@@ -5,7 +5,8 @@
  */
 package jdbcv2018;
 
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.*;
 
 /**
  *
@@ -13,19 +14,19 @@ import java.sql.SQLException;
  */
 public class ProjetJAVA {
 
+ 
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args)throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         // TODO code application logic here
-        String nameDatabase ="ProjetJAVA";
+        String nameDatabase ="ProjetJAVA/";
         String loginDatabase ="root";
         String passwordDatabase="root";
         Connexion c1= new Connexion(nameDatabase, loginDatabase, passwordDatabase);
         
-                
         
-        
-    }
-    
+       
+}
 }

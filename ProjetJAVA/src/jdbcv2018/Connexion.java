@@ -52,47 +52,30 @@ public class Connexion {
     public Connexion(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
         // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
-
-        // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
-        String urlDatabase = "jdbc:mysql://localhost:8888/" + nameDatabase;
-        System.out.println("Ca marche");
+       System.out.println("Driver ok");
+       String urlDatabase = "jdbc:mysql://localhost:8888/" + nameDatabase;
+       // //String urlDatabase = "jdbc:mysql//localhost:8888" ;
+      
         //création d'une connexion JDBC à la base 
         conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
-
+System.out.println("Ca marche ");
         // création d'un ordre SQL (statement)
         stmt = conn.createStatement();
-    }
-
-    /**
-     * Constructeur avec 4 paramètres : username et password ECE, login et
-     * password de la BDD à distance sur le serveur de l'ECE
-     * @param usernameECE
-     * @param passwordECE
-     * @param loginDatabase
-     * @param passwordDatabase
-     * @throws java.sql.SQLException
-     * @throws java.lang.ClassNotFoundException
-     */
-    public Connexion(String usernameECE, String passwordECE, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
-        // chargement driver "com.mysql.jdbc.Driver"
-        Class.forName("com.mysql.jdbc.Driver");
-
-        // Connexion via le tunnel SSH avec le username et le password ECE
-        SSHTunnel ssh = new SSHTunnel(usernameECE, passwordECE);
-
-        if (ssh.connect()) {
-            System.out.println("Connexion reussie");
-
-            // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
-            String urlDatabase = "jdbc:mysql://localhost:3305/" + usernameECE;
-
-            //création d'une connexion JDBC à la base
-            conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
-
-            // création d'un ordre SQL (statement)
-            stmt = conn.createStatement();
-
-        }
+        String query = "SELECT id, nom From Niveau";         
+      ResultSet res = stmt.executeQuery(query);
+      int i = 1;         
+         
+      System.out.println("\n\t---------------------------------------");
+      System.out.println("\tLECTURE STANDARD.");
+      System.out.println("\t---------------------------------------");
+       
+      while(res.next()){
+        System.out.println("\tNom : "+res.getString("prof_nom") +" \t prénom : "+res.getString("prof_prenom"));
+        //On regarde si on se trouve sur la dernière ligne du résultat
+        if(res.isLast())
+          System.out.println("\t\t* DERNIER RESULTAT !\n");
+        i++;
+      }
     }
 
     /**
@@ -100,8 +83,10 @@ public class Connexion {
      *
      * @param table
      */
+    
     public void ajouterTable(String table) {
         tables.add(table);
+      System.out.println("zfigymizg");
     }
 
     /**
@@ -134,7 +119,7 @@ public class Connexion {
     public ArrayList remplirChampsTable(String table) throws SQLException {
         // récupération de l'ordre de la requete
         rset = stmt.executeQuery("select * from " + table);
-
+       
         // récupération du résultat de l'ordre
         rsetMeta = rset.getMetaData();
 
