@@ -1,4 +1,4 @@
-package jdbcv2018;
+package Modele;
 
 import com.jcraft.jsch.*;
 

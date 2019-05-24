@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jdbcv2018;
+package Modele;
 
 import java.sql.*;
 import java.util.*;
