@@ -35,7 +35,7 @@ public class ProjetJAVA {
             bdd = BaseDeDonnee();
          
            
-        
+        System.out.println("ca farte les gars ? ");
        // G = new Graphique();
         //G.build();
     }
