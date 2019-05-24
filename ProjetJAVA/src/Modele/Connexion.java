@@ -52,41 +52,27 @@ public class Connexion {
     public Connexion(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
         // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
-       System.out.println("Driver ok");
-       String urlDatabase = "jdbc:mysql://localhost:8888/" + nameDatabase;
-       // //String urlDatabase = "jdbc:mysql//localhost:8888" ;
-      
+        System.out.println("Driver ok");
+        // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
+        String urlDatabase = "jdbc:mysql://localhost/" + nameDatabase;
+       
         //création d'une connexion JDBC à la base 
         conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
-System.out.println("Ca marche ");
+       
         // création d'un ordre SQL (statement)
         stmt = conn.createStatement();
-        String query = "SELECT id, nom From Niveau";         
-      ResultSet res = stmt.executeQuery(query);
-      int i = 1;         
+          System.out.println("tout roule pour la ddb");
          
-      System.out.println("\n\t---------------------------------------");
-      System.out.println("\tLECTURE STANDARD.");
-      System.out.println("\t---------------------------------------");
-       
-      while(res.next()){
-        System.out.println("\tNom : "+res.getString("prof_nom") +" \t prénom : "+res.getString("prof_prenom"));
-        //On regarde si on se trouve sur la dernière ligne du résultat
-        if(res.isLast())
-          System.out.println("\t\t* DERNIER RESULTAT !\n");
-        i++;
-      }
     }
+
 
     /**
      * Méthode qui ajoute la table en parametre dans son ArrayList
      *
      * @param table
      */
-    
     public void ajouterTable(String table) {
         tables.add(table);
-      System.out.println("zfigymizg");
     }
 
     /**
@@ -119,7 +105,7 @@ System.out.println("Ca marche ");
     public ArrayList remplirChampsTable(String table) throws SQLException {
         // récupération de l'ordre de la requete
         rset = stmt.executeQuery("select * from " + table);
-       
+
         // récupération du résultat de l'ordre
         rsetMeta = rset.getMetaData();
 
