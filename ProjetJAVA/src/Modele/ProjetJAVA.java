@@ -33,8 +33,8 @@ public class ProjetJAVA {
     {
       
            // bdd = BaseDeDonnee();//Ouverture de la base de données
-            //new Menu();
-            new Modifier();
+            new Menu();
+           
        // G = new Graphique();
         //G.build();
     }

@@ -9,20 +9,35 @@ package Modele;
  *
  * @author grego
  */
+import javax.swing.JComboBox;
 public class Modifier extends javax.swing.JFrame{
     
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    public Modifier()
+    public Modifier(int a)
     {
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel1.setText("jLabel1");
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Personne", "Classe", "Niveau", "Ecole", "Inscription","Bulletin", }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        if(a == 1)
+        {
+          jLabel1.setText("Choisissez la table à mettre à jour");
+          this.setTitle("Mise à jour");
+        }
+        if(a == 0)
+        {
+          jLabel1.setText("Choisissez la table à modifier");
+          this.setTitle("Suppresion");
+        }
+        
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -47,8 +62,13 @@ public class Modifier extends javax.swing.JFrame{
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(236, Short.MAX_VALUE))
         );
-
         pack();
+        
         this.setVisible(true);
     }
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) { 
+        JComboBox cb = (JComboBox)evt.getSource();
+        String petName = (String)cb.getSelectedItem();
+            System.out.println(petName);
+    } 
 }
