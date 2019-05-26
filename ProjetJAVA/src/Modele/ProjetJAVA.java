@@ -32,10 +32,9 @@ public class ProjetJAVA {
     public static void main(String[] args) throws SQLException, ClassNotFoundException
     {
       
-            bdd = BaseDeDonnee();//Ouverture de la base de données
-         
-           
-        System.out.println("ca farte les gars ? ");
+           // bdd = BaseDeDonnee();//Ouverture de la base de données
+            //new Menu();
+            new Modifier();
        // G = new Graphique();
         //G.build();
     }
