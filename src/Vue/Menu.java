@@ -5,9 +5,14 @@
  */
 package Vue;
 
+import Controleur.Data;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import Modele.*;
+import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.JLabel;
 
 /**
  *
@@ -15,19 +20,27 @@ import Modele.*;
  */
 public class Menu extends javax.swing.JFrame {
 
+    private Image img;
     private javax.swing.JLabel eleves;
+    private Data datab = new Data();
+    private int nb;
+
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
+        img = Toolkit.getDefaultToolkit().createImage("Images/Ecole.jpg");
+        this.setIconImage(img);
         eleves = new javax.swing.JLabel();
-        eleves.setText("Nombre d'élèves :");
         eleves.setBounds(10,50,160,30);
+        eleves.setText("Connexion en cours...");
         this.add(eleves);
         this.setTitle("Gestion de l'école");
-        
         this.setVisible(true);
+        datab.LoadAllData();
+        nb = datab.nbeleves();
+        eleves.setText("Nombre d'élèves : "+nb);
     }
 
     /**
@@ -78,7 +91,7 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel1.setText("Bienvenue dans votre espace gestion école");
 
-        Icon image = new ImageIcon( "Graphique.png" );
+        Icon image = new ImageIcon( "Images/Graphique.png" );
         jLabel2.setIcon(image);
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -129,7 +142,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new Modifier(0);
+        new Modifier(0,datab);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -137,7 +150,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        // New rapport();
+      
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -145,7 +158,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new Modifier(1);
+        new Modifier(1,datab);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * @author grego
  */
 public class DAO_Bulletin extends DAO<Bulletin> {
-    private ArrayList <Bulletin> bulle;
+  
     public DAO_Bulletin(Connection conn) {
         super(conn);
     }

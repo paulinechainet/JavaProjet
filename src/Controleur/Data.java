@@ -39,6 +39,7 @@ public class Data {
     }
     public void LoadAllData()
     {
+        
         LoadAnnee();
         LoadBulletin();
         LoadClasse();
@@ -370,7 +371,23 @@ public class Data {
     public Map<Integer, Trimestre> getTrimestres() {
         return tableTrimestres;
     }
-    
+    public void affichage()
+    {
+      for(Map.Entry<Integer, Personne> entry : tablePersonnes.entrySet()) 
+      {
+          Personne p = entry.getValue();
+          System.out.println(p.getNom());
+      }  
+      
+    }
+   /* public Personne searchp(String rech)
+    {
+       for(Map.Entry<Integer, Personne> entry : tablePersonnes.entrySet()) 
+      {
+          Personne p = entry.getValue();
+          System.out.println(p.getNom());
+      } 
+    }*/
     public void SetDataBulletins()
     {
         for(Map.Entry<Integer,Bulletin> bull : tableBulletins.entrySet())
@@ -389,7 +406,10 @@ public class Data {
             }
         }
     }
-    
+    public int nbeleves()
+    {
+       return tablePersonnes.size();
+    }
     public void SetDataClasses()
     {
         for(Map.Entry<Integer,Inscription> inscri : tableInscriptions.entrySet())

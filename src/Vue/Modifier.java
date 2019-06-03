@@ -16,6 +16,7 @@ import Controleur.*;
 import Modele.Bulletin;
 import Modele.Classe;
 import Modele.Personne;
+import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 
 public class Modifier extends javax.swing.JFrame{
@@ -32,8 +33,10 @@ public class Modifier extends javax.swing.JFrame{
     Classe c;
     Personne p;
     Bulletin b;
-    public Modifier(int a)
+    private Data d;
+    public Modifier(int a, Data db)
     {
+        d = db;
         recherche = true;
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -134,6 +137,7 @@ public void Init()
         if(choix == "Personne")
         {
             rafraichir();
+            d.affichage();
             p = new Personne(1,rech,rech);
          jTable = new javax.swing.JTable();
             jScrollPane1 = new javax.swing.JScrollPane();

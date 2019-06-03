@@ -25,7 +25,7 @@ import java.util.logging.Logger;
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            tmp = DriverManager.getConnection("jdbc:mysql://localhost:8888/ProjetJAVA","root","root");
+            tmp = DriverManager.getConnection("jdbc:mysql://localhost/ProjetJAVA","root","");
          }catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(DAOFactory.class.getName()).log(Level.SEVERE, null, ex);
          }

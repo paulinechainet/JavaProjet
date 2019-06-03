@@ -33,7 +33,7 @@ public class ProjetJAVA {
     public static void main(String[] args) throws SQLException, ClassNotFoundException
     {
       
-           //bdd = BaseDeDonnee();//Ouverture de la base de données
+           bdd = BaseDeDonnee();//Ouverture de la base de données
             new Menu();
            
        // G = new Graphique();
