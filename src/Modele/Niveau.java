@@ -13,6 +13,10 @@ package Modele;
 public class Niveau {
     private int id;
     private String nom;
+    public String[] attributs = 
+    {
+        "Nom"
+    };
 
     public Niveau(int id, String nom) {
         this.id = id;

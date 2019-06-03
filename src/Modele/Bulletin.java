@@ -14,11 +14,22 @@ import java.util.ArrayList;
 
 public class Bulletin {
     private int id;
+    private Personne P;
     private Inscription inscription;
-    private Trimestre trimestre;
+
     private Personne personne;
     private ArrayList<Evaluation> tableEvaluations = new ArrayList();
-    
+
+    public String attributs[]=
+    {
+        "Nom de l'élève",
+        "Id inscription",
+        "Trimestre",
+        "Appréciation",
+        "Moyenne"
+    };
+
+
     public Bulletin(int id, Inscription inscription, Trimestre trimestre) {
         this.id = id;
         this.inscription = inscription;

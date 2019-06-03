@@ -18,11 +18,20 @@ public class Personne {
      private Classe classe;
      private ArrayList<Classe> tableClasses= new ArrayList();
     private ArrayList<Bulletin> tableBulletins = new ArrayList();
+    public String[] attributs = 
+{
+        "Nom",
+        "Prénom",
+};
 
     public Personne(int id, String nom, String prenom) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
+    }
+    public Personne()
+    {
+        
     }
     
 

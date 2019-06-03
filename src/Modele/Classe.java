@@ -16,9 +16,19 @@ public class Classe {
     private String nom;
     private Niveau niveau;
     private Annee annee;
+
     private ArrayList<Personne> tablePersonnes;
     public ArrayList<Discipline> tableDisciplines = new ArrayList();
     
+
+    public String[] attributs = 
+{
+        "Nom",
+        "Niveau",
+        "Annee"
+};
+
+
     public Classe(int id, String nom, Niveau niveau, Annee annee) {
         this.id = id;
         this.nom = nom;

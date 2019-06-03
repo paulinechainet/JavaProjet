@@ -5,6 +5,7 @@
  */
 package Modele;
 
+import Vue.Menu;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,10 +33,9 @@ public class ProjetJAVA {
     public static void main(String[] args) throws SQLException, ClassNotFoundException
     {
       
-            bdd = BaseDeDonnee();
-         
+           //bdd = BaseDeDonnee();//Ouverture de la base de données
+            new Menu();
            
-        
        // G = new Graphique();
         //G.build();
     }
