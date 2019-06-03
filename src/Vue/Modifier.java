@@ -137,9 +137,10 @@ public void Init()
         if(choix == "Personne")
         {
             rafraichir();
-            d.affichage();
-            p = new Personne(1,rech,rech);
-         jTable = new javax.swing.JTable();
+            p = d.searchp(rech);
+            if(p.getId()!=-1)//L'id est négatif si aucune personne ne correspond à la recherche
+            {
+              jTable = new javax.swing.JTable();
             jScrollPane1 = new javax.swing.JScrollPane();
             DefaultTableModel tableModel = new DefaultTableModel();
             for(int i = 0; i<p.attributs.length;i++)
@@ -153,7 +154,13 @@ public void Init()
              jScrollPane1.setBounds (20,120,500,40);
             bouton.setBounds(530, 130, 100, 30);
              jP.add(jScrollPane1);
-             jP.add(bouton); 
+             jP.add(bouton);   
+            }
+            else
+            {
+                System.out.println("Introuvable");
+            }
+         
         }
         if(choix == "Bulletin")
         {

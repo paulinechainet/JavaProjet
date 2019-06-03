@@ -380,14 +380,35 @@ public class Data {
       }  
       
     }
-   /* public Personne searchp(String rech)
+    public Personne searchp(String rech)
     {
+        Personne p;
+        int a = 0;
+        int cle = 0;
+        String nom = null;
+        String Prenom = null;
        for(Map.Entry<Integer, Personne> entry : tablePersonnes.entrySet()) 
       {
-          Personne p = entry.getValue();
+          p = entry.getValue();
           System.out.println(p.getNom());
-      } 
-    }*/
+          if(p.getNom() == rech || p.getPrenom() == rech)
+          {
+              a = 1;
+              cle = p.getId();
+              nom = p.getNom();
+              Prenom = p.getPrenom();
+          }
+      }
+       if(a == 0)
+       {
+       p = new Personne();
+       }
+       else
+       {
+          p = new Personne(cle,nom,Prenom);
+       }
+       return p;
+    }
     public void SetDataBulletins()
     {
         for(Map.Entry<Integer,Bulletin> bull : tableBulletins.entrySet())

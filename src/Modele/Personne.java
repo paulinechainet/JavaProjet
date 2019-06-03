@@ -32,7 +32,7 @@ public class Personne {
     }
     public Personne()
     {
-        
+      id = -1;  
     }
     
 
