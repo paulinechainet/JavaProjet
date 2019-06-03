@@ -13,24 +13,19 @@ package Modele;
 
 public class Annee {
     private int id;
-    private String annee;
 
-    public Annee(int id,String annee) {
+
+    public Annee(int id) {
         this.id = id;
-        this.annee = annee;
+        
     }
 
     public int getId() {
         return id;
     }
+public void setId(int id)
+{
+    this.id=id;
+}
 
-    public String getAnnee() {
-        return annee;
-    }
-
-    public void setAnnee(String annee) {
-        this.annee = annee;
-    }
-    
-    
 }

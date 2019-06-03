@@ -25,7 +25,7 @@ import java.util.logging.Logger;
         
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            tmp = DriverManager.getConnection("jdbc:mysql://localhost/ProjetJAVA","root","");
+            tmp = DriverManager.getConnection("jdbc:mysql://localhost:8888/ProjetJAVA","root","root");
          }catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(DAOFactory.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -104,6 +104,11 @@ import java.util.logging.Logger;
   public static DAO getDAO_Inscription()
   {
       return new DAO_Inscription(conn);
+  }
+  
+  public static DAO getDAO_Enseignement()
+  {
+      return new DAO_Enseignement(conn); 
   }
   
     } 
