@@ -1,2 +1,0 @@
-jdbcv2018.SSHTunnel
-jdbcv2018.SSHTunnel$SilentUserInfo
