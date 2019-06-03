@@ -14,6 +14,12 @@ public class Classe {
     private String nom;
     private Niveau niveau;
     private Annee annee;
+    public String[] attributs = 
+{
+        "Nom",
+        "Niveau",
+        "Annee"
+};
 
     public Classe(int id, String nom, Niveau niveau, Annee annee) {
         this.id = id;

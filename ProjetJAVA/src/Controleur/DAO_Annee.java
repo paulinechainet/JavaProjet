@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +22,7 @@ import java.util.logging.Logger;
 
 
 public class DAO_Annee extends DAO<Annee>{
-      
+      private ArrayList <Annee> an;
     public DAO_Annee(Connection conn) {
         super(conn);
     }

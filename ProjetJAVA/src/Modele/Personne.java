@@ -13,11 +13,20 @@ public class Personne {
     private int id;
     private String nom;
     private String prenom;
+    public String[] attributs = 
+{
+        "Nom",
+        "Prénom",
+};
 
     public Personne(int id, String nom, String prenom) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
+    }
+    public Personne()
+    {
+        
     }
     
 

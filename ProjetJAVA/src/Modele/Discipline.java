@@ -12,6 +12,10 @@ package Modele;
 public class Discipline {
     private int id;
     private String nom;
+    public String[] attributs = 
+    {
+        "Nom"
+    };
 
     public Discipline(int id, String nom) {
         this.id = id;

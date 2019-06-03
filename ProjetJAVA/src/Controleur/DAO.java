@@ -18,6 +18,10 @@ public abstract class DAO<T> {
     public DAO(Connection conn){
     this.connect = conn;
   }
+    public DAO()
+    {
+        
+    }
     
     public abstract boolean create(T obj);
     public abstract boolean delete(T obj);

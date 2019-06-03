@@ -12,8 +12,17 @@ package Modele;
 
 public class Bulletin {
     private int id;
+    private Personne P;
     private Inscription inscription;
     private Trimestre trimestre;
+    public String attributs[]=
+    {
+        "Nom de l'élève",
+        "Id inscription",
+        "Trimestre",
+        "Appréciation",
+        "Moyenne"
+    };
 
     public Bulletin(int id, Inscription inscription, Trimestre trimestre) {
         this.id = id;
