@@ -18,6 +18,7 @@ public class Personne {
      private Classe classe;
      private ArrayList<Classe> tableClasses= new ArrayList();
     private ArrayList<Bulletin> tableBulletins = new ArrayList();
+    private ArrayList<Discipline> tableDisciplines=new ArrayList();
     public String[] attributs = 
 {
         "Nom",
@@ -58,8 +59,12 @@ public class Personne {
         return tableBulletins;
     }
      
-      public ArrayList getALClasse()
+      public ArrayList<Classe> getALClasse()
       {
           return tableClasses;
       }
+      public ArrayList<Discipline> getDiscipline()
+              {
+                  return tableDisciplines; 
+              }
 }

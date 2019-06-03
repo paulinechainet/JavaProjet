@@ -416,9 +416,9 @@ public class Data {
                 p.getALClasse().add(c);
             }
             
-            if(!p.getDisciplines().contains(d))
+            if(!p.getDiscipline().contains(d))
             {
-                p.getDisciplines().add(d);
+                p.getDiscipline().add(d);
             }
             
             if(!c.getDisciplines().contains(d))

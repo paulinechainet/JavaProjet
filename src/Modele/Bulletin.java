@@ -16,7 +16,7 @@ public class Bulletin {
     private int id;
     private Personne P;
     private Inscription inscription;
-
+private Trimestre trimestre; 
     private Personne personne;
     private ArrayList<Evaluation> tableEvaluations = new ArrayList();
 
