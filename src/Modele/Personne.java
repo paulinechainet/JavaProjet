@@ -5,8 +5,6 @@
  */
 package Modele;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author grego
@@ -15,9 +13,6 @@ public class Personne {
     private int id;
     private String nom;
     private String prenom;
-     private Classe classe;
-     private ArrayList<Classe> tableClasses= new ArrayList();
-    private ArrayList<Bulletin> tableBulletins = new ArrayList();
 
     public Personne(int id, String nom, String prenom) {
         this.id = id;
@@ -37,20 +32,6 @@ public class Personne {
     public String getPrenom() {
         return prenom;
     }
-    public Classe getClasse() {
-        return classe;
-    }
-
-    public void setClasse(Classe classe) {
-        this.classe = classe;
-    }
     
-      public ArrayList<Bulletin> getBulletins() {
-        return tableBulletins;
-    }
-     
-      public ArrayList getALClasse()
-      {
-          return tableClasses;
-      }
+    
 }

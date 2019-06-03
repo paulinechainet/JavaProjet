@@ -5,6 +5,8 @@
  */
 package Modele;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author grego
@@ -14,7 +16,9 @@ public class Classe {
     private String nom;
     private Niveau niveau;
     private Annee annee;
-
+    private ArrayList<Personne> tablePersonnes;
+    public ArrayList<Discipline> tableDisciplines = new ArrayList();
+    
     public Classe(int id, String nom, Niveau niveau, Annee annee) {
         this.id = id;
         this.nom = nom;
@@ -53,5 +57,18 @@ public class Classe {
         this.annee = annee;
     }
     
+    public ArrayList<Personne> getPersonnes() {
+        return tablePersonnes;
+    }
+
+    public void setEleves(ArrayList<Personne> personnes) {
+        this.tablePersonnes = personnes;
+    }
+
     
+    
+
+    public ArrayList<Discipline> getDisciplines() {
+        return tableDisciplines;
+    }
 }

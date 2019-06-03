@@ -30,9 +30,9 @@ public class DAO_Annee extends DAO<Annee>{
     public boolean create(Annee obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO anneescolaire (annee) VALUES(?)"
+                    "INSERT INTO AnneeScolaire VALUES(?)"
                     );
-            statement.setObject(1,obj.getAnnee(), Types.VARCHAR); 
+            statement.setObject(1,obj.getId(), Types.INTEGER); 
             statement.executeUpdate(); 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Annee.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,7 +46,7 @@ public class DAO_Annee extends DAO<Annee>{
     public boolean delete(Annee obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "DELETE FROM anneescolaire WHERE anneescolaire.id="+obj.getId()
+                    "DELETE FROM AnneeScolaire WHERE id="+obj.getId()
                     );
             statement.executeUpdate(); 
         } catch (SQLException ex) {
@@ -60,10 +60,10 @@ public class DAO_Annee extends DAO<Annee>{
     public boolean update(Annee obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "UPDATE anneescolaire SET id=?,annee=? WHERE anneescolaire.id=?"
+                    "UPDATE AnnneeScolaire SET id=? WHERE id=?"
                     );
             statement.setObject(1,obj.getId(), Types.INTEGER);
-            statement.setObject(2,obj.getAnnee(), Types.VARCHAR);
+            
             statement.executeUpdate(); 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Annee.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,16 +72,15 @@ public class DAO_Annee extends DAO<Annee>{
         return true;
     }
 
+    @Override
     public Annee find(int id) {
         Annee e = null;
         try {
-            PreparedStatement statement = this.connect.prepareStatement(
-                    "SELECT * FROM anneescolaire WHERE anneescolaire.id="+id
-                    );
+            PreparedStatement statement = this.connect.prepareStatement( "SELECT * FROM AnneeCcolaire WHERE id="+id );
             ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
-                e = new Annee(rs.getInt("id"),rs.getString("annee"));
+                e = new Annee(id);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Annee.class.getName()).log(Level.SEVERE, null, ex);

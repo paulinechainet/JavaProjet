@@ -18,77 +18,79 @@ import java.util.logging.Logger;
  *
  * @author grego
  */
-
-public class DAO_Personne extends DAO<Personne>   
-{
-
-    public DAO_Personne(Connection conn) {
+public class DAO_Bulletin extends DAO<Bulletin> {
+    
+    public DAO_Bulletin(Connection conn) {
         super(conn);
     }
     
     @Override
-    public boolean create(Personne obj) {
+    public boolean create(Bulletin obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO Personne (nom,prenom) VALUES(?,?)"
+                    "INSERT INTO bulletin (id_inscription,id_trimestre) VALUES(?,?,?)"
                     );
-            statement.setObject(1,obj.getNom(),Types.VARCHAR); 
-            statement.setObject(2,obj.getPrenom(),Types.VARCHAR);
+            statement.setObject(1,obj.getInscription().getId(),Types.INTEGER);
+            statement.setObject(2,obj.getTrimestre().getId(),Types.INTEGER); 
             statement.executeUpdate(); 
         } catch (SQLException ex) {
-            Logger.getLogger(DAO_Personne.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAO_Bulletin.class.getName()).log(Level.SEVERE, null, ex);
         }
         //en spécifiant bien les types SQL cibles 
-        //en spécifiant bien les types SQL cibles 
         
         return true;
     }
 
     @Override
-    public boolean delete(Personne obj) {
+    public boolean delete(Bulletin obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "DELETE FROM Personne WHERE id="+obj.getId()
+                    "DELETE FROM bulletin WHERE bulletin.id="+obj.getId()
                     );
             statement.executeUpdate(); 
         } catch (SQLException ex) {
-            Logger.getLogger(DAO_Personne.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAO_Bulletin.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return true;
     }
 
     @Override
-    public boolean update(Personne obj) {
-       try {
+    public boolean update(Bulletin obj) {
+         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "UPDATE Personne SET nom=?, prenom=? WHERE id=?"
+                    "UPDATE bulletin SET id_inscription=?,id_trimestre=? WHERE bulletin.id=?"
                     );
-            statement.setObject(1,obj.getNom(),Types.VARCHAR); 
-            statement.setObject(2,obj.getPrenom(),Types.VARCHAR);
-            statement.setObject(3,obj.getId(),Types.INTEGER);
+            statement.setObject(1,obj.getInscription().getId(),Types.INTEGER);
+            statement.setObject(2,obj.getTrimestre().getId(),Types.INTEGER); 
+            statement.setObject(3,obj.getId(),Types.INTEGER); 
             statement.executeUpdate(); 
         } catch (SQLException ex) {
-            Logger.getLogger(DAO_Personne.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+            Logger.getLogger(DAO_Bulletin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         
         return true;
     }
 
     @Override
-    public Personne find(int id) {
-        Personne e = null;
+    public Bulletin find(int id) {
+        Bulletin e = null;
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "SELECT * FROM Personne WHERE id="+id
+                    "SELECT * FROM bulletin WHERE bulletin.id="+id
                     );
             ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
-                e = new Personne(rs.getInt("id"),rs.getString("nom"),rs.getString("prenom"));
+                e = new Bulletin(rs.getInt("id"));
+                DAO_Inscription inscriDAO = new DAO_Inscription(this.connect);
+                DAO_Trimestre trimDAO = new DAO_Trimestre(this.connect);
+                e.setInscription(inscriDAO.find(rs.getInt("id_inscription")));
+                e.setTrimestre(trimDAO.find(rs.getInt("id_trimestre")));                
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAO_Personne.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAO_Bulletin.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return e;
@@ -100,15 +102,16 @@ public class DAO_Personne extends DAO<Personne>
         try {
              ResultSet result = this.connect.createStatement(
                 ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT MAX(id) FROM Personne");
+                ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT MAX(id) FROM bulletin");
              if(result.first())
              {
                  max_id = result.getInt("MAX(id)");
              }
         } catch (SQLException ex) {
-            Logger.getLogger(DAO_Personne.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAO_Bulletin.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return max_id;
     }
 }
+

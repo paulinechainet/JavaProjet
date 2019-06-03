@@ -19,71 +19,76 @@ import java.util.logging.Logger;
  * @author grego
  */
 
+public class DAO_Personne extends DAO<Personne>   
+{
 
-public class DAO_Annee extends DAO<Annee>{
-      
-    public DAO_Annee(Connection conn) {
+    public DAO_Personne(Connection conn) {
         super(conn);
     }
     
     @Override
-    public boolean create(Annee obj) {
+    public boolean create(Personne obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO AnneeScolaire VALUES(?)"
+                    "INSERT INTO enseignant (nom,prenom) VALUES(?,?)"
                     );
-            statement.setObject(1,obj.getId(), Types.INTEGER); 
+            statement.setObject(1,obj.getNom(),Types.VARCHAR); 
+            statement.setObject(2,obj.getPrenom(),Types.VARCHAR);
             statement.executeUpdate(); 
         } catch (SQLException ex) {
-            Logger.getLogger(DAO_Annee.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAO_Personne.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //en spécifiant bien les types SQL cibles 
         //en spécifiant bien les types SQL cibles 
         
         return true;
     }
 
     @Override
-    public boolean delete(Annee obj) {
+    public boolean delete(Personne obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "DELETE FROM AnneeScolaire WHERE id="+obj.getId()
+                    "DELETE FROM enseignant WHERE enseignant.id="+obj.getId()
                     );
             statement.executeUpdate(); 
         } catch (SQLException ex) {
-            Logger.getLogger(DAO_Annee.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAO_Personne.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return true;
     }
 
     @Override
-    public boolean update(Annee obj) {
-        try {
+    public boolean update(Personne obj) {
+       try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "UPDATE AnnneeScolaire SET id=? WHERE id=?"
+                    "UPDATE enseignant SET nom=?, prenom=? WHERE enseignant.id=?"
                     );
-            statement.setObject(1,obj.getId(), Types.INTEGER);
-            
+            statement.setObject(1,obj.getNom(),Types.VARCHAR); 
+            statement.setObject(2,obj.getPrenom(),Types.VARCHAR);
+            statement.setObject(3,obj.getId(),Types.INTEGER);
             statement.executeUpdate(); 
         } catch (SQLException ex) {
-            Logger.getLogger(DAO_Annee.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(DAO_Personne.class.getName()).log(Level.SEVERE, null, ex);
+        } 
         
         return true;
     }
 
     @Override
-    public Annee find(int id) {
-        Annee e = null;
+    public Personne find(int id) {
+        Personne e = null;
         try {
-            PreparedStatement statement = this.connect.prepareStatement( "SELECT * FROM AnneeCcolaire WHERE id="+id );
+            PreparedStatement statement = this.connect.prepareStatement(
+                    "SELECT * FROM enseignant WHERE enseignant.id="+id
+                    );
             ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
-                e = new Annee(id);
+                e = new Personne(rs.getInt("id"),rs.getString("nom"),rs.getString("prenom"));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAO_Annee.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAO_Personne.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return e;
@@ -95,17 +100,15 @@ public class DAO_Annee extends DAO<Annee>{
         try {
              ResultSet result = this.connect.createStatement(
                 ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT MAX(id) FROM anneescolaire");
+                ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT MAX(id) FROM enseignant");
              if(result.first())
              {
                  max_id = result.getInt("MAX(id)");
              }
         } catch (SQLException ex) {
-            Logger.getLogger(DAO_Annee.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAO_Personne.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return max_id;
     }
-
-
 }

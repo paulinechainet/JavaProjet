@@ -30,7 +30,7 @@ public class DAO_Personne extends DAO<Personne>
     public boolean create(Personne obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO enseignant (nom,prenom) VALUES(?,?)"
+                    "INSERT INTO Personne (nom,prenom) VALUES(?,?)"
                     );
             statement.setObject(1,obj.getNom(),Types.VARCHAR); 
             statement.setObject(2,obj.getPrenom(),Types.VARCHAR);
@@ -48,7 +48,7 @@ public class DAO_Personne extends DAO<Personne>
     public boolean delete(Personne obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "DELETE FROM enseignant WHERE enseignant.id="+obj.getId()
+                    "DELETE FROM Personne WHERE id="+obj.getId()
                     );
             statement.executeUpdate(); 
         } catch (SQLException ex) {
@@ -62,7 +62,7 @@ public class DAO_Personne extends DAO<Personne>
     public boolean update(Personne obj) {
        try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "UPDATE enseignant SET nom=?, prenom=? WHERE enseignant.id=?"
+                    "UPDATE Personne SET nom=?, prenom=? WHERE id=?"
                     );
             statement.setObject(1,obj.getNom(),Types.VARCHAR); 
             statement.setObject(2,obj.getPrenom(),Types.VARCHAR);
@@ -80,7 +80,7 @@ public class DAO_Personne extends DAO<Personne>
         Personne e = null;
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "SELECT * FROM enseignant WHERE enseignant.id="+id
+                    "SELECT * FROM Personne WHERE id="+id
                     );
             ResultSet rs = statement.executeQuery();
             while (rs.next())
@@ -100,7 +100,7 @@ public class DAO_Personne extends DAO<Personne>
         try {
              ResultSet result = this.connect.createStatement(
                 ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT MAX(id) FROM enseignant");
+                ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT MAX(id) FROM Personne");
              if(result.first())
              {
                  max_id = result.getInt("MAX(id)");

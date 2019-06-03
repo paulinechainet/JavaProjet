@@ -28,7 +28,7 @@ public class DAO_Bulletin extends DAO<Bulletin> {
     public boolean create(Bulletin obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO bulletin (id_inscription,id_trimestre) VALUES(?,?,?)"
+                    "INSERT INTO Bulletin (Inscription.id,Trimestre.id) VALUES(?,?,?)"
                     );
             statement.setObject(1,obj.getInscription().getId(),Types.INTEGER);
             statement.setObject(2,obj.getTrimestre().getId(),Types.INTEGER); 
@@ -36,7 +36,6 @@ public class DAO_Bulletin extends DAO<Bulletin> {
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Bulletin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //en spécifiant bien les types SQL cibles 
         
         return true;
     }
