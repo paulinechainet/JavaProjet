@@ -25,6 +25,7 @@ public class Modifier extends javax.swing.JFrame{
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel trouve;
     private javax.swing.JTextField texte;
     private javax.swing.JButton bouton;
     private String choix;
@@ -34,6 +35,7 @@ public class Modifier extends javax.swing.JFrame{
     Personne p;
     Bulletin b;
     private Data d;
+    private int sup;
     public Modifier(int a, Data db)
     {
         d = db;
@@ -41,6 +43,7 @@ public class Modifier extends javax.swing.JFrame{
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        trouve = new javax.swing.JLabel();
         jP = new javax.swing.JPanel();
         jP.setLayout(null);
         jP.setBounds(10, 80, 800, 600);
@@ -65,6 +68,7 @@ public class Modifier extends javax.swing.JFrame{
                 texteActionPerformed(evt);
             }
         });
+             sup = a;
         if(a == 1)
         {
           this.setTitle("Mise à jour");
@@ -110,7 +114,6 @@ public void Init()
     {
         
         String rech = texte.getText();
-        System.out.println(texte.getText());
         if(choix == "Classe")
         {
             rafraichir();
@@ -136,10 +139,19 @@ public void Init()
         }
         if(choix == "Personne")
         {
+            String s;
+            rech = texte.getText();
             rafraichir();
             p = d.searchp(rech);
             if(p.getId()!=-1)//L'id est négatif si aucune personne ne correspond à la recherche
             {
+                if(p.getType() == 1)
+                {
+                    s = "Etudiant";
+                }
+                else{
+                    s ="Professeur";
+                }
               jTable = new javax.swing.JTable();
             jScrollPane1 = new javax.swing.JScrollPane();
             DefaultTableModel tableModel = new DefaultTableModel();
@@ -147,8 +159,7 @@ public void Init()
             {
               tableModel.addColumn(p.attributs[i]);  
             }
-            tableModel.addRow(new Object[]{ p.getPrenom(), p.getNom()});
-            //tableModel.setRowCount(0);//Vider la table
+            tableModel.addRow(new Object[]{ p.getNom(), p.getPrenom(), s});
             jTable.setModel(tableModel);                   
              jScrollPane1.setViewportView(jTable);
              jScrollPane1.setBounds (20,120,500,40);
@@ -158,7 +169,9 @@ public void Init()
             }
             else
             {
-                System.out.println("Introuvable");
+              trouve.setBounds(20,80,500,40);
+              trouve.setText("Aucune personne correspondante");
+              jP.add(trouve);
             }
          
         }
@@ -206,12 +219,17 @@ public void Init()
     }
     private void boutonActionPerformed(java.awt.event.ActionEvent evt)
     {
-       jScrollPane1.setVisible(false);
-           bouton.setVisible(false);
-            this.repaint();
-            if(choix == "Bulletin")
+       rafraichir();
+            if(choix == "Personne")
         {
-            
+            if(sup==1)
+            {
+            d.modifp(p.getId(), jTable.getValueAt(0,0).toString(), jTable.getValueAt(0,1).toString());
+            }
+            else
+            {
+            d.supprp(p.getId());
+            }
         }
            if(choix == "Bulletin")
         {

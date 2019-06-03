@@ -387,17 +387,19 @@ public class Data {
         int cle = 0;
         String nom = null;
         String Prenom = null;
+        int i=0;
        for(Map.Entry<Integer, Personne> entry : tablePersonnes.entrySet()) 
       {
+
           p = entry.getValue();
-          System.out.println(p.getNom());
-          if(p.getNom() == rech || p.getPrenom() == rech)
+          if(p.getNom().equals(rech) || p.getPrenom().equals(rech))
           {
               a = 1;
               cle = p.getId();
               nom = p.getNom();
               Prenom = p.getPrenom();
           }
+          
       }
        if(a == 0)
        {
@@ -408,6 +410,30 @@ public class Data {
           p = new Personne(cle,nom,Prenom);
        }
        return p;
+    }
+    public void addp(int id, String nom, String prenom)
+    {
+        Personne p = new Personne(id,nom,prenom);
+        tablePersonnes.put(id, p);
+        SavePersonne();
+        tablePersonnes.clear();
+        LoadPersonne();
+        
+        
+    }
+    public void modifp(int id, String nom, String prenom)
+    {
+      Personne p = new Personne(id,nom,prenom);
+      tablePersonnes.remove(id);
+      tablePersonnes.put(id, p);
+      SavePersonne();
+    }
+    public void supprp(int id)
+    {
+        Personne p = tablePersonnes.get(id);
+        tablePersonnes.remove(id);
+        DAO<Personne> DAO= DAOFactory.getDAO_Personne();
+        DAO.delete(p);
     }
     public void SetDataBulletins()
     {

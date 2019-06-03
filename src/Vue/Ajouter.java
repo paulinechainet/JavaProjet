@@ -5,6 +5,7 @@
  */
 package Vue;
 
+import Controleur.Data;
 import Modele.*;
 import Modele.Personne;
 import javax.swing.JComboBox;
@@ -25,9 +26,16 @@ public class Ajouter extends javax.swing.JFrame {
     private Classe c;
     private Bulletin b;
     private Personne p;
+    private Data d;
 
-    public Ajouter() {
+    public Ajouter(Data db) {
+        d = db;
         bouton = new javax.swing.JButton();
+         bouton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boutonActionPerformed(evt);
+            }
+        });
         aff = new javax.swing.JPanel();
         aff.setBounds(10, 80, 400, 600);
         this.add(aff);
@@ -90,7 +98,7 @@ public class Ajouter extends javax.swing.JFrame {
         if (choix == "Personne") {
             initjpanel();
             p = new Personne();
-            for (i = 0; i < p.attributs.length; i++) {
+            for (i = 0; i < p.attributs.length-1; i++) {
                 saisie[i] = new JTextField(1);
                 saisie[i].setText(p.attributs[i]);
                 saisie[i].setBounds(10, 50 * i, 250, 30);
@@ -120,4 +128,24 @@ public class Ajouter extends javax.swing.JFrame {
 
         }
 }
+    private void boutonActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        initjpanel();
+        if(choix == "Personne")
+        {
+            d.addp(-1,saisie[0].getText(),saisie[1].getText());
+        }
+           if(choix == "Classe")
+        {
+            d.addc()
+        }
+           if(choix == "Bulletin")
+        {
+            
+        }
+           if(choix == "Bulletin")
+        {
+            
+        }
+    }
 }

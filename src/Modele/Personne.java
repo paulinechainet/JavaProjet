@@ -16,6 +16,7 @@ public class Personne {
     private String nom;
     private String prenom;
      private Classe classe;
+     private int type;
      private ArrayList<Classe> tableClasses= new ArrayList();
     private ArrayList<Bulletin> tableBulletins = new ArrayList();
     private ArrayList<Discipline> tableDisciplines=new ArrayList();
@@ -23,6 +24,7 @@ public class Personne {
 {
         "Nom",
         "Prénom",
+        "Fonction"
 };
 
     public Personne(int id, String nom, String prenom) {
@@ -42,6 +44,12 @@ public class Personne {
 
     public String getNom() {
         return nom;
+    }
+    public int getType(){
+        return type;
+    }
+    public void setType(int t){
+        type = t;
     }
 
     public String getPrenom() {
