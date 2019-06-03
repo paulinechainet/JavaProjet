@@ -52,14 +52,22 @@ public class Connexion {
     public Connexion(String nameDatabase, String loginDatabase, String passwordDatabase) throws SQLException, ClassNotFoundException {
         // chargement driver "com.mysql.jdbc.Driver"
         Class.forName("com.mysql.jdbc.Driver");
+<<<<<<< HEAD:ProjetJAVA/ProjetJAVA/src/Modele/Connexion.java
         // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
         String urlDatabase = "jdbc:mysql://localhost:8888/" + nameDatabase;
+=======
+        System.out.println("Driver ok");
        
         //création d'une connexion JDBC à la base 
         conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
        
         // création d'un ordre SQL (statement)
         stmt = conn.createStatement();
+<<<<<<< HEAD:ProjetJAVA/ProjetJAVA/src/Modele/Connexion.java
+=======
+          System.out.println("tout roule pour la ddb");
+         
+>>>>>>> ebd535cfbaa1f43a29b66956aeb476db29b98558:ProjetJAVA/src/Modele/Connexion.java
     }
 
 
