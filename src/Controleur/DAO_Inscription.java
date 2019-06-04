@@ -29,7 +29,7 @@ public class DAO_Inscription extends DAO<Inscription>{
     public boolean create(Inscription obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO inscription (id_eleve,id_classe) VALUES(?,?)"
+                    "INSERT INTO inscription (Personne.id,Classe.id) VALUES(?,?)"
                     );
             statement.setObject(1,obj.getPersonne().getId(),Types.INTEGER); 
             statement.setObject(2,obj.getClasse().getId(),Types.INTEGER);
@@ -46,7 +46,7 @@ public class DAO_Inscription extends DAO<Inscription>{
     public boolean delete(Inscription obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "DELETE FROM inscription WHERE inscription.id="+obj.getId()
+                    "DELETE FROM inscription WHERE id="+obj.getId()
                     );
             statement.executeUpdate(); 
         } catch (SQLException ex) {
@@ -60,7 +60,7 @@ public class DAO_Inscription extends DAO<Inscription>{
     public boolean update(Inscription obj) {
          try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "UPDATE inscription SET id_eleve=?,id_classe=? WHERE inscription.id=?"
+                    "UPDATE inscription SET id_eleve=?,id_classe=? WHERE id=?"
                     );
             statement.setObject(1,obj.getPersonne().getId(),Types.INTEGER); 
             statement.setObject(2,obj.getClasse().getId(),Types.INTEGER);
@@ -79,7 +79,7 @@ public class DAO_Inscription extends DAO<Inscription>{
         Inscription e = null;
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "SELECT * FROM inscription WHERE inscription.id="+id
+                    "SELECT * FROM inscription WHERE id="+id
                     );
             ResultSet rs = statement.executeQuery();
             while (rs.next())
@@ -87,8 +87,8 @@ public class DAO_Inscription extends DAO<Inscription>{
                 e = new Inscription(rs.getInt("id"));
                 DAO_Personne personneDAO = new DAO_Personne(this.connect);
                 DAO_Classe classDAO = new DAO_Classe(this.connect);
-                e.setPersonne(personneDAO.find(rs.getInt("id_personne")));
-                e.setClasse(classDAO.find(rs.getInt("id_classe")));
+                e.setPersonne(personneDAO.find(rs.getInt("Personne.id")));
+                e.setClasse(classDAO.find(rs.getInt("Classe.id")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Inscription.class.getName()).log(Level.SEVERE, null, ex);

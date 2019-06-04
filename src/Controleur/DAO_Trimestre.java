@@ -89,7 +89,7 @@ public class DAO_Trimestre extends DAO<Trimestre>{
             {
                 e = new Trimestre(rs.getInt("id"),rs.getInt("numero"),rs.getString("debut"),rs.getString("fin"));
                 DAO_Annee anDAO = new DAO_Annee(this.connect);
-                e.setAnnee(anDAO.find(rs.getInt("id_annee")));
+                e.setAnnee(anDAO.find(rs.getInt("AnneeScolaire.id")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Trimestre.class.getName()).log(Level.SEVERE, null, ex);

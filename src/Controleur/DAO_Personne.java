@@ -30,10 +30,11 @@ public class DAO_Personne extends DAO<Personne>
     public boolean create(Personne obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO Personne (nom,prenom) VALUES(?,?)"
+                    "INSERT INTO Personne (nom,prenom,type) VALUES(?,?,?)"
                     );
             statement.setObject(1,obj.getNom(),Types.VARCHAR); 
             statement.setObject(2,obj.getPrenom(),Types.VARCHAR);
+            statement.setObject(3,obj.getType(),Types.INTEGER);
             statement.executeUpdate(); 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Personne.class.getName()).log(Level.SEVERE, null, ex);
@@ -85,7 +86,7 @@ public class DAO_Personne extends DAO<Personne>
             ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
-                e = new Personne(rs.getInt("id"),rs.getString("nom"),rs.getString("prenom"));
+                e = new Personne(rs.getInt("id"),rs.getString("nom"),rs.getString("prenom"),rs.getInt("type"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Personne.class.getName()).log(Level.SEVERE, null, ex);

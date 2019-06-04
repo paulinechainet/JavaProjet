@@ -50,8 +50,8 @@ public class Data {
         LoadInscription();
         LoadNiveau();
         LoadTrimestre();
-        SetDataClasses();
-        SetDataBulletins();
+        //SetDataClasses();
+        //SetDataBulletins();
     }
       public void Save_All_Data()
     {
@@ -387,7 +387,7 @@ public class Data {
         int cle = 0;
         String nom = null;
         String Prenom = null;
-        int i=0;
+        int i = 0;
        for(Map.Entry<Integer, Personne> entry : tablePersonnes.entrySet()) 
       {
 
@@ -398,6 +398,7 @@ public class Data {
               cle = p.getId();
               nom = p.getNom();
               Prenom = p.getPrenom();
+              i = p.getType();
           }
           
       }
@@ -407,23 +408,63 @@ public class Data {
        }
        else
        {
-          p = new Personne(cle,nom,Prenom);
+          p = new Personne(cle,nom,Prenom,i);
        }
        return p;
     }
-    public void addp(int id, String nom, String prenom)
+    public Classe searchc(String rech,int id)
     {
-        Personne p = new Personne(id,nom,prenom);
+        Classe c;
+        int a = 0;
+        int cle = 0;
+        String nom = null;
+        Annee an = null;
+        Niveau n = null;
+       for(Map.Entry<Integer, Classe> entry : tableClasses.entrySet()) 
+      {
+
+          c = entry.getValue();
+          if(c.getan() == id && c.getNom().equals(rech))
+          {
+              a = 1;
+              cle = id;
+              nom = c.getNom();
+              an = c.getAnnee();
+              n = c.getNiveau();
+          }
+          
+      }
+       if(a == 0)
+       {
+       c = new Classe();
+       }
+       else
+       {
+          c = new Classe(cle,nom,n,an);
+       }
+       return c;
+    }
+    public void addc(int id,int idn, String nom,String n, int a)
+    {
+        Annee an = new Annee(a);
+        Niveau niv = new Niveau(idn,n);
+        Classe c = new Classe(id,nom,niv,an);
+        tableClasses.put(id, c);
+        SaveClasse();
+        tableClasses.clear();
+        LoadClasse(); 
+    }
+    public void addp(int id, String nom, String prenom, int type)
+    {
+        Personne p = new Personne(id,nom,prenom,type);
         tablePersonnes.put(id, p);
         SavePersonne();
         tablePersonnes.clear();
-        LoadPersonne();
-        
-        
+        LoadPersonne(); 
     }
-    public void modifp(int id, String nom, String prenom)
+    public void modifp(int id, String nom, String prenom, int type)
     {
-      Personne p = new Personne(id,nom,prenom);
+      Personne p = new Personne(id,nom,prenom,type);
       tablePersonnes.remove(id);
       tablePersonnes.put(id, p);
       SavePersonne();

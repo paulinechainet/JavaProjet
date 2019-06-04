@@ -30,7 +30,7 @@ public class DAO_Classe extends DAO<Classe>{
     public boolean create(Classe obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO classe (nom,id_niveau,id_annee) VALUES(?,?,?)"
+                    "INSERT INTO classe (nom,Niveau.id,Annee.id) VALUES(?,?,?)"
                     ); 
             statement.setObject(1,obj.getNom(),Types.VARCHAR); 
             statement.setObject(2,obj.getNiveau().getId(),Types.INTEGER);
@@ -48,7 +48,7 @@ public class DAO_Classe extends DAO<Classe>{
     public boolean delete(Classe obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "DELETE FROM classe WHERE classe.id="+obj.getId()
+                    "DELETE FROM classe WHERE id="+obj.getId()
                     );
             statement.executeUpdate(); 
         } catch (SQLException ex) {
@@ -89,8 +89,8 @@ public class DAO_Classe extends DAO<Classe>{
                 e = new Classe(rs.getInt("id"),rs.getString("nom"));
                 DAO_Niveau nivDAO = new DAO_Niveau(this.connect);
                 DAO_Annee anDAO = new DAO_Annee(this.connect);
-                e.setNiveau(nivDAO.find(rs.getInt("id_niveau")));
-                e.setAnnee(anDAO.find(rs.getInt("id_annee")));                
+                e.setNiveau(nivDAO.find(rs.getInt("Niveau.id")));
+                e.setAnnee(anDAO.find(rs.getInt("AnneeScolaire.id")));                
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Classe.class.getName()).log(Level.SEVERE, null, ex);

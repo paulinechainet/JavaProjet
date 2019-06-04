@@ -13,9 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import Controleur.*;
-import Modele.Bulletin;
-import Modele.Classe;
-import Modele.Personne;
+import Modele.*;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +21,8 @@ public class Modifier extends javax.swing.JFrame{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<Integer> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel trouve;
@@ -30,17 +30,20 @@ public class Modifier extends javax.swing.JFrame{
     private javax.swing.JButton bouton;
     private String choix;
     private javax.swing.JPanel jP;
-    private boolean recherche;
+    private int annee;
     Classe c;
     Personne p;
     Bulletin b;
+    Niveau n;
     private Data d;
     private int sup;
+    private int trimestre;
     public Modifier(int a, Data db)
     {
         d = db;
-        recherche = true;
         jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         trouve = new javax.swing.JLabel();
@@ -49,8 +52,21 @@ public class Modifier extends javax.swing.JFrame{
         jP.setBounds(10, 80, 800, 600);
         jLabel2.setBounds(10, 0, 400, 25);
         bouton = new javax.swing.JButton();
-        
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choisissez la table à modifier","Personne", "Classe", "Niveau", "Ecole", "Inscription","Bulletin", }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"1er trimestre","2e trimestre","3e trimestre", }));
+        jComboBox3.setBounds(550,30,80,25);
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new Integer[] {2016, 2017, 2018, 2019, }));
+        jComboBox2.setBounds(350,30,80,25);
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choisissez la table à modifier","Personne", "Classe", "Evaluation", "Ecole", "Inscription","Bulletin", }));
         bouton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonActionPerformed(evt);
@@ -117,9 +133,9 @@ public void Init()
         if(choix == "Classe")
         {
             rafraichir();
-            //DAO_Classe d = new DAO_Classe();
-            //c = d.recherche(texte.getText());
-            c = new Classe(1,rech);
+            c = d.searchc(texte.getText(),annee);
+            if(c.getId()!=-1)
+            {
             jTable = new javax.swing.JTable();
             jScrollPane1 = new javax.swing.JScrollPane();
             DefaultTableModel tableModel = new DefaultTableModel();
@@ -127,13 +143,21 @@ public void Init()
             {
               tableModel.addColumn(c.attributs[i]);  
             }
-            tableModel.addRow(new Object[]{ c.getNom(), c.getAnnee(), c.getNiveau()});
+            n = c.getNiveau();
+            tableModel.addRow(new Object[]{ c.getNom(), n.getNom(),c.getan()});
             jTable.setModel(tableModel);                   
              jScrollPane1.setViewportView(jTable);
              jScrollPane1.setBounds (20,100,500,40);
              bouton.setBounds(530, 130, 100, 30);
              jP.add(jScrollPane1);
              jP.add(bouton);
+            }
+            else
+            {
+             trouve.setBounds(20,80,500,40);
+              trouve.setText("Aucune classe correspondante");
+              jP.add(trouve);   
+            }
              
             
         }
@@ -147,7 +171,7 @@ public void Init()
             {
                 if(p.getType() == 1)
                 {
-                    s = "Etudiant";
+                    s = "Eleve";
                 }
                 else{
                     s ="Professeur";
@@ -196,10 +220,10 @@ public void Init()
              jP.add(bouton); 
             
         }
-        if(choix == "Ecole")
+        if(choix == "Evaluation")
         {
             rafraichir();
-            //Recherche dans classe
+            
         }
         
     }
@@ -222,18 +246,38 @@ public void Init()
        rafraichir();
             if(choix == "Personne")
         {
+            int type;
+            if(jTable.getValueAt(0,2).toString().equals("Eleve"))
+            {
+               type = 1;
+            }
+            else if(jTable.getValueAt(0,2).toString().equals("Professeur"))
+            {
+                type = 0;
+            }
+            else//Si l'utilisateur se trompe dans sa saisie le type n'est pas modifié
+            {
+                type = p.getType();
+            }
             if(sup==1)
             {
-            d.modifp(p.getId(), jTable.getValueAt(0,0).toString(), jTable.getValueAt(0,1).toString());
+            d.modifp(p.getId(), jTable.getValueAt(0,0).toString(), jTable.getValueAt(0,1).toString(),type);
             }
             else
             {
             d.supprp(p.getId());
             }
         }
-           if(choix == "Bulletin")
+           if(choix == "Classe")
         {
-            
+            if(sup==1)
+            {
+            //d.modifp(p.getId(), jTable.getValueAt(0,0).toString(), jTable.getValueAt(0,1).toString());
+            }
+            else
+            {
+            d.supprp(p.getId());
+            }
         }
            if(choix == "Bulletin")
         {
@@ -250,7 +294,8 @@ public void Init()
         jP.removeAll();
         if(choix == "Classe")
         {
-          jLabel2.setText("Rechercher par nom une "+ choix+ " :");  
+          jLabel2.setText("Rechercher par nom une "+ choix+ " :");
+          jP.add(jComboBox2);
         }
         else if(choix == "Personne")
         {
@@ -260,9 +305,38 @@ public void Init()
         {
           jLabel2.setText("Rechercher par nom ou par prénom un "+ choix +" :");
         }
+        else if(choix == "Evaluation")
+        {
+            jLabel2.setText("Rechercher par nom d'éléves");
+            jP.add(jComboBox2);
+            jP.add(jComboBox3);
+            
+        }
         else jLabel2.setText("Rechercher dans : "+ choix);
         jP.add(jLabel2);
         jP.add(texte);
         this.repaint();
     }
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) 
+    {
+        JComboBox cb = (JComboBox)evt.getSource();
+         annee = (Integer)cb.getSelectedItem();
+    } 
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) 
+    {
+        JComboBox cb = (JComboBox)evt.getSource();
+         String sele = (String)cb.getSelectedItem();
+         if(sele == "1er trimestre")
+         {
+             trimestre = 1;
+         }
+         else if(sele == "2e trimestre")
+         {
+             trimestre = 2;
+         }
+         else
+         {
+             trimestre = 3;
+         }
+    } 
 }

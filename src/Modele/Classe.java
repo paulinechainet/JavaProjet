@@ -40,6 +40,9 @@ public class Classe {
         this.id = id;
         this.nom = nom;
     }
+    public Classe() {
+        this.id = -1;
+    }
     
     
 
@@ -57,6 +60,9 @@ public class Classe {
 
     public Annee getAnnee() {
         return annee;
+    }
+    public int getan(){
+        return annee.getId();
     }
 
     public void setNiveau(Niveau niveau) {

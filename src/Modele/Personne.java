@@ -27,10 +27,11 @@ public class Personne {
         "Fonction"
 };
 
-    public Personne(int id, String nom, String prenom) {
+    public Personne(int id, String nom, String prenom, int t) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
+        type = t;
     }
     public Personne()
     {

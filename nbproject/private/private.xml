@@ -3,11 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/paulinechainet/Documents/GitHub/JavaProjet/src/Modele/Bulletin.java</file>
-            <file>file:/Users/paulinechainet/Documents/GitHub/JavaProjet/src/Controleur/Data.java</file>
-            <file>file:/Users/paulinechainet/Documents/GitHub/JavaProjet/src/Modele/Personne.java</file>
-            <file>file:/Users/paulinechainet/Documents/GitHub/JavaProjet/src/Modele/Connexion.java</file>
-            <file>file:/Users/paulinechainet/Documents/GitHub/JavaProjet/src/Controleur/DAO_Discipline.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Controleur/DAO_Bulletin.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Controleur/Data.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Modele/Personne.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Controleur/DAOFactory.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Vue/Modifier.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Controleur/DAO.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Modele/ProjetJAVA.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Controleur/DAO_Personne.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Modele/Niveau.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Vue/Menu.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Modele/Classe.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Controleur/DAO_Classe.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Modele/Annee.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Controleur/DAO_Niveau.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Modele/Connexion.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Controleur/DAO_Annee.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Controleur/DAO_Enseignement.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Controleur/DAO_Trimestre.java</file>
+            <file>file:/C:/Users/grego/Documents/GitHub/JavaProjet/src/Vue/Ajouter.java</file>
         </group>
     </open-files>
 </project-private>

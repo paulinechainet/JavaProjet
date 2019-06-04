@@ -16,7 +16,6 @@ public class Annee {
 
     public Annee(int id) {
         this.id = id;
-        
     }
 
     public int getId() {

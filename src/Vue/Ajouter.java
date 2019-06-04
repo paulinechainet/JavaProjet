@@ -11,7 +11,7 @@ import Modele.Personne;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
+import javax.swing.ButtonGroup;
 /**
  *
  * @author grego
@@ -23,13 +23,33 @@ public class Ajouter extends javax.swing.JFrame {
     private JTextField[] saisie = new JTextField[10];
     private javax.swing.JButton bouton;
     private javax.swing.JPanel aff;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.ButtonGroup groupe;
     private Classe c;
     private Bulletin b;
     private Personne p;
+    private int type = 3;
     private Data d;
 
     public Ajouter(Data db) {
         d = db;
+        groupe = new javax.swing.ButtonGroup();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton1.setText("Eleve");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton2.setText("Professeur");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
         bouton = new javax.swing.JButton();
          bouton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,7 +94,13 @@ public class Ajouter extends javax.swing.JFrame {
         aff.removeAll();
         this.repaint();
     }
+private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        type = 1;
+    }                                             
 
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        type = 0;
+    }  
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
         JComboBox cb = (JComboBox) evt.getSource();
         choix = (String) cb.getSelectedItem();
@@ -104,8 +130,14 @@ public class Ajouter extends javax.swing.JFrame {
                 saisie[i].setBounds(10, 50 * i, 250, 30);
                 aff.add(saisie[i]);
             }
-            bouton.setBounds(10,40 + 50 * i, 200, 30);
+            jRadioButton1.setBounds(10, 50 * i -20, 80, 30);
+            jRadioButton2.setBounds(100,50 * i -20, 200, 30);
+            groupe.add(jRadioButton1);
+            groupe.add(jRadioButton2);
+            bouton.setBounds(10,10 + 50 * i, 200, 30);
             aff.add(bouton);
+            aff.add(jRadioButton1);
+            aff.add(jRadioButton2);
             
 
         }
@@ -118,7 +150,7 @@ public class Ajouter extends javax.swing.JFrame {
                 saisie[i].setBounds(10, 50 * i, 250, 30);
                 aff.add(saisie[i]);
             }
-            bouton.setBounds(10,40 + 50 * i, 200, 30);
+            bouton.setBounds(10,20 + 50 * i, 200, 30);
             aff.add(bouton);
         }
         if (choix == "Ecole") {
@@ -131,13 +163,13 @@ public class Ajouter extends javax.swing.JFrame {
     private void boutonActionPerformed(java.awt.event.ActionEvent evt)
     {
         initjpanel();
-        if(choix == "Personne")
+        if(choix == "Personne" && type !=3)
         {
-            d.addp(-1,saisie[0].getText(),saisie[1].getText());
+            d.addp(-1,saisie[0].getText(),saisie[1].getText(),type);
         }
            if(choix == "Classe")
         {
-            d.addc()
+            //d.addc()
         }
            if(choix == "Bulletin")
         {

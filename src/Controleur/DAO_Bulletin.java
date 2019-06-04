@@ -86,8 +86,8 @@ public class DAO_Bulletin extends DAO<Bulletin> {
                 e = new Bulletin(rs.getInt("id"));
                 DAO_Inscription inscriDAO = new DAO_Inscription(this.connect);
                 DAO_Trimestre trimDAO = new DAO_Trimestre(this.connect);
-                e.setInscription(inscriDAO.find(rs.getInt("id_inscription")));
-                e.setTrimestre(trimDAO.find(rs.getInt("id_trimestre")));                
+                e.setInscription(inscriDAO.find(rs.getInt("Inscription.id")));
+                e.setTrimestre(trimDAO.find(rs.getInt("Trimestre.id")));                
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Bulletin.class.getName()).log(Level.SEVERE, null, ex);
