@@ -19,21 +19,24 @@ public class Bulletin {
 private Trimestre trimestre; 
     private Personne personne;
     private ArrayList<Evaluation> tableEvaluations = new ArrayList();
+    String Appreciation;
+    private int moyenne;
 
     public String attributs[]=
     {
         "Nom de l'élève",
-        "Id inscription",
-        "Trimestre",
+        "Début du Trimestre",
+        "Fin du trimestre",
         "Appréciation",
-        "Moyenne"
+        "Moyenne générale"
     };
 
 
-    public Bulletin(int id, Inscription inscription, Trimestre trimestre) {
+    public Bulletin(int id, Inscription inscription, Trimestre trimestre, String Appreciation) {
         this.id = id;
         this.inscription = inscription;
         this.trimestre = trimestre;
+        this.Appreciation = Appreciation;
     }
 
     public Bulletin(int id) {
@@ -75,6 +78,22 @@ private Trimestre trimestre;
 public void setEvaluations(ArrayList<Evaluation> evaluations) {
         this.tableEvaluations = evaluations;
     }
+public String getapre()
+{
+    return this.Appreciation;
+}
+public void setapre(String s)
+{
+    this.Appreciation = s;
+}
+public void setmoy(int m)
+{
+    this.moyenne = m;
+}
+public int getmoy()
+{
+    return this.moyenne;
+}
     
     
 }

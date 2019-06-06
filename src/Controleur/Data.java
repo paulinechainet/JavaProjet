@@ -15,6 +15,7 @@ import Modele.Inscription;
 import Modele.Niveau;
 import Modele.Personne;
 import Modele.Trimestre;
+import Modele.Detail;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +34,7 @@ public class Data {
     private Map<Integer,Inscription> tableInscriptions = new HashMap<Integer,Inscription>();
     private Map<Integer,Niveau> tableNiveaux = new HashMap<Integer,Niveau>();
     private Map<Integer,Trimestre> tableTrimestres = new HashMap<Integer,Trimestre>();
+    private Map<Integer,Detail> tableDetail = new HashMap<Integer,Detail>();
    
     public Data() {
       
@@ -50,6 +52,7 @@ public class Data {
         LoadInscription();
         LoadNiveau();
         LoadTrimestre();
+        LoadDetail();
         //SetDataClasses();
         //SetDataBulletins();
     }
@@ -90,6 +93,18 @@ public class Data {
             {
                 Bulletin a = DAO.find(i);
                 tableBulletins.put(a.getId(),a);
+            }
+        }
+    }
+     private void LoadDetail()
+    {
+        DAO<Detail> DAO= DAOFactory.getDAO_Detail();
+        for(int i =1;i<DAO.getMaxId()+1;i++)
+        {
+            if(DAO.find(i) != null)
+            {
+                Detail a = DAO.find(i);
+                tableDetail.put(a.getId(),a);
             }
         }
     }
@@ -379,6 +394,123 @@ public class Data {
           System.out.println(p.getNom());
       }  
       
+    }
+    public Detail searchd(int id)
+    {
+        Detail t,t1 = null;
+        Bulletin b;
+        Enseignement e;
+        for(Map.Entry<Integer, Detail> entry : tableDetail.entrySet())
+        {
+          t = entry.getValue();
+          b = t.getBulletin();
+          e = t.getEnseignement();
+          if(b.getId() == id)
+          {
+              t1 = t;
+          }
+        }
+        return t1;
+    }
+    public Classe inscrit(int id)
+    {
+        Classe c= null;
+        Inscription i;
+        Personne p;
+        String s;
+        for(Map.Entry<Integer, Inscription> entry : tableInscriptions.entrySet())
+        {
+          i = entry.getValue();
+          p = i.getPersonne();
+          if(p.getId() == id)
+          {
+              c = i.getClasse();
+          }
+        }
+        return c;
+        
+    }
+    public Trimestre searcht(int trimestre, int annee)
+    {
+        Trimestre t,t1 = null;
+        Annee a;
+        for(Map.Entry<Integer, Trimestre> entry : tableTrimestres.entrySet())
+        {
+          t = entry.getValue();
+          a = t.getAnnee();
+          if(a.getId() == annee && t.getNumero() == trimestre)
+          {
+              t1 = t;
+          }
+        }
+        return t1;
+    }
+    public Inscription searchinscrit(int id)
+    {
+        Inscription i,i1 = null;
+        Personne p = null;
+        Classe c;
+         for(Map.Entry<Integer, Inscription> entry : tableInscriptions.entrySet()) 
+      {
+
+          i = entry.getValue();
+          p = i.getPersonne();
+          if(p.getId() == id)
+          {
+           c = i.getClasse(); 
+           i1 = new Inscription(i.getId(),p,c);
+          }
+          
+      }
+         return i1;
+        
+    }
+    public void modifinscrit(String nom,int id,Classe c,Personne p)
+    {
+        Inscription i;
+        Classe c1 = searchc(nom,2019);
+        i = searchinscrit(p.getId());
+        if(i != null && c1 == null)//Si la classe n'existe pas et que l'eleve est déjà inscrit le laisser dans sa classe
+        {
+            i.setClasse(c);
+        }
+        if(i!=null && c1 !=null)
+        {
+            i.setClasse(c1);
+        }
+        if(i==null)
+        {
+            i = new Inscription(-1,p,c);
+        }
+      DAO<Inscription> DAO= DAOFactory.getDAO_Inscription();
+      System.out.println(DAO.getMaxId());
+      tableInscriptions.put(-1,i);
+      SaveInscription();
+        
+    }
+    public Bulletin searchbulletin(int idi, int idt)
+    {
+        Bulletin b,b1 = null;
+        Inscription i;
+        Trimestre t;
+        String s;
+        int a =0;
+         for(Map.Entry<Integer, Bulletin> entry : tableBulletins.entrySet()) 
+      {
+
+          b = entry.getValue();
+          i = b.getInscription();
+          t = b.getTrimestre();
+          if(i.getId() == idi && t.getNumero() == idt)
+          {
+              s = b.getapre();
+              t = b.getTrimestre();
+              b1 = new Bulletin(idi,i,t,s);
+          }
+          
+      }
+         return b1;
+         
     }
     public Personne searchp(String rech)
     {

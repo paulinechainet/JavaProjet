@@ -83,7 +83,7 @@ public class DAO_Evaluation extends DAO<Evaluation>{
         Evaluation e = null;
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "SELECT * FROM evalation WHERE evaluation.id="+id
+                    "SELECT * FROM evaluation WHERE evaluation.id="+id
                     );
             ResultSet rs = statement.executeQuery();
             while (rs.next())
@@ -91,8 +91,8 @@ public class DAO_Evaluation extends DAO<Evaluation>{
                 e = new Evaluation(rs.getInt("id"),rs.getInt("note"),rs.getString("appreciation"));
                 DAO_Bulletin buDAO = new DAO_Bulletin(this.connect);
                 DAO_Personne enDAO = new DAO_Personne(this.connect);
-                e.setBulletin(buDAO.find(rs.getInt("id_bulletin")));
-                e.setEnseignant(enDAO.find(rs.getInt("id_enseignant")));
+                e.setBulletin(buDAO.find(rs.getInt("DetailBulletin.id")));
+                e.setEnseignant(enDAO.find(rs.getInt("Enseignement.id")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Evaluation.class.getName()).log(Level.SEVERE, null, ex);

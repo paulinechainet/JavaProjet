@@ -29,10 +29,11 @@ public class DAO_Bulletin extends DAO<Bulletin> {
     public boolean create(Bulletin obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO Bulletin (Inscription.id,Trimestre.id) VALUES(?,?,?)"
+                    "INSERT INTO Bulletin (Inscription.id,Trimestre.id,appreciation) VALUES(?,?,?)"
                     );
             statement.setObject(1,obj.getInscription().getId(),Types.INTEGER);
-            statement.setObject(2,obj.getTrimestre().getId(),Types.INTEGER); 
+            statement.setObject(2,obj.getTrimestre().getId(),Types.INTEGER);
+            statement.setObject(3,obj.getapre(),Types.VARCHAR); 
             statement.executeUpdate(); 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Bulletin.class.getName()).log(Level.SEVERE, null, ex);
@@ -87,7 +88,9 @@ public class DAO_Bulletin extends DAO<Bulletin> {
                 DAO_Inscription inscriDAO = new DAO_Inscription(this.connect);
                 DAO_Trimestre trimDAO = new DAO_Trimestre(this.connect);
                 e.setInscription(inscriDAO.find(rs.getInt("Inscription.id")));
-                e.setTrimestre(trimDAO.find(rs.getInt("Trimestre.id")));                
+                e.setTrimestre(trimDAO.find(rs.getInt("Trimestre.id")));
+                e.setapre(rs.getString("Appreciation"));
+                e.setmoy(rs.getInt("Moyenneg"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Bulletin.class.getName()).log(Level.SEVERE, null, ex);

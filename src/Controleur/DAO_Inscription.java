@@ -5,7 +5,9 @@
  */
 package Controleur;
 
+import Modele.Classe;
 import Modele.Inscription;
+import Modele.Personne;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -60,7 +62,7 @@ public class DAO_Inscription extends DAO<Inscription>{
     public boolean update(Inscription obj) {
          try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "UPDATE inscription SET id_eleve=?,id_classe=? WHERE id=?"
+                    "UPDATE inscription SET Personne.id=?,Classe.id=? WHERE id=?"
                     );
             statement.setObject(1,obj.getPersonne().getId(),Types.INTEGER); 
             statement.setObject(2,obj.getClasse().getId(),Types.INTEGER);

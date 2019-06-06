@@ -49,6 +49,10 @@ import java.util.logging.Logger;
     return new DAO_Annee(conn);
   }
   
+  public static DAO getDAO_Detail(){
+    return new DAO_Detail(conn);
+  }
+  
   /**
   * Retourne un objet Buleltin interagissant avec la BDD
   * @return DAO
