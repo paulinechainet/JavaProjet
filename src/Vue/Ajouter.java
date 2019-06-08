@@ -23,7 +23,8 @@ public class Ajouter extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
-    private String choix, classe, discipline,prof;
+    private javax.swing.JComboBox<String> jComboBox5;
+    private String choix, classe, discipline,prof,niveau;
     private JTextField[] saisie = new JTextField[10];
     private javax.swing.JButton bouton;
     private javax.swing.JPanel aff;
@@ -67,7 +68,7 @@ public class Ajouter extends javax.swing.JFrame {
         this.add(aff);
         bouton.setText("Ajouter");
         jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisissez la table à modifier", "Personne", "Classe", "Enseignement", "Inscription", "Bulletin","Evaluation"}));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Ajouter un(e)", "Personne", "Classe", "Enseignement","Evaluation"}));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -92,6 +93,13 @@ public class Ajouter extends javax.swing.JFrame {
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
+            }
+        });
+        jComboBox5 = new javax.swing.JComboBox<>();
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir un niveau"}));
+        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox5ActionPerformed(evt);
             }
         });
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -138,15 +146,19 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         int i;
         if (choix == "Classe") {
             initjpanel();
-            c = new Classe(0, "");
-            for (i = 0; i < c.attributs.length; i++) {
-                saisie[i] = new JTextField(1);
-                saisie[i].setText(c.attributs[i]);
-                saisie[i].setBounds(10, 50 * i, 250, 30);
-                aff.add(saisie[i]);
-            }
-            bouton.setBounds(10,40 + 50 * i, 200, 30);
+                saisie[1] = new JTextField(1);
+                saisie[1].setText("Nom");
+                saisie[1].setBounds(10, 0, 150, 30);
+                aff.add(saisie[1]);
+                ArrayList<Niveau> tabn;
+                tabn = d.getallNiv();
+                for(int e = 0; e<tabn.size();e++){
+                    jComboBox5.addItem(tabn.get(e).getNom());
+                }
+                jComboBox5.setBounds(180, 0, 250, 30);
+            bouton.setBounds(10,40 , 200, 30);
             aff.add(bouton);
+            aff.add(jComboBox5);
         }
         if (choix == "Personne") {
             initjpanel();
@@ -188,9 +200,9 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
             tabc = d.getallC();
             tabp = d.getP();
             tabd = d.getallDis();
-            jComboBox2.setBounds(10, 50, 200, 30);
-            jComboBox3.setBounds(230, 50, 200, 30);
-            jComboBox4.setBounds(460, 50, 200, 30);
+            jComboBox2.setBounds(10, 0, 200, 30);
+            jComboBox3.setBounds(230, 0, 200, 30);
+            jComboBox4.setBounds(460, 0, 200, 30);
             for(i =0;i<tabc.size();i++)
             {
              jComboBox2.addItem(tabc.get(i).getNom());   
@@ -206,7 +218,7 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
             aff.add(jComboBox2);
             aff.add(jComboBox3);
             aff.add(jComboBox4);
-            bouton.setBounds(10,70, 200, 30);
+            bouton.setBounds(10,40, 200, 30);
             aff.add(bouton);
 
         }
@@ -223,7 +235,7 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         }
            if(choix == "Classe")
         {
-            //d.addc()
+           d.addc(niveau, saisie[1].getText(), 2019);
         }
            if(choix == "Enseignement")
         {
@@ -275,5 +287,9 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
      private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {
          JComboBox cb = (JComboBox) evt.getSource();
         discipline = (String) cb.getSelectedItem();
+     }
+      private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {
+         JComboBox cb = (JComboBox) evt.getSource();
+        niveau = (String) cb.getSelectedItem();
      }
 }

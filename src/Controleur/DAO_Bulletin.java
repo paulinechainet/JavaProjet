@@ -60,7 +60,7 @@ public class DAO_Bulletin extends DAO<Bulletin> {
     public boolean update(Bulletin obj) {
          try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "UPDATE bulletin SET id_inscription=?,id_trimestre=? WHERE bulletin.id=?"
+                    "UPDATE bulletin SET `Inscription.id`=?,`Trimestre.id`=? WHERE id=?"
                     );
             statement.setObject(1,obj.getInscription().getId(),Types.INTEGER);
             statement.setObject(2,obj.getTrimestre().getId(),Types.INTEGER); 

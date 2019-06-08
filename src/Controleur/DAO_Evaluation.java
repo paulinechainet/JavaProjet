@@ -89,7 +89,7 @@ public class DAO_Evaluation extends DAO<Evaluation>{
             while (rs.next())
             {
                 e = new Evaluation(rs.getInt("id"),rs.getInt("note"),rs.getString("appreciation"));
-                DAO_Bulletin buDAO = new DAO_Bulletin(this.connect);
+                DAO_Detail buDAO = new DAO_Detail(this.connect);
                 DAO_Personne enDAO = new DAO_Personne(this.connect);
                 e.setBulletin(buDAO.find(rs.getInt("DetailBulletin.id")));
                 e.setEnseignant(enDAO.find(rs.getInt("Enseignement.id")));

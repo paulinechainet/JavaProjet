@@ -15,7 +15,7 @@ public class Evaluation {
     private int id;
     private int note;
     private String appreciation;
-    private Bulletin bulletin;
+    private Detail bulletin;
     private Personne enseignant;
    public String attributs[]=
     {
@@ -25,7 +25,7 @@ public class Evaluation {
       "Appreciation"
     };
 
-    public Evaluation(int id, int note, String appreciation, Bulletin bulletin,Personne enseignant) {
+    public Evaluation(int id, int note, String appreciation, Detail bulletin,Personne enseignant) {
         this.id = id;
         this.note = note;
         this.appreciation = appreciation;
@@ -54,11 +54,11 @@ public class Evaluation {
         return appreciation;
     }
 
-    public Bulletin getBulletin() {
+    public Detail getBulletin() {
         return bulletin;
     }
 
-    public void setBulletin(Bulletin bulletin) {
+    public void setBulletin(Detail bulletin) {
         this.bulletin = bulletin;
     }
 

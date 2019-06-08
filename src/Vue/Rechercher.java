@@ -36,6 +36,7 @@ private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel jP;
     private int annee;
     Classe c,c1;
+    Evaluation ev = new Evaluation();
     ArrayList <Personne> tabp;
     Personne p;
     Inscription i;
@@ -236,6 +237,25 @@ private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
              jScrollPane1.setBounds (20,120,900,100);
              jP.add(jScrollPane1);
             }
+            if(choix == "Evaluation"){
+                ArrayList<Evaluation> eval;
+                eval = d.getallEv();
+                jTable = new javax.swing.JTable();
+                jScrollPane1 = new javax.swing.JScrollPane();
+                DefaultTableModel tableModel = new DefaultTableModel();
+                for(int i = 0; i<ev.attributs.length;i++)
+            {
+              tableModel.addColumn(ev.attributs[i]);  
+            }
+            for(int i=0; i<eval.size();i++){
+                tableModel.addRow(new Object[]{eval.get(i).getBulletin().getBulletin().getInscription().getPersonne().getNom(),eval.get(i).getBulletin().getEnseignement().getDiscipline().getNom(),eval.get(i).getNote(),eval.get(i).getAppreciation()}); 
+            }
+            jTable.setModel(tableModel);                   
+            jScrollPane1.setViewportView(jTable);
+            jScrollPane1.setBounds (20,120,500,140);
+            jP.add(jScrollPane1);
+                
+            }
 }
 public void rafraichir()
     {
@@ -254,11 +274,11 @@ public void rafraichir()
         {
             jP.add(jComboBox2);
             jP.add(jComboBox3);
-          jLabel2.setText("Rechercher par nom ou par prénom un de l'élève");
+          jLabel2.setText("Rechercher par nom ou par prénom un élève");
         }
         else if(choix == "Evaluation")
         {
-            jLabel2.setText("Rechercher par nom ou par prénom un de l'élève");
+            jLabel2.setText("Rechercher par nom ou par prénom un élève");
             jP.add(jComboBox2);
             jP.add(jComboBox3);
             
@@ -433,9 +453,9 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
             if(p.getId()!=-1 && p.getType()!=0){
             i = d.searchinscrit(p.getId());
             t = d.searcht(trimestre, annee);
-            b = d.searchbulletin(i.getId(), t.getNumero());
-            de = d.searchd(b.getId());
+            b = d.searchbulletin(i.getId(), t.getId());
             if(b!= null){
+            de = d.searchd(b.getId());
             jTable = new javax.swing.JTable();
             jTable2 = new javax.swing.JTable();
             
@@ -460,7 +480,7 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
             jScrollPane12.setViewportView(jTable2);
             jScrollPane12.setBounds (20,200,900,40);
              jP.add(jScrollPane1);
-             jP.add(jScrollPane12); 
+             jP.add(jScrollPane12);
             }
             else
             {
@@ -475,11 +495,73 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
               trouve.setText("Aucune eleve correspondant");
               jP.add(trouve); 
             }
-            
         }
         if(choix == "Evaluation")
         {
             rafraichir();
+            String s,ins;
+            rech = texte.getText();
+            rafraichir();
+            p = d.searchp(rech);
+            if(p.getId()!=-1 && p.getType() == 1)//L'id est négatif si aucune personne ne correspond à la recherche
+            {      
+                c= d.inscrit(p.getId());
+            if(c == null)
+            {
+                ins = "Aucune";
+            }
+            else
+            {
+                ins = c.getNom();
+            }
+              jTable = new javax.swing.JTable();
+            jScrollPane1 = new javax.swing.JScrollPane();
+            DefaultTableModel tableModel = new DefaultTableModel();
+            for(int i = 0; i<p.attributs.length;i++)
+            {
+              tableModel.addColumn(p.attributs[i]);  
+            }
+                tableModel.addColumn("Classe");
+             tableModel.addRow(new Object[]{ p.getNom(), p.getPrenom(), "Eleve",ins});   
+            jTable.setModel(tableModel);                   
+             jScrollPane1.setViewportView(jTable);
+             jScrollPane1.setBounds (20,120,500,40);
+             jP.add(jScrollPane1);
+            i = d.searchinscrit(p.getId());
+            t = d.searcht(trimestre, annee);
+            b = d.searchbulletin(i.getId(), t.getId());
+            if(b!=null){
+            de = d.searchd(b.getId());
+            ArrayList <Evaluation> eval;
+            eval = d.searchNote(de.getId());
+            jTable2 = new javax.swing.JTable();
+            jScrollPane12 = new javax.swing.JScrollPane();
+            DefaultTableModel tableModel2 = new DefaultTableModel();
+            for(int i = 1; i<ev.attributs.length;i++)
+            {
+              tableModel2.addColumn(ev.attributs[i]);  
+            }
+            for(int i=0; i<eval.size();i++){
+                tableModel2.addRow(new Object[]{de.getEnseignement().getDiscipline().getNom(),eval.get(i).getNote(),eval.get(i).getAppreciation()}); 
+            }
+            jTable2.setModel(tableModel2);                   
+            jScrollPane12.setViewportView(jTable2);
+            jScrollPane12.setBounds (20,180,500,40);
+            jP.add(jScrollPane12);
+            }
+            else
+            {
+               trouve.setBounds(20,150,500,40);
+              trouve.setText("Aucune note correspondante");
+              jP.add(trouve); 
+            }
+            }
+            else
+            {
+              trouve.setBounds(20,80,500,40);
+              trouve.setText("Aucun eleve correspondant");
+              jP.add(trouve);
+            }
             
         }
         if(choix == "Inscription")

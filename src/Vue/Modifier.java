@@ -256,9 +256,10 @@ public void Init()
             if(p.getId()!=-1 && p.getType()!=0){
             i = d.searchinscrit(p.getId());
             t = d.searcht(trimestre, annee);
-            b = d.searchbulletin(i.getId(), t.getNumero());
-            de = d.searchd(b.getId());
+            b = d.searchbulletin(i.getId(), t.getId());
+            
             if(b!= null){
+            de = d.searchd(b.getId());
             jTable = new javax.swing.JTable();
             jTable2 = new javax.swing.JTable();
             
@@ -268,7 +269,7 @@ public void Init()
             {
               tableModel.addColumn(b.attributs[i]);  
             }
-            tableModel.addRow(new Object[]{p.getNom(),t.getDebut(),t.getFin(),b.getapre()});
+            tableModel.addRow(new Object[]{p.getNom(),t.getDebut(),t.getFin(),b.getapre(),b.getmoy()});
             //tableModel.setRowCount(0);//Vider la table
             jTable.setModel(tableModel);                   
              jScrollPane1.setViewportView(jTable);
@@ -279,7 +280,7 @@ public void Init()
             {
               tableModel2.addColumn(de.attributs[i]);  
             }
-             tableModel2.addRow(new Object[]{de.getMoyenne(),de.getapre()});
+             tableModel2.addRow(new Object[]{de.getEnseignement().getDiscipline().getNom(),de.getEnseignement().getPersonne().getNom(),de.getMoyenne(),de.getapre()});
             jTable2.setModel(tableModel2);
             jScrollPane12.setViewportView(jTable2);
             jScrollPane12.setBounds (20,200,900,40);
@@ -337,24 +338,32 @@ public void Init()
              jP.add(jScrollPane1);
             i = d.searchinscrit(p.getId());
             t = d.searcht(trimestre, annee);
-            b = d.searchbulletin(i.getId(), t.getNumero());
+            b = d.searchbulletin(i.getId(), t.getId());
+            if(b!=null){
             de = d.searchd(b.getId());
             ArrayList <Evaluation> eval;
             eval = d.searchNote(de.getId());
             jTable2 = new javax.swing.JTable();
             jScrollPane12 = new javax.swing.JScrollPane();
             DefaultTableModel tableModel2 = new DefaultTableModel();
-            for(int i = 0; i<ev.attributs.length;i++)
+            for(int i = 1; i<ev.attributs.length;i++)
             {
               tableModel2.addColumn(ev.attributs[i]);  
             }
             for(int i=0; i<eval.size();i++){
-                tableModel2.addRow(new Object[]{ p.getNom(), de.getEnseignement().getDiscipline().getNom(),eval.get(i).getNote(),eval.get(i).getAppreciation()}); 
+                tableModel2.addRow(new Object[]{de.getEnseignement().getDiscipline().getNom(),eval.get(i).getNote(),eval.get(i).getAppreciation()}); 
             }
             jTable2.setModel(tableModel2);                   
-             jScrollPane1.setViewportView(jTable2);
-            jScrollPane1.setBounds (20,420,500,40);
+            jScrollPane12.setViewportView(jTable2);
+            jScrollPane12.setBounds (20,180,500,40);
             jP.add(jScrollPane12);
+            }
+            else
+            {
+               trouve.setBounds(20,150,500,40);
+              trouve.setText("Aucune note correspondante");
+              jP.add(trouve); 
+            }
             }
             else
             {

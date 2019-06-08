@@ -32,11 +32,12 @@ private Trimestre trimestre;
     };
 
 
-    public Bulletin(int id, Inscription inscription, Trimestre trimestre, String Appreciation) {
+    public Bulletin(int id, Inscription inscription, Trimestre trimestre, String Appreciation, int moy) {
         this.id = id;
         this.inscription = inscription;
         this.trimestre = trimestre;
         this.Appreciation = Appreciation;
+        this.moyenne = moy;
     }
 
     public Bulletin(int id) {

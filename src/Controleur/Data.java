@@ -369,6 +369,26 @@ public class Data {
       }
        return tabc;
     }
+    public ArrayList<Evaluation> getallEv(){
+        Evaluation e;
+        ArrayList <Evaluation> tabe = new ArrayList();
+       for(Map.Entry<Integer, Evaluation> entry : tableEvaluations.entrySet()) 
+      {
+          e = entry.getValue();
+          tabe.add(e);
+      }
+       return tabe;
+    }
+    public ArrayList<Niveau> getallNiv(){
+        Niveau e;
+        ArrayList <Niveau> tabe = new ArrayList();
+       for(Map.Entry<Integer, Niveau> entry : tableNiveaux.entrySet()) 
+      {
+          e = entry.getValue();
+          tabe.add(e);
+      }
+       return tabe;
+    }
     public ArrayList<Bulletin> getallB(){
         Bulletin b;
         ArrayList <Bulletin> tabb = new ArrayList();
@@ -419,10 +439,10 @@ public class Data {
     }
     public void affichage()
     {
-      for(Map.Entry<Integer, Personne> entry : tablePersonnes.entrySet()) 
+      for(Map.Entry<Integer, Evaluation> entry : tableEvaluations.entrySet()) 
       {
-          Personne p = entry.getValue();
-          System.out.println(p.getNom());
+          Evaluation p = entry.getValue();
+          System.out.println(p.getBulletin().getId());
       }  
       
     }
@@ -435,7 +455,6 @@ public class Data {
         {
           t = entry.getValue();
           b = t.getBulletin();
-          e = t.getEnseignement();
           if(b.getId() == id)
           {
               t1 = t;
@@ -496,9 +515,23 @@ public class Data {
          return i1;
         
     }
+    public Niveau searchn(String s)
+    {
+        Niveau i,i1 = null;
+         for(Map.Entry<Integer, Niveau> entry : tableNiveaux.entrySet()) 
+      {
+
+          i = entry.getValue();
+          if(i.getNom() == s)
+          {
+            i1 = i;
+          }
+    }
+         return i1;
+    }
     public ArrayList<Evaluation> searchNote(int idb)
     {
-        Evaluation e;
+        Evaluation e = null;
         ArrayList <Evaluation> tabe = new ArrayList();
       for(Map.Entry<Integer, Evaluation> entry : tableEvaluations.entrySet()) 
       {
@@ -627,11 +660,12 @@ public class Data {
           b = entry.getValue();
           i = b.getInscription();
           t = b.getTrimestre();
-          if(i.getId() == idi && t.getNumero() == idt)
+          if(i.getId() == idi && t.getId() == idt)
           {
               s = b.getapre();
               t = b.getTrimestre();
-              b1 = new Bulletin(idi,i,t,s);
+              a = b.getmoy();
+              b1 = new Bulletin(b.getId(),i,t,s,a);
           }
           
       }
@@ -702,15 +736,14 @@ public class Data {
        }
        return c;
     }
-    public void addc(int id,int idn, String nom,String n, int a)
+    public void addc(String nom,String n, int a)
     {
         Annee an = new Annee(a);
-        Niveau niv = new Niveau(idn,n);
-        Classe c = new Classe(id,nom,niv,an);
-        tableClasses.put(id, c);
-        SaveClasse();
-        tableClasses.clear();
-        LoadClasse(); 
+        Niveau niv = searchn(nom);
+        DAO<Classe> DAO= DAOFactory.getDAO_Classe();
+        Classe c = new Classe(DAO.getMaxId()+1,n,niv,an);
+        tableClasses.put(DAO.getMaxId()+1, c);
+        SaveClasse(); 
     }
     public void addp(int id, String nom, String prenom, int type)
     {
