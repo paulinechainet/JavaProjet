@@ -14,6 +14,11 @@ public class Enseignement {
     private Classe classe;
     private Personne personne;
     private Discipline discipline;
+    public String attributs[]={
+        "Classe",
+        "Professeur",
+        "Discipline"
+    };
 
     public Enseignement(int id, Classe classe, Personne personne, Discipline discipline) {
         this.id = id;
@@ -24,6 +29,10 @@ public class Enseignement {
 
     public Enseignement(int id) {
         this.id = id;
+    }
+
+    public Enseignement() {
+        
     }
     
 

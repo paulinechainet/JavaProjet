@@ -17,6 +17,13 @@ public class Evaluation {
     private String appreciation;
     private Bulletin bulletin;
     private Personne enseignant;
+   public String attributs[]=
+    {
+      "Nom de l'élève",
+      "Discipline",
+      "Note",
+      "Appreciation"
+    };
 
     public Evaluation(int id, int note, String appreciation, Bulletin bulletin,Personne enseignant) {
         this.id = id;
@@ -31,8 +38,9 @@ public class Evaluation {
         this.note = note;
         this.appreciation = appreciation;
     }
-    
-    
+
+    public Evaluation() {
+    }
 
     public int getId() {
         return id;

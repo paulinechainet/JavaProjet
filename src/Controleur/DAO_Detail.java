@@ -58,7 +58,6 @@ public class DAO_Detail extends DAO<Detail> {
                 e.setEnseignement(ensDAO.find(rs.getInt("Enseignement.id")));
                 e.setBulletin(bullDAO.find(rs.getInt("Bulletin.id")));
                 e.setapre(rs.getString("Appreciation"));
-                e.setnb(rs.getInt("NbNotes"));
                 e.setMoyenne(rs.getInt("Moyenne"));
             }
         } catch (SQLException ex) {

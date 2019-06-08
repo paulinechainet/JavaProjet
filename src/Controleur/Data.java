@@ -16,6 +16,7 @@ import Modele.Niveau;
 import Modele.Personne;
 import Modele.Trimestre;
 import Modele.Detail;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -358,6 +359,36 @@ public class Data {
     public Map<Integer, Classe> getClasses() {
         return tableClasses;
     }
+    public ArrayList<Classe> getallC(){
+        Classe c;
+        ArrayList <Classe> tabc = new ArrayList();
+       for(Map.Entry<Integer, Classe> entry : tableClasses.entrySet()) 
+      {
+          c = entry.getValue();
+          tabc.add(c);
+      }
+       return tabc;
+    }
+    public ArrayList<Bulletin> getallB(){
+        Bulletin b;
+        ArrayList <Bulletin> tabb = new ArrayList();
+       for(Map.Entry<Integer, Bulletin> entry : tableBulletins.entrySet()) 
+      {
+          b = entry.getValue();
+          tabb.add(b);
+      }
+       return tabb;
+    }
+    public ArrayList<Discipline> getallDis(){
+        Discipline d;
+        ArrayList <Discipline> tabd = new ArrayList();
+       for(Map.Entry<Integer, Discipline> entry : tableDisciplines.entrySet()) 
+      {
+          d = entry.getValue();
+          tabd.add(d);
+      }
+       return tabd;
+    }
 
     public Map<Integer, Discipline> getDisciplines() {
         return tableDisciplines;
@@ -465,28 +496,123 @@ public class Data {
          return i1;
         
     }
+    public ArrayList<Evaluation> searchNote(int idb)
+    {
+        Evaluation e;
+        ArrayList <Evaluation> tabe = new ArrayList();
+      for(Map.Entry<Integer, Evaluation> entry : tableEvaluations.entrySet()) 
+      {
+          e = entry.getValue();
+          if(e.getBulletin().getId() == idb){
+              tabe.add(e);
+          }
+      }
+      return tabe;
+    }
+    public Personne searche(int id)
+    {
+        Inscription i;
+        Personne p = null;
+        for(Map.Entry<Integer, Inscription> entry : tableInscriptions.entrySet()) 
+      {
+
+          i = entry.getValue();
+          if(i.getId() == id)
+          {
+           p = i.getPersonne();
+          }
+          
+      }
+         return p;
+    }
+    public void addenseignement( Classe classe, Personne personne, Discipline discipline)
+    {
+       DAO<Enseignement> DAO= DAOFactory.getDAO_Enseignement();
+       Enseignement e = new Enseignement(DAO.getMaxId()+1,classe,personne,discipline); 
+       System.out.println(personne.getNom());
+       System.out.println(classe.getNom());
+       System.out.println(discipline.getNom());
+       tableEnseignements.put(DAO.getMaxId(), e);
+       SaveEnseignement();
+    }
+    public ArrayList<Classe> searchclasseid(int id)
+    {
+        Enseignement e;
+        Classe c;
+        ArrayList<Classe> tabc = new ArrayList();
+        Personne p;
+        for(Map.Entry<Integer, Enseignement> entry : tableEnseignements.entrySet()) 
+      {
+          e = entry.getValue();
+          c = e.getClasse();
+          p = e.getPersonne();
+          if(p.getId() == id)
+          {
+              tabc.add(c);
+          }
+      }
+        return tabc;
+    }
     public void modifinscrit(String nom,int id,Classe c,Personne p)
     {
         Inscription i;
-        Classe c1 = searchc(nom,2019);
+        Classe c1;
+        
         i = searchinscrit(p.getId());
-        if(i != null && c1 == null)//Si la classe n'existe pas et que l'eleve est déjà inscrit le laisser dans sa classe
+        
+        if(i!=null)
         {
             i.setClasse(c);
         }
-        if(i!=null && c1 !=null)
-        {
-            i.setClasse(c1);
-        }
         if(i==null)
         {
-            i = new Inscription(-1,p,c);
+            DAO<Inscription> DAO= DAOFactory.getDAO_Inscription();
+            i = new Inscription(DAO.getMaxId()+1,p,c);
         }
-      DAO<Inscription> DAO= DAOFactory.getDAO_Inscription();
-      System.out.println(DAO.getMaxId());
-      tableInscriptions.put(-1,i);
+
+      if(i.getClasse()!=null){
+      tableInscriptions.put(i.getId(),i);
       SaveInscription();
-        
+      }
+    }
+    public ArrayList<Personne> getE()
+    {
+        ArrayList<Personne> e = new ArrayList();
+        Personne p;
+        for(Map.Entry<Integer, Personne> entry : tablePersonnes.entrySet()) 
+      {
+          p = entry.getValue();
+          if(p.getType() == 1){
+              e.add(p);
+          }
+      }
+        return e;
+    }
+    public ArrayList<Personne> getP()
+    {
+        ArrayList<Personne> e = new ArrayList();
+        Personne p;
+        for(Map.Entry<Integer, Personne> entry : tablePersonnes.entrySet()) 
+      {
+          p = entry.getValue();
+          if(p.getType() != 1){
+              e.add(p);
+          }
+      }
+        return e;
+    }
+    public Discipline searchdiscipline(Personne p)
+    {
+        Discipline di = null;
+        Enseignement e;
+        for(Map.Entry<Integer, Enseignement> entry : tableEnseignements.entrySet()) 
+      {
+          e = entry.getValue();
+          if(e.getPersonne().getId() == p.getId()){
+              di = e.getDiscipline();
+          }
+      }
+        return di;
     }
     public Bulletin searchbulletin(int idi, int idt)
     {
@@ -559,7 +685,7 @@ public class Data {
           if(c.getan() == id && c.getNom().equals(rech))
           {
               a = 1;
-              cle = id;
+              cle = c.getId();
               nom = c.getNom();
               an = c.getAnnee();
               n = c.getNiveau();

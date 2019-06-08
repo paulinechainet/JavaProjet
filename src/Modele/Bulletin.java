@@ -42,6 +42,10 @@ private Trimestre trimestre;
     public Bulletin(int id) {
         this.id = id;
     }
+
+    public Bulletin() {
+        
+    }
     
     
     

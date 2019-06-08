@@ -31,10 +31,11 @@ public class DAO_Inscription extends DAO<Inscription>{
     public boolean create(Inscription obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO inscription (Personne.id,Classe.id) VALUES(?,?)"
+                    "INSERT INTO `inscription`(`id`, `Personne.id`,`Classe.id`) VALUES(?,?,?)"
                     );
-            statement.setObject(1,obj.getPersonne().getId(),Types.INTEGER); 
-            statement.setObject(2,obj.getClasse().getId(),Types.INTEGER);
+            statement.setObject(1,obj.getId(),Types.INTEGER); 
+            statement.setObject(2,obj.getPersonne().getId(),Types.INTEGER); 
+            statement.setObject(3,obj.getClasse().getId(),Types.INTEGER);
             statement.executeUpdate(); 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Inscription.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,10 +63,10 @@ public class DAO_Inscription extends DAO<Inscription>{
     public boolean update(Inscription obj) {
          try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "UPDATE inscription SET Personne.id=?,Classe.id=? WHERE id=?"
+                    "UPDATE inscription SET `Classe.id`=?,`Personne.id`=? WHERE id=?"
                     );
-            statement.setObject(1,obj.getPersonne().getId(),Types.INTEGER); 
-            statement.setObject(2,obj.getClasse().getId(),Types.INTEGER);
+            statement.setObject(2,obj.getPersonne().getId(),Types.INTEGER); 
+            statement.setObject(1,obj.getClasse().getId(),Types.INTEGER);
             statement.setObject(3,obj.getId(),Types.INTEGER);
             statement.executeUpdate(); 
         } catch (SQLException ex) {

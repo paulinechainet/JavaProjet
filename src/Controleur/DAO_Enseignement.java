@@ -27,7 +27,7 @@ public class DAO_Enseignement extends DAO<Enseignement> {
     public boolean create(Enseignement obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO Enseignement (Classe.id,Personne.id,Discipline.id) VALUES(?,?,?)"
+                    "INSERT INTO Enseignement (`Classe.id`,`Personne.id`,`Discipline.id`) VALUES(?,?,?)"
                     );
             statement.setObject(1,obj.getClasse().getId(),Types.INTEGER); 
             statement.setObject(2,obj.getPersonne().getId(),Types.INTEGER);
@@ -59,7 +59,7 @@ public class DAO_Enseignement extends DAO<Enseignement> {
     public boolean update(Enseignement obj) {
          try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "UPDATE Enseignement SET Classe.id=?,Personne.id=?,Discipline.id=? WHERE id=?"
+                    "UPDATE Enseignement SET `Classe.id`=?,`Personne.id`=?,`Discipline.id`=? WHERE id=?"
                     );
             statement.setObject(1,obj.getClasse().getId(),Types.INTEGER); 
             statement.setObject(2,obj.getPersonne().getId(),Types.INTEGER);
