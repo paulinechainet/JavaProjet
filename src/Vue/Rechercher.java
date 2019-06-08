@@ -190,7 +190,15 @@ private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
                for(int i =0; i< tabp.size();i++)
                {
                    di = d.searchdiscipline(tabp.get(i));
-             tableModel.addRow(new Object[]{ tabp.get(i).getNom(), tabp.get(i).getPrenom(), "Professeur",di.getNom()});   
+                   if(di == null)
+                   {
+                       ins = "Aucune";
+                   }
+                   else
+                   {
+                       ins = di.getNom();
+                   }
+             tableModel.addRow(new Object[]{ tabp.get(i).getNom(), tabp.get(i).getPrenom(), "Professeur",ins});   
                
             }  
              jTable.setModel(tableModel);                   
@@ -546,7 +554,7 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
             }
             jTable2.setModel(tableModel2);                   
             jScrollPane12.setViewportView(jTable2);
-            jScrollPane12.setBounds (20,180,500,40);
+            jScrollPane12.setBounds (20,180,500,120);
             jP.add(jScrollPane12);
             }
             else

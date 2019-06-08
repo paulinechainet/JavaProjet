@@ -28,11 +28,12 @@ public class DAO_Detail extends DAO<Detail> {
     public boolean create(Detail obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO detailbulletin (Bulletin.id,Enseignement.id,appreciation) VALUES(?,?,?)"
+                    "INSERT INTO detailbulletin (`Bulletin.id`,`Enseignement.id`,`appreciation`,`Moyenne`) VALUES(?,?,?,?)"
                     );
             statement.setObject(1,obj.getBulletin().getId(),Types.INTEGER);
             statement.setObject(2,obj.getEnseignement().getId(),Types.INTEGER);
-            statement.setObject(3,obj.getapre(),Types.VARCHAR); 
+            statement.setObject(3,obj.getapre(),Types.VARCHAR);
+            statement.setObject(4,obj.getMoyenne(),Types.INTEGER);
             statement.executeUpdate(); 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Detail.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,6 +93,20 @@ public class DAO_Detail extends DAO<Detail> {
 
     @Override
     public boolean update(Detail obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            PreparedStatement statement = this.connect.prepareStatement(
+                    "UPDATE detailbulletin SET `Bulletin.id`=?,`Enseignement.id`=?,`appreciation`=?,`Moyenne`=? WHERE id=?"
+                    );
+            statement.setObject(2,obj.getEnseignement().getId(),Types.INTEGER);
+            statement.setObject(1,obj.getBulletin().getId(),Types.INTEGER); 
+            statement.setObject(3,obj.getapre(),Types.VARCHAR); 
+            statement.setObject(4,obj.getMoyenne(),Types.INTEGER);
+            statement.setObject(5,obj.getId(),Types.INTEGER);
+            
+            statement.executeUpdate(); 
+        } catch (SQLException ex) {
+            Logger.getLogger(DAO_Detail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
 }

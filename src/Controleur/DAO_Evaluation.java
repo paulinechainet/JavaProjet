@@ -30,7 +30,7 @@ public class DAO_Evaluation extends DAO<Evaluation>{
     public boolean create(Evaluation obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO evaluation (note,appreciation,id_bulletin,id_enseignant) VALUES(?,?,?,?)"
+                    "INSERT INTO evaluation (`note`,`appreciation`,`DetailBulletin.id`,`Enseignement.id`) VALUES(?,?,?,?)"
                     );
             statement.setObject(1,obj.getNote(),Types.INTEGER); 
             statement.setObject(2,obj.getAppreciation(),Types.VARCHAR);
@@ -63,7 +63,7 @@ public class DAO_Evaluation extends DAO<Evaluation>{
     public boolean update(Evaluation obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "UPDATE evaluation SET note=?,appreciation=?,id_bulletin=?,id_enseignant=? WHERE evaluation.id=?)"
+                    "UPDATE evaluation SET note=?,`appreciation`=?,`DetailBulletin.id`=?,`Enseignement.id`=? WHERE id=?"
                     );
             statement.setObject(1,obj.getNote(),Types.INTEGER); 
             statement.setObject(2,obj.getAppreciation(),Types.VARCHAR);

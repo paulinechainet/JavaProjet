@@ -29,11 +29,13 @@ public class DAO_Bulletin extends DAO<Bulletin> {
     public boolean create(Bulletin obj) {
         try {
             PreparedStatement statement = this.connect.prepareStatement(
-                    "INSERT INTO Bulletin (Inscription.id,Trimestre.id,appreciation) VALUES(?,?,?)"
+                    "INSERT INTO Bulletin (`Inscription.id`,`Trimestre.id`,`appreciation`,`Moyenneg`) VALUES(?,?,?,?)"
                     );
+            
             statement.setObject(1,obj.getInscription().getId(),Types.INTEGER);
             statement.setObject(2,obj.getTrimestre().getId(),Types.INTEGER);
             statement.setObject(3,obj.getapre(),Types.VARCHAR); 
+            statement.setObject(4,obj.getmoy(),Types.INTEGER);
             statement.executeUpdate(); 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Bulletin.class.getName()).log(Level.SEVERE, null, ex);

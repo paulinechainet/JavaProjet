@@ -78,7 +78,7 @@ public class Modifier extends javax.swing.JFrame{
                 jComboBox2ActionPerformed(evt);
             }
         });
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choisissez la table à modifier","Personne", "Classe", "Evaluation", "Ecole", "Inscription","Bulletin", }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choisissez la table à modifier","Personne", "Classe", "Evaluation","Bulletin",}));
         bouton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonActionPerformed(evt);

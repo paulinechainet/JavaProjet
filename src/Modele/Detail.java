@@ -27,13 +27,12 @@ public Detail(int id)
     {
         this.id = id;
     }    
-    public Detail(int id, int nb,Bulletin b, Enseignement e, String a )
+    public Detail(int id, Bulletin b, Enseignement e, String a )
     {
       this.appreciation = a;
       this.bulletin = b;
       this.enseignement = e;
       this.id = id;
-      this.nb_notes = nb;
     }
     public String getapre()
     {
@@ -79,6 +78,10 @@ public Detail(int id)
     public void setMoyenne(int m)
     {
         this.moyenne = m;
+    }
+
+    public void searchde(Bulletin b, Enseignement e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

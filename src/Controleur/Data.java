@@ -16,6 +16,7 @@ import Modele.Niveau;
 import Modele.Personne;
 import Modele.Trimestre;
 import Modele.Detail;
+import Modele.Ecole;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -218,6 +219,20 @@ public class Data {
         DAO<Annee> DAO= DAOFactory.getDAO_Annee();
         for(Map.Entry<Integer, Annee> entry : tableAnnees.entrySet()) {  
             Annee a = entry.getValue();
+            if(DAO.find(a.getId())!=null)
+            {
+                DAO.update(a);
+            }else{
+                DAO.create(a);
+            }
+            
+        }
+    }
+    private void SaveDetail()
+    {
+        DAO<Detail> DAO= DAOFactory.getDAO_Detail();
+        for(Map.Entry<Integer, Detail> entry : tableDetail.entrySet()) {  
+            Detail a = entry.getValue();
             if(DAO.find(a.getId())!=null)
             {
                 DAO.update(a);
@@ -455,6 +470,8 @@ public class Data {
         {
           t = entry.getValue();
           b = t.getBulletin();
+          System.out.print(id);
+          System.out.print(b.getId());
           if(b.getId() == id)
           {
               t1 = t;
@@ -826,5 +843,71 @@ public class Data {
             }
                 
         }
+    }
+
+    public void addisci(String text) {
+        DAO<Discipline> DAO= DAOFactory.getDAO_Discipline();
+        Discipline d = new Discipline(DAO.getMaxId()+1,text);
+        tableDisciplines.put(DAO.getMaxId()+1,d);
+        SaveDiscipline();
+        
+    }
+   /* public void addschool(String text) {
+        DAO<Ecole> DAO= DAOFactory.getDAO_Ecole();
+        Ecole E = new Ecole(DAO.getMaxId()+1,text);
+        tableEcoles.put(DAO.getMaxId()+1,E);
+        SaveEcole();
+        
+    }*/
+
+    public void addeval(int note, String a, Detail b, Personne el) {
+        //int id, int note, String appreciation, Detail bulletin,Personne enseignant
+                DAO<Evaluation> DAO = DAOFactory.getDAO_Evaluation();
+                Evaluation e = new Evaluation(DAO.getMaxId()+1,note,a,b,el);
+                tableEvaluations.put(DAO.getMaxId()+1, e);
+                SaveEvaluation();
+                LoadEvaluation();
+    }
+
+    public void addb(Inscription inscription, Trimestre trimestre, String appreciation) {
+        DAO<Bulletin> DAO= DAOFactory.getDAO_Bulletin();
+        int moyenne = 10;
+        Bulletin b = new Bulletin(DAO.getMaxId()+1,inscription,trimestre,"", moyenne);
+        tableBulletins.put(DAO.getMaxId()+1, b);
+        SaveBulletin();
+    }
+    public void addetail(Bulletin b, Enseignement e)
+    {
+        DAO<Detail> DAO= DAOFactory.getDAO_Detail();
+        Detail d = new Detail(DAO.getMaxId()+1,b,e,"");
+        tableDetail.put(DAO.getMaxId()+1, d);
+        SaveDetail();
+        
+    }
+    public Enseignement searchenseignement(String prof, String dis)
+    {
+        Enseignement e,e1 = null;
+        for(Map.Entry<Integer,Enseignement> entry : tableEnseignements.entrySet())
+        {
+            e = entry.getValue();
+            if(e.getPersonne().getNom().equals(prof) && e.getDiscipline().getNom().equals(dis))
+            {
+                e1 = e;
+            }
+        }
+        return e1;
+    }
+
+    public Detail searchde(Bulletin b, Enseignement e) {
+        Detail d,d1 = null;
+        for(Map.Entry<Integer,Detail> entry : tableDetail.entrySet())
+        {
+            d = entry.getValue();
+            if(d.getBulletin().getId() == b.getId() && d.getEnseignement().getId() == e.getId())
+            {
+                d1 = d;
+            }
+        }
+        return d1;
     }
 }
