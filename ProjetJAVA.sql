@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8889
--- Généré le :  mer. 22 mai 2019 à 12:42
--- Version du serveur :  5.7.25
--- Version de PHP :  7.3.1
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  sam. 08 juin 2019 à 22:05
+-- Version du serveur :  5.7.24
+-- Version de PHP :  7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,368 +19,371 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `ProjetJAVA`
+-- Base de données :  `projetjava`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `AnneeScolaire`
+-- Structure de la table `anneescolaire`
 --
 
-CREATE TABLE `AnneeScolaire` (
+DROP TABLE IF EXISTS `anneescolaire`;
+CREATE TABLE IF NOT EXISTS `anneescolaire` (
   `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `anneescolaire`
+--
+
+INSERT INTO `anneescolaire` (`id`) VALUES
+(2016),
+(2017),
+(2018),
+(2019);
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Bulletin`
+-- Structure de la table `bulletin`
 --
 
-CREATE TABLE `Bulletin` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `bulletin`;
+CREATE TABLE IF NOT EXISTS `bulletin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Trimestre.id` int(11) NOT NULL,
   `Inscription.id` int(11) NOT NULL,
-  `appreciation` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `appreciation` text NOT NULL,
+  `Moyenneg` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Trimestre.id` (`Trimestre.id`),
+  KEY `Inscription.id` (`Inscription.id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `bulletin`
+--
+
+INSERT INTO `bulletin` (`id`, `Trimestre.id`, `Inscription.id`, `appreciation`, `Moyenneg`) VALUES
+(2, 10, 1, 'Peut mieux faire.', 0),
+(3, 10, 2, 'Catastrophique.', 0),
+(6, 12, 3, 'Connaissances très approximatives.', 10),
+(7, 12, 1, '', 10),
+(8, 12, 2, '', 10);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Classe`
+-- Structure de la table `classe`
 --
 
-CREATE TABLE `Classe` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `classe`;
+CREATE TABLE IF NOT EXISTS `classe` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` text,
-  `Ecole.id` int(11) NOT NULL,
+  `Ecole.id` int(11) NOT NULL DEFAULT '1',
   `Niveau.id` int(11) NOT NULL,
-  `AnneeScolaire.id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `AnneeScolaire.id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Ecole.id` (`Ecole.id`),
+  KEY `AnneeScolaire.id` (`AnneeScolaire.id`),
+  KEY `Niveau.id` (`Niveau.id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `classe`
+--
+
+INSERT INTO `classe` (`id`, `nom`, `Ecole.id`, `Niveau.id`, `AnneeScolaire.id`) VALUES
+(1, 'CPA', 1, 1, 2018),
+(2, 'CPB', 1, 1, 2018),
+(3, 'Ecureuil', 1, 5, 2018),
+(4, 'Lievre', 1, 2, 2019),
+(5, 'Marmotte', 1, 3, 2019);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `DetailBulletin`
+-- Structure de la table `detailbulletin`
 --
 
-CREATE TABLE `DetailBulletin` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `detailbulletin`;
+CREATE TABLE IF NOT EXISTS `detailbulletin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Bulletin.id` int(11) NOT NULL,
-  `Enseignant.id` int(11) NOT NULL,
-  `appreciation` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `Enseignement.id` int(11) NOT NULL,
+  `appreciation` text,
+  `Moyenne` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Bulletin.id` (`Bulletin.id`),
+  KEY `Enseignant.id` (`Enseignement.id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `detailbulletin`
+--
+
+INSERT INTO `detailbulletin` (`id`, `Bulletin.id`, `Enseignement.id`, `appreciation`, `Moyenne`) VALUES
+(1, 3, 1, 'A toucher le fond mais creuse encore.', 0),
+(2, 2, 2, 'Quelques efforts à faire et cet éléve pourrait obtenir plus que la moyenne.', 0),
+(3, 6, 1, '', 0);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Discipline`
+-- Structure de la table `discipline`
 --
 
-CREATE TABLE `Discipline` (
-  `id` int(11) NOT NULL,
-  `nom` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `discipline`;
+CREATE TABLE IF NOT EXISTS `discipline` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `discipline`
+--
+
+INSERT INTO `discipline` (`id`, `nom`) VALUES
+(1, 'Anglais'),
+(2, 'Francais'),
+(3, 'Histoire');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Ecole`
+-- Structure de la table `ecole`
 --
 
-CREATE TABLE `Ecole` (
-  `id_ecole` int(11) NOT NULL,
-  `nom_ecole` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `ecole`;
+CREATE TABLE IF NOT EXISTS `ecole` (
+  `id_ecole` int(11) NOT NULL AUTO_INCREMENT,
+  `nom_ecole` text NOT NULL,
+  PRIMARY KEY (`id_ecole`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `ecole`
+--
+
+INSERT INTO `ecole` (`id_ecole`, `nom_ecole`) VALUES
+(1, 'Gambetta');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Enseignant`
+-- Structure de la table `enseignement`
 --
 
-CREATE TABLE `Enseignant` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `enseignement`;
+CREATE TABLE IF NOT EXISTS `enseignement` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Classe.id` int(11) NOT NULL,
   `Discipline.id` int(11) NOT NULL,
-  `Personne.id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `Personne.id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Discipline.id` (`Discipline.id`),
+  KEY `Personne.id` (`Personne.id`),
+  KEY `Classe.id` (`Classe.id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `enseignement`
+--
+
+INSERT INTO `enseignement` (`id`, `Classe.id`, `Discipline.id`, `Personne.id`) VALUES
+(1, 1, 2, 1),
+(2, 1, 1, 2),
+(3, 2, 1, 2);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Evaluation`
+-- Structure de la table `evaluation`
 --
 
-CREATE TABLE `Evaluation` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `evaluation`;
+CREATE TABLE IF NOT EXISTS `evaluation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `DetailBulletin.id` int(11) NOT NULL,
+  `Enseignement.id` int(11) NOT NULL,
   `note` int(11) NOT NULL,
-  `appreciation` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `appreciation` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `DetailBulletin.id` (`DetailBulletin.id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `evaluation`
+--
+
+INSERT INTO `evaluation` (`id`, `DetailBulletin.id`, `Enseignement.id`, `note`, `appreciation`) VALUES
+(1, 1, 1, 8, 'A retravailler.'),
+(2, 2, 2, 10, 'Passable'),
+(3, 1, 1, 9, 'Mediocre'),
+(4, 3, 14, 6, 'Mauvais'),
+(5, 3, 14, 16, 'Très bonne connaissance de l\'histoire romaine.');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Inscription`
+-- Structure de la table `inscription`
 --
 
-CREATE TABLE `Inscription` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `inscription`;
+CREATE TABLE IF NOT EXISTS `inscription` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Classe.id` int(11) NOT NULL,
-  `Personne.id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `Personne.id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Classe.id` (`Classe.id`),
+  KEY `Personne.id` (`Personne.id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `inscription`
+--
+
+INSERT INTO `inscription` (`id`, `Classe.id`, `Personne.id`) VALUES
+(1, 1, 12),
+(2, 1, 13),
+(3, 1, 14),
+(4, 1, 15),
+(5, 5, 17);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Niveau`
+-- Structure de la table `niveau`
 --
 
-CREATE TABLE `Niveau` (
-  `id` int(11) NOT NULL,
-  `nom` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `niveau`;
+CREATE TABLE IF NOT EXISTS `niveau` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` text,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `niveau`
+--
+
+INSERT INTO `niveau` (`id`, `nom`) VALUES
+(1, 'CP'),
+(2, 'CE1'),
+(3, 'CE2'),
+(4, 'CM1'),
+(5, 'CM2');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Personne`
+-- Structure de la table `personne`
 --
 
-CREATE TABLE `Personne` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `personne`;
+CREATE TABLE IF NOT EXISTS `personne` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` text,
   `prenom` text,
-  `type` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `type` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `personne`
+--
+
+INSERT INTO `personne` (`id`, `nom`, `prenom`, `type`) VALUES
+(1, 'Chainet', 'Pauline', 0),
+(2, 'Choquet', 'Gregoire', 0),
+(12, 'Tilleul', 'Gilles', 1),
+(13, 'Eugene', 'Jean', 1),
+(14, 'Robilliard', 'Julia', 1),
+(15, 'Berger', 'Christine', 1),
+(16, 'Frey', 'Thomas', 0),
+(17, 'Aye', 'Eva', 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Trimestre`
+-- Structure de la table `trimestre`
 --
 
-CREATE TABLE `Trimestre` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `trimestre`;
+CREATE TABLE IF NOT EXISTS `trimestre` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `numero` int(11) DEFAULT NULL,
   `debut` date DEFAULT NULL,
   `fin` date DEFAULT NULL,
-  `AnneeScolaire.id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `AnneeScolaire.id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
--- Index pour les tables déchargées
+-- Déchargement des données de la table `trimestre`
 --
 
---
--- Index pour la table `AnneeScolaire`
---
-ALTER TABLE `AnneeScolaire`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `Bulletin`
---
-ALTER TABLE `Bulletin`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `Trimestre.id` (`Trimestre.id`),
-  ADD KEY `Inscription.id` (`Inscription.id`);
-
---
--- Index pour la table `Classe`
---
-ALTER TABLE `Classe`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `Ecole.id` (`Ecole.id`),
-  ADD KEY `AnneeScolaire.id` (`AnneeScolaire.id`),
-  ADD KEY `Niveau.id` (`Niveau.id`);
-
---
--- Index pour la table `DetailBulletin`
---
-ALTER TABLE `DetailBulletin`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `Bulletin.id` (`Bulletin.id`),
-  ADD KEY `Enseignant.id` (`Enseignant.id`);
-
---
--- Index pour la table `Discipline`
---
-ALTER TABLE `Discipline`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `Ecole`
---
-ALTER TABLE `Ecole`
-  ADD PRIMARY KEY (`id_ecole`);
-
---
--- Index pour la table `Enseignant`
---
-ALTER TABLE `Enseignant`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `Discipline.id` (`Discipline.id`),
-  ADD KEY `Personne.id` (`Personne.id`),
-  ADD KEY `Classe.id` (`Classe.id`);
-
---
--- Index pour la table `Evaluation`
---
-ALTER TABLE `Evaluation`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `DetailBulletin.id` (`DetailBulletin.id`);
-
---
--- Index pour la table `Inscription`
---
-ALTER TABLE `Inscription`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `Classe.id` (`Classe.id`),
-  ADD KEY `Personne.id` (`Personne.id`);
-
---
--- Index pour la table `Niveau`
---
-ALTER TABLE `Niveau`
-  ADD UNIQUE KEY `id` (`id`);
-
---
--- Index pour la table `Personne`
---
-ALTER TABLE `Personne`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index pour la table `Trimestre`
---
-ALTER TABLE `Trimestre`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `AnneeScolaire.id` (`AnneeScolaire.id`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `AnneeScolaire`
---
-ALTER TABLE `AnneeScolaire`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Bulletin`
---
-ALTER TABLE `Bulletin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Classe`
---
-ALTER TABLE `Classe`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `DetailBulletin`
---
-ALTER TABLE `DetailBulletin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Discipline`
---
-ALTER TABLE `Discipline`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Ecole`
---
-ALTER TABLE `Ecole`
-  MODIFY `id_ecole` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Enseignant`
---
-ALTER TABLE `Enseignant`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Evaluation`
---
-ALTER TABLE `Evaluation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Inscription`
---
-ALTER TABLE `Inscription`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Niveau`
---
-ALTER TABLE `Niveau`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Personne`
---
-ALTER TABLE `Personne`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Trimestre`
---
-ALTER TABLE `Trimestre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+INSERT INTO `trimestre` (`id`, `numero`, `debut`, `fin`, `AnneeScolaire.id`) VALUES
+(1, 1, '2016-09-05', '2016-12-10', 2016),
+(2, 2, '2016-12-10', '2017-02-28', 2016),
+(4, 3, '2017-02-28', '2017-06-10', 2016),
+(5, 1, '2017-09-03', '2017-12-28', 2017),
+(6, 2, '2017-12-28', '2017-02-28', 2017),
+(7, 3, '2017-02-28', '2017-06-13', 2017),
+(10, 1, '2018-09-03', '2018-12-14', 2018),
+(11, 2, '2018-12-14', '2019-03-01', 2018),
+(12, 3, '2019-03-01', '2019-06-09', 2018),
+(13, 1, '2019-09-01', '2019-12-15', 2019);
 
 --
 -- Contraintes pour les tables déchargées
 --
 
 --
--- Contraintes pour la table `Bulletin`
+-- Contraintes pour la table `bulletin`
 --
-ALTER TABLE `Bulletin`
-  ADD CONSTRAINT `bulletin_ibfk_1` FOREIGN KEY (`Trimestre.id`) REFERENCES `Trimestre` (`id`),
-  ADD CONSTRAINT `bulletin_ibfk_2` FOREIGN KEY (`Inscription.id`) REFERENCES `Inscription` (`id`);
+ALTER TABLE `bulletin`
+  ADD CONSTRAINT `bulletin_ibfk_1` FOREIGN KEY (`Trimestre.id`) REFERENCES `trimestre` (`id`),
+  ADD CONSTRAINT `bulletin_ibfk_2` FOREIGN KEY (`Inscription.id`) REFERENCES `inscription` (`id`);
 
 --
--- Contraintes pour la table `Classe`
+-- Contraintes pour la table `classe`
 --
-ALTER TABLE `Classe`
-  ADD CONSTRAINT `classe_ibfk_1` FOREIGN KEY (`Ecole.id`) REFERENCES `Ecole` (`id_ecole`),
-  ADD CONSTRAINT `classe_ibfk_2` FOREIGN KEY (`Niveau.id`) REFERENCES `Niveau` (`id`);
+ALTER TABLE `classe`
+  ADD CONSTRAINT `classe_ibfk_1` FOREIGN KEY (`Ecole.id`) REFERENCES `ecole` (`id_ecole`),
+  ADD CONSTRAINT `classe_ibfk_2` FOREIGN KEY (`Niveau.id`) REFERENCES `niveau` (`id`);
 
 --
--- Contraintes pour la table `DetailBulletin`
+-- Contraintes pour la table `detailbulletin`
 --
-ALTER TABLE `DetailBulletin`
-  ADD CONSTRAINT `detailbulletin_ibfk_1` FOREIGN KEY (`Bulletin.id`) REFERENCES `Bulletin` (`id`),
-  ADD CONSTRAINT `detailbulletin_ibfk_2` FOREIGN KEY (`Enseignant.id`) REFERENCES `Enseignant` (`id`);
+ALTER TABLE `detailbulletin`
+  ADD CONSTRAINT `detailbulletin_ibfk_1` FOREIGN KEY (`Bulletin.id`) REFERENCES `bulletin` (`id`),
+  ADD CONSTRAINT `detailbulletin_ibfk_2` FOREIGN KEY (`Enseignement.id`) REFERENCES `enseignement` (`id`);
 
 --
--- Contraintes pour la table `Enseignant`
+-- Contraintes pour la table `enseignement`
 --
-ALTER TABLE `Enseignant`
-  ADD CONSTRAINT `enseignant_ibfk_1` FOREIGN KEY (`Classe.id`) REFERENCES `Classe` (`id`),
-  ADD CONSTRAINT `enseignant_ibfk_2` FOREIGN KEY (`Discipline.id`) REFERENCES `Discipline` (`id`),
-  ADD CONSTRAINT `enseignant_ibfk_3` FOREIGN KEY (`Personne.id`) REFERENCES `Personne` (`id`);
+ALTER TABLE `enseignement`
+  ADD CONSTRAINT `enseignement_ibfk_1` FOREIGN KEY (`Classe.id`) REFERENCES `classe` (`id`),
+  ADD CONSTRAINT `enseignement_ibfk_2` FOREIGN KEY (`Discipline.id`) REFERENCES `discipline` (`id`),
+  ADD CONSTRAINT `enseignement_ibfk_3` FOREIGN KEY (`Personne.id`) REFERENCES `personne` (`id`);
 
 --
--- Contraintes pour la table `Evaluation`
+-- Contraintes pour la table `evaluation`
 --
-ALTER TABLE `Evaluation`
-  ADD CONSTRAINT `evaluation_ibfk_1` FOREIGN KEY (`DetailBulletin.id`) REFERENCES `DetailBulletin` (`id`);
+ALTER TABLE `evaluation`
+  ADD CONSTRAINT `evaluation_ibfk_1` FOREIGN KEY (`DetailBulletin.id`) REFERENCES `detailbulletin` (`id`);
 
 --
--- Contraintes pour la table `Inscription`
+-- Contraintes pour la table `inscription`
 --
-ALTER TABLE `Inscription`
-  ADD CONSTRAINT `inscription_ibfk_1` FOREIGN KEY (`Classe.id`) REFERENCES `Classe` (`id`),
-  ADD CONSTRAINT `inscription_ibfk_2` FOREIGN KEY (`Personne.id`) REFERENCES `Personne` (`id`);
+ALTER TABLE `inscription`
+  ADD CONSTRAINT `inscription_ibfk_1` FOREIGN KEY (`Classe.id`) REFERENCES `classe` (`id`),
+  ADD CONSTRAINT `inscription_ibfk_2` FOREIGN KEY (`Personne.id`) REFERENCES `personne` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
