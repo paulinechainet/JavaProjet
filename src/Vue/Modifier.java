@@ -14,6 +14,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import Controleur.*;
 import Modele.*;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
@@ -48,8 +50,10 @@ public class Modifier extends javax.swing.JFrame{
     private Data d;
     private int sup;
     private int trimestre;
-    public Modifier(int a, Data db)
+    public Modifier(int a, Data db, int droit)
     {
+        Image img = Toolkit.getDefaultToolkit().createImage("Images/Ecole.jpg");
+        this.setIconImage(img);
         d = db;
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -78,7 +82,13 @@ public class Modifier extends javax.swing.JFrame{
                 jComboBox2ActionPerformed(evt);
             }
         });
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choisissez la table à modifier","Personne", "Classe", "Evaluation","Bulletin",}));
+        if(droit == 0){
+            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choisissez la table à modifier","Personne", "Classe", "Evaluation","Bulletin",}));
+        }
+        else{
+            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choisissez la table à modifier", "Evaluation","Bulletin",}));
+        }
+        
         bouton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boutonActionPerformed(evt);

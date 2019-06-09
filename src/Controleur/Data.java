@@ -137,7 +137,7 @@ public class Data {
             }
         }
     }
-      private void LoadPersonne()
+      public void LoadPersonne()
     {
         DAO<Personne> DAO= DAOFactory.getDAO_Personne();
         for(int i =1;i<DAO.getMaxId()+1;i++)
@@ -149,6 +149,30 @@ public class Data {
             }
         }
     }
+      public Personne verifp(String s){
+          Personne p,p1 = null;
+         for(Map.Entry<Integer, Personne> entry2 : tablePersonnes.entrySet())
+         {
+          p = entry2.getValue();
+          if(p.getNom().equals(s) && p.getType() == 0)
+          {
+              p1 = p;
+          }
+         }
+         return p1;
+      }
+      public Personne verife(String s){
+          Personne p,p1 = null;
+         for(Map.Entry<Integer, Personne> entry2 : tablePersonnes.entrySet())
+         {
+          p = entry2.getValue();
+          if(p.getNom().equals(s) && p.getType() == 1)
+          {
+              p1 = p;
+          }
+         }
+         return p1;
+      }
     
     private void LoadEnseignement()
     {

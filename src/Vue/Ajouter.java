@@ -8,6 +8,8 @@ package Vue;
 import Controleur.Data;
 import Modele.*;
 import Modele.Personne;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -38,15 +40,20 @@ public class Ajouter extends javax.swing.JFrame {
     private javax.swing.ButtonGroup groupe;
     private Classe c;
     private Bulletin b;
-    private Personne p;
+    private Personne p,pr;
     private Discipline di;
     private Enseignement e;
     private int type = 3;
     private Data d;
     private Integer note;
+    private int droit;
 
-    public Ajouter(Data db) {
+    public Ajouter(Data db, int dr, Personne p1) {
+        Image img = Toolkit.getDefaultToolkit().createImage("Images/Ecole.jpg");
+        this.setIconImage(img);
         d = db;
+        droit = dr;
+        pr = p1;
         groupe = new javax.swing.ButtonGroup();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -125,7 +132,10 @@ public class Ajouter extends javax.swing.JFrame {
         bouton.setText("Ajouter");
         jComboBox1 = new javax.swing.JComboBox<>();
         
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Ajouter un(e)", "Personne", "Classe", "Enseignement","Discipline","Evaluation"}));
+        if(droit == 0){
+            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Ajouter un(e)", "Personne", "Classe", "Enseignement","Discipline","Evaluation"}));
+        }
+        else jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Ajouter une","Evaluation"}));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -296,7 +306,7 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
             saisie[1].setBounds(10, 145, 450, 40);
             jComboBox7.setBounds(10, 75, 150, 30);
             aff.add(jComboBox6);
-            aff.add(jComboBox3);
+            if(droit == 0){aff.add(jComboBox3);}
             aff.add(jComboBox4);
             aff.add(a);
             aff.add(a2);
@@ -356,6 +366,10 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         }
            if(choix == "Evaluation")
         {
+            if(droit!=0)
+            {
+                prof = pr.getNom();
+            }
             ArrayList<Detail> tabd;
             p = d.searchp(eleve);
             Inscription in = d.searchinscrit(p.getId());
@@ -368,9 +382,6 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
             tabd = d.searchd(b.getId());
             Enseignement e = d.searchenseignement(prof, discipline);
                 if(e!=null){  
-                                    System.out.println(prof);
-                System.out.println(discipline);
-                System.out.println(e.getDiscipline().getNom());
             Detail de = d.search1d(e);
                  d.addetail(b, e);
                  de = d.search1d(e);

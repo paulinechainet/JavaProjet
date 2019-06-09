@@ -14,6 +14,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import Controleur.*;
 import Modele.*;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JScrollPane;
@@ -52,6 +54,8 @@ private javax.swing.JScrollPane jScrollPane1;
 
 public Rechercher(Data datab)
 {
+    Image img = Toolkit.getDefaultToolkit().createImage("Images/Ecole.jpg");
+        this.setIconImage(img);
     d = datab;
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();

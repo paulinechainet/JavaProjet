@@ -5,7 +5,7 @@
  */
 package Modele;
 
-import Vue.Menu;
+import Vue.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 public class ProjetJAVA {
     private static Connexion bdd;
     private static Graphique G;
+    private Login l;
     
     public static Connexion BaseDeDonnee() throws SQLException, ClassNotFoundException
     {
@@ -32,12 +33,8 @@ public class ProjetJAVA {
     }
     public static void main(String[] args) throws SQLException, ClassNotFoundException
     {
-      
-           //bdd = BaseDeDonnee();//Ouverture de la base de données
-            new Menu();
-           
-       // G = new Graphique();
-        //G.build();
+            new Login();
+            //new Reporting();
     }
     
 }
