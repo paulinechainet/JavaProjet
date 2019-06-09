@@ -65,7 +65,7 @@ public class DAO_Annee extends DAO<Annee>{
                     );
             statement.setObject(1,obj.getId(), Types.INTEGER);
             
-            statement.executeUpdate(); 
+           // statement.executeUpdate(); 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Annee.class.getName()).log(Level.SEVERE, null, ex);
         }

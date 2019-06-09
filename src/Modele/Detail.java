@@ -12,7 +12,7 @@ package Modele;
 public class Detail {
     private int nb_notes;
     private int id;
-    private int moyenne;
+    private float moyenne;
     private Bulletin bulletin;
     private Enseignement enseignement;
     private String appreciation;
@@ -71,17 +71,13 @@ public Detail(int id)
     {
         return this.bulletin;
     }
-    public int getMoyenne()
+    public float getMoyenne()
     {
         return this.moyenne;
     }
-    public void setMoyenne(int m)
+    public void setMoyenne(float m)
     {
         this.moyenne = m;
-    }
-
-    public void searchde(Bulletin b, Enseignement e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

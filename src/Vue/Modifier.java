@@ -43,7 +43,7 @@ public class Modifier extends javax.swing.JFrame{
     Bulletin b;
     Niveau n;
     Trimestre t;
-    Detail de;
+    Detail de = new Detail(1);
     Evaluation ev = new Evaluation();
     private Data d;
     private int sup;
@@ -251,15 +251,15 @@ public void Init()
         }
         if(choix == "Bulletin")
         {
+            ArrayList<Detail> tabd;
             rafraichir();
             p = d.searchp(texte.getText());
             if(p.getId()!=-1 && p.getType()!=0){
             i = d.searchinscrit(p.getId());
             t = d.searcht(trimestre, annee);
             b = d.searchbulletin(i.getId(), t.getId());
-            
             if(b!= null){
-            de = d.searchd(b.getId());
+            tabd = d.searchd(b.getId());
             jTable = new javax.swing.JTable();
             jTable2 = new javax.swing.JTable();
             
@@ -276,11 +276,15 @@ public void Init()
              jScrollPane1.setBounds (20,120,900,40);
              DefaultTableModel tableModel2 = new DefaultTableModel();
              jScrollPane12 = new javax.swing.JScrollPane();
+             de = new Detail(1);
              for(int i = 0; i<de.attributs.length;i++)
             {
               tableModel2.addColumn(de.attributs[i]);  
             }
-             tableModel2.addRow(new Object[]{de.getEnseignement().getDiscipline().getNom(),de.getEnseignement().getPersonne().getNom(),de.getMoyenne(),de.getapre()});
+             for(int i=0;i<tabd.size();i++){
+                 tableModel2.addRow(new Object[]{tabd.get(i).getEnseignement().getDiscipline().getNom(),tabd.get(i).getEnseignement().getPersonne().getNom(),tabd.get(i).getMoyenne(),tabd.get(i).getapre()});
+             }
+             
             jTable2.setModel(tableModel2);
             jScrollPane12.setViewportView(jTable2);
             jScrollPane12.setBounds (20,200,900,40);
@@ -308,6 +312,7 @@ public void Init()
         {
             rafraichir();
             String s,ins;
+            ArrayList<Detail> tabd;
             rech = texte.getText();
             rafraichir();
             p = d.searchp(rech);
@@ -340,9 +345,8 @@ public void Init()
             t = d.searcht(trimestre, annee);
             b = d.searchbulletin(i.getId(), t.getId());
             if(b!=null){
-            de = d.searchd(b.getId());
+            tabd = d.searchd(b.getId());
             ArrayList <Evaluation> eval;
-            eval = d.searchNote(de.getId());
             jTable2 = new javax.swing.JTable();
             jScrollPane12 = new javax.swing.JScrollPane();
             DefaultTableModel tableModel2 = new DefaultTableModel();
@@ -350,6 +354,7 @@ public void Init()
             {
               tableModel2.addColumn(ev.attributs[i]);  
             }
+            eval = d.searchNote(de.getId());
             for(int i=0; i<eval.size();i++){
                 tableModel2.addRow(new Object[]{de.getEnseignement().getDiscipline().getNom(),eval.get(i).getNote(),eval.get(i).getAppreciation()}); 
             }

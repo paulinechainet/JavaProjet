@@ -347,8 +347,7 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
             }
             for(int i = 0;i<tabc.size();i++)
             {
-                System.out.println(classe);
-                System.out.println(tabc.get(i).getNom());
+
                 if (tabc.get(i).getNom().equals(classe)){
                     c1 = tabc.get(i);
                 }
@@ -357,8 +356,8 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         }
            if(choix == "Evaluation")
         {
+            ArrayList<Detail> tabd;
             p = d.searchp(eleve);
-            System.out.println(eleve);
             Inscription in = d.searchinscrit(p.getId());
             Trimestre t = d.searcht(3, 2018);
             b = d.searchbulletin(in.getId(), t.getId());
@@ -366,28 +365,29 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
                 d.addb(in, t,saisie[1].getText());
                 b = d.searchbulletin(in.getId(), t.getId());
             }
-            Detail de = d.searchd(b.getId());
-            if(de==null){
-                Enseignement e = d.searchenseignement(prof, discipline);
-                if(e!=null){
+            tabd = d.searchd(b.getId());
+            Enseignement e = d.searchenseignement(prof, discipline);
+                if(e!=null){  
+                                    System.out.println(prof);
+                System.out.println(discipline);
+                System.out.println(e.getDiscipline().getNom());
+            Detail de = d.search1d(e);
                  d.addetail(b, e);
-                 de = d.searchde(b,e);
-                 d.addeval(note,saisie[1].getText(),de , p);
+                 de = d.search1d(e);
+                 d.addeval(note,saisie[1].getText(),de , e);
                 }
                 else
                 {
                     initjpanel();
                     JLabel trouve = new JLabel();
                     trouve.setText("Le professeur n'enseigne pas cette matière");
-                    trouve.setBounds(10, 10, 100, 30);
+                    trouve.setBounds(10, 10, 300, 30);
                     aff.add(trouve);
                 }
             }
-            else d.addeval(note,saisie[1].getText(),de , p);
-                
+    }   
             
-        }
-    }
+        
      private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
          JComboBox cb = (JComboBox) evt.getSource();
         classe = (String) cb.getSelectedItem();
@@ -407,7 +407,6 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
       private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {
           JComboBox cb = (JComboBox) evt.getSource();
         eleve = (String) cb.getSelectedItem();
-        System.out.println(eleve);
      }
       private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {
           JComboBox cb = (JComboBox) evt.getSource();

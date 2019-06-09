@@ -20,7 +20,7 @@ private Trimestre trimestre;
     private Personne personne;
     private ArrayList<Evaluation> tableEvaluations = new ArrayList();
     String Appreciation;
-    private int moyenne;
+    private float moyenne;
 
     public String attributs[]=
     {
@@ -32,7 +32,7 @@ private Trimestre trimestre;
     };
 
 
-    public Bulletin(int id, Inscription inscription, Trimestre trimestre, String Appreciation, int moy) {
+    public Bulletin(int id, Inscription inscription, Trimestre trimestre, String Appreciation, float moy) {
         this.id = id;
         this.inscription = inscription;
         this.trimestre = trimestre;
@@ -91,11 +91,11 @@ public void setapre(String s)
 {
     this.Appreciation = s;
 }
-public void setmoy(int m)
+public void setmoy(float m)
 {
     this.moyenne = m;
 }
-public int getmoy()
+public float getmoy()
 {
     return this.moyenne;
 }

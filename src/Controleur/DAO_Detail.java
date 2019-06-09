@@ -33,7 +33,7 @@ public class DAO_Detail extends DAO<Detail> {
             statement.setObject(1,obj.getBulletin().getId(),Types.INTEGER);
             statement.setObject(2,obj.getEnseignement().getId(),Types.INTEGER);
             statement.setObject(3,obj.getapre(),Types.VARCHAR);
-            statement.setObject(4,obj.getMoyenne(),Types.INTEGER);
+            statement.setObject(4,obj.getMoyenne(),Types.FLOAT);
             statement.executeUpdate(); 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Detail.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,7 +59,7 @@ public class DAO_Detail extends DAO<Detail> {
                 e.setEnseignement(ensDAO.find(rs.getInt("Enseignement.id")));
                 e.setBulletin(bullDAO.find(rs.getInt("Bulletin.id")));
                 e.setapre(rs.getString("Appreciation"));
-                e.setMoyenne(rs.getInt("Moyenne"));
+                e.setMoyenne(rs.getFloat("Moyenne"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Bulletin.class.getName()).log(Level.SEVERE, null, ex);
@@ -100,7 +100,7 @@ public class DAO_Detail extends DAO<Detail> {
             statement.setObject(2,obj.getEnseignement().getId(),Types.INTEGER);
             statement.setObject(1,obj.getBulletin().getId(),Types.INTEGER); 
             statement.setObject(3,obj.getapre(),Types.VARCHAR); 
-            statement.setObject(4,obj.getMoyenne(),Types.INTEGER);
+            statement.setObject(4,obj.getMoyenne(),Types.FLOAT);
             statement.setObject(5,obj.getId(),Types.INTEGER);
             
             statement.executeUpdate(); 

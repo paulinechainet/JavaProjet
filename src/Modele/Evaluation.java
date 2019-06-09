@@ -16,7 +16,7 @@ public class Evaluation {
     private int note;
     private String appreciation;
     private Detail bulletin;
-    private Personne enseignant;
+    private Enseignement enseignant;
    public String attributs[]=
     {
       "Nom de l'élève",
@@ -25,7 +25,7 @@ public class Evaluation {
       "Appreciation"
     };
 
-    public Evaluation(int id, int note, String appreciation, Detail bulletin,Personne enseignant) {
+    public Evaluation(int id, int note, String appreciation, Detail bulletin,Enseignement enseignant) {
         this.id = id;
         this.note = note;
         this.appreciation = appreciation;
@@ -62,11 +62,11 @@ public class Evaluation {
         this.bulletin = bulletin;
     }
 
-    public Personne getEnseignant() {
+    public Enseignement getEnseignant() {
         return enseignant;
     }
 
-    public void setEnseignant(Personne enseignant) {
+    public void setEnseignant(Enseignement enseignant) {
         this.enseignant = enseignant;
     }
     
