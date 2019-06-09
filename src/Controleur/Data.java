@@ -255,9 +255,10 @@ public class Data {
     private void SaveDetail()
     {
         DAO<Detail> DAO= DAOFactory.getDAO_Detail();
+
         for(Map.Entry<Integer, Detail> entry : tableDetail.entrySet()) {  
             Detail a = entry.getValue();
-            float Moyenne =0;
+             float Moyenne =0;
             int nbnotes =0;
         for(Map.Entry<Integer, Evaluation> entry2 : tableEvaluations.entrySet()){
             Evaluation e = entry2.getValue();
@@ -282,6 +283,7 @@ public class Data {
     {
         DAO<Bulletin> DAO= DAOFactory.getDAO_Bulletin();
         Detail de;
+                    
         for(Map.Entry<Integer, Bulletin> entry : tableBulletins.entrySet()) {  
             Bulletin a = entry.getValue();
             float Moyenne = 0;
@@ -294,7 +296,8 @@ public class Data {
                nbmoy++;
            }
         }
-           if(nbmoy !=0) Moyenne = Moyenne/nbmoy;
+           if(nbmoy !=0){Moyenne = Moyenne/nbmoy;}
+           else Moyenne = 10;
            a.setmoy(Moyenne);
             
             if(DAO.find(a.getId())!=null)
@@ -926,6 +929,8 @@ public class Data {
                 Evaluation e = new Evaluation(DAO.getMaxId()+1,note,a,b,el);
                 tableEvaluations.put(DAO.getMaxId()+1, e);
                 SaveEvaluation();
+                SaveBulletin();
+                SaveDetail();
                 LoadEvaluation();
     }
 
