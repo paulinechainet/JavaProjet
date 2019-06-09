@@ -22,11 +22,19 @@ import java.util.logging.Logger;
  */
 
 public class DAO_Inscription extends DAO<Inscription>{
-    
+    /**
+     * 
+     * @param conn 
+     */
     public DAO_Inscription(Connection conn) {
         super(conn);
     }
     
+    /**
+     * 
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean create(Inscription obj) {
         try {
@@ -44,7 +52,11 @@ public class DAO_Inscription extends DAO<Inscription>{
         
         return true;
     }
-
+/**
+ * 
+ * @param obj
+ * @return 
+ */
     @Override
     public boolean delete(Inscription obj) {
         try {
@@ -58,7 +70,11 @@ public class DAO_Inscription extends DAO<Inscription>{
         
         return true;
     }
-
+/**
+ * 
+ * @param obj
+ * @return 
+ */
     @Override
     public boolean update(Inscription obj) {
          try {
@@ -75,7 +91,11 @@ public class DAO_Inscription extends DAO<Inscription>{
 
         return true;
     }
-    
+    /**
+     * 
+     * @param id
+     * @return 
+     */
 
     @Override
     public Inscription find(int id) {
@@ -99,6 +119,10 @@ public class DAO_Inscription extends DAO<Inscription>{
         
         return e;
     }
+    /**
+     * 
+     * @return 
+     */
     
         @Override
     public int getMaxId(){

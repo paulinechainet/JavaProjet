@@ -20,8 +20,10 @@ public class Bulletin {
      private Trimestre trimestre; 
     private Personne personne;
     private ArrayList<Evaluation> tableEvaluations = new ArrayList();
-    private String Appreciation;
-    private int moyenne;
+
+    String Appreciation;
+    private float moyenne;
+
     public String attributs[]=
     {
         "Nom de l'élève",
@@ -40,7 +42,9 @@ public class Bulletin {
      * @param Appreciation
      * @param moy
      */
-    public Bulletin(int id, Inscription inscription, Trimestre trimestre, String Appreciation, int moy) {
+
+
+    public Bulletin(int id, Inscription inscription, Trimestre trimestre, String Appreciation, float moy) {
         this.id = id;
         this.inscription = inscription;
         this.trimestre = trimestre;
@@ -56,9 +60,7 @@ public class Bulletin {
         this.id = id;
     }
 
-    /**
-     *
-     */
+
     public Bulletin() {
         
     }
@@ -151,16 +153,13 @@ public class Bulletin {
      *
      * @param m du bulletin
      */
-    public void setmoy(int m)
+    
+public void setmoy(float m)
 {
     this.moyenne = m;
 }
+public float getmoy()
 
-    /**
-     *
-     * @return moyenne du bulletin
-     */
-    public int getmoy()
 {
     return this.moyenne;
 }

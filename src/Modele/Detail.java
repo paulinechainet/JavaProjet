@@ -13,7 +13,7 @@ public class Detail {
 
     private int nb_notes;
     private int id;
-    private int moyenne;
+    private float moyenne;
     private Bulletin bulletin;
     private Enseignement enseignement;
     private String appreciation;
@@ -34,6 +34,7 @@ public class Detail {
         this.id = id;
     }    
 
+
     /**
      * CONSTRUCTEUR
      * @param id
@@ -41,6 +42,7 @@ public class Detail {
      * @param e
      * @param a
      */
+
     public Detail(int id, Bulletin b, Enseignement e, String a )
     {
       this.appreciation = a;
@@ -135,16 +137,13 @@ public class Detail {
      *GETTER
      * @return moyenne
      */
-    public int getMoyenne()
+ 
+    public float getMoyenne()
     {
         return this.moyenne;
     }
+    public void setMoyenne(float m)
 
-    /**
-     *SETTER
-     * @param m
-     */
-    public void setMoyenne(int m)
     {
         this.moyenne = m;
     }

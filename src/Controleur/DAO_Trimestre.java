@@ -20,10 +20,18 @@ import java.util.logging.Logger;
  */
 public class DAO_Trimestre extends DAO<Trimestre>{
     
+    /**
+     * 
+     * @param conn 
+     */
     public DAO_Trimestre(Connection conn) {
         super(conn);
     }
-    
+    /**
+     * 
+     * @param obj
+     * @return 
+     */
     @Override
     public boolean create(Trimestre obj) {
         try {
@@ -43,7 +51,11 @@ public class DAO_Trimestre extends DAO<Trimestre>{
         return true;
         
     }
-
+/**
+ * 
+ * @param obj
+ * @return 
+ */
     @Override
     public boolean delete(Trimestre obj) {
         try {
@@ -57,7 +69,11 @@ public class DAO_Trimestre extends DAO<Trimestre>{
         
         return true;
     }
-
+/**
+ * 
+ * @param obj
+ * @return 
+ */
     @Override
     public boolean update(Trimestre obj) {
          try {
@@ -76,7 +92,11 @@ public class DAO_Trimestre extends DAO<Trimestre>{
         
         return true;
     }
-
+/**
+ * 
+ * @param id
+ * @return 
+ */
     @Override
     public Trimestre find(int id) {
         Trimestre e = null;
@@ -97,7 +117,10 @@ public class DAO_Trimestre extends DAO<Trimestre>{
         
         return e;
     }
-    
+    /**
+     * 
+     * @return  max_id
+     */
         @Override
     public int getMaxId(){
         int max_id = 0;

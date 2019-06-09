@@ -8,6 +8,8 @@ package Vue;
 import Controleur.Data;
 import Modele.*;
 import Modele.Personne;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -38,18 +40,74 @@ public class Ajouter extends javax.swing.JFrame {
     private javax.swing.ButtonGroup groupe;
     private Classe c;
     private Bulletin b;
-    private Personne p;
+
+    private Personne p,pr;
     private Discipline di;
     private Enseignement e;
     private int type = 3;
     private Data d;
     private Integer note;
+    private int droit;
 
-    public Ajouter(Data db) {
+    public Ajouter(Data db, int dr, Personne p1) {
+        Image img = Toolkit.getDefaultToolkit().createImage("Images/Ecole.jpg");
+        this.setIconImage(img);
         d = db;
+        droit = dr;
+        pr = p1;
         groupe = new javax.swing.ButtonGroup();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        ArrayList<Classe> tabc;
+            ArrayList<Personne> tabp;
+            ArrayList<Discipline> tabd;
+            tabc = d.getallC();
+            tabp = d.getP();
+            tabd = d.getallDis();
+            jComboBox2 = new javax.swing.JComboBox<>();
+            jComboBox3 = new javax.swing.JComboBox<>();
+            jComboBox4 = new javax.swing.JComboBox<>();
+            jComboBox5 = new javax.swing.JComboBox<>();
+            jComboBox6 = new javax.swing.JComboBox<>();
+            jComboBox7 = new javax.swing.JComboBox<>();
+            jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir une classe"}));
+            jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir un professeur"}));
+            jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir une discipline"}));
+            jComboBox2.setBounds(10, 0, 200, 30);
+            jComboBox3.setBounds(230, 0, 200, 30);
+            jComboBox4.setBounds(460, 0, 200, 30);
+            for(int i =0;i<tabc.size();i++)
+            {
+             jComboBox2.addItem(tabc.get(i).getNom());   
+            }
+            for(int i =0;i<tabp.size();i++)
+            {
+             jComboBox3.addItem(tabp.get(i).getNom());   
+            }
+            for(int i =0;i<tabd.size();i++)
+            {
+             jComboBox4.addItem(tabd.get(i).getNom());   
+            }
+        tabd = d.getallDis();
+           tabp = d.getP();
+            jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir un élève"}));
+            jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir un professeur"}));
+            ArrayList<Personne> e = d.getE();
+            for(int j=0;j<e.size();j++){
+                jComboBox6.addItem(e.get(j).getNom());
+            }
+            jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir une discipline"}));
+            for(int i =0;i<tabd.size();i++)
+            {
+             jComboBox4.addItem(tabd.get(i).getNom());   
+            }
+            for(int i =0;i<tabp.size();i++)
+            {
+             jComboBox3.addItem(tabp.get(i).getNom());   
+            }
+            for(int i=1;i<21;i++){
+                jComboBox7.addItem(i);
+            }
         jRadioButton1.setText("Eleve");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,72 +133,54 @@ public class Ajouter extends javax.swing.JFrame {
         bouton.setText("Ajouter");
         jComboBox1 = new javax.swing.JComboBox<>();
         
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Ajouter un(e)", "Personne", "Classe", "Enseignement","Discipline","Evaluation"}));
+
+        if(droit == 0){
+            jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Ajouter un(e)", "Personne", "Classe", "Enseignement","Discipline","Evaluation"}));
+        }
+        else jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Ajouter une","Evaluation"}));
+
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir une classe"}));
+
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
             }
         });
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir un professeur"}));
+
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);
             }
         });
-        jComboBox4 = new javax.swing.JComboBox<>();
+
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
             }
         });
-        jComboBox5 = new javax.swing.JComboBox<>();
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir un niveau"}));
+
         jComboBox5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox5ActionPerformed(evt);
             }
         });
-        jComboBox6 = new javax.swing.JComboBox<>();
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir un niveau"}));
+
         jComboBox6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox6ActionPerformed(evt);
             }
         });
-        jComboBox7 = new javax.swing.JComboBox<>();
+
         jComboBox7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox7ActionPerformed(evt);
             }
         });
-        ArrayList<Discipline> tabd = d.getallDis();
-            ArrayList<Personne> tabp = d.getP();
-            jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir un élève"}));
-            jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir un professeur"}));
-            ArrayList<Personne> e = d.getE();
-            for(int j=0;j<e.size();j++){
-                jComboBox6.addItem(e.get(j).getNom());
-            }
-            jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir une discipline"}));
-            for(int i =0;i<tabd.size();i++)
-            {
-             jComboBox4.addItem(tabd.get(i).getNom());   
-            }
-            for(int i =0;i<tabp.size();i++)
-            {
-             jComboBox3.addItem(tabp.get(i).getNom());   
-            }
-            for(int i=1;i<21;i++){
-                jComboBox7.addItem(i);
-            }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,33 +273,7 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         }
         if (choix == "Enseignement") {
             initjpanel();
-            ArrayList<Classe> tabc;
-            ArrayList<Personne> tabp;
-            ArrayList<Discipline> tabd;
-            tabc = d.getallC();
-            tabp = d.getP();
-            tabd = d.getallDis();
-            jComboBox2 = new javax.swing.JComboBox<>();
-            jComboBox3 = new javax.swing.JComboBox<>();
-            jComboBox4 = new javax.swing.JComboBox<>();
-            jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir une classe"}));
-            jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir un professeur"}));
-            jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Choisir une discipline"}));
-            jComboBox2.setBounds(10, 0, 200, 30);
-            jComboBox3.setBounds(230, 0, 200, 30);
-            jComboBox4.setBounds(460, 0, 200, 30);
-            for(i =0;i<tabc.size();i++)
-            {
-             jComboBox2.addItem(tabc.get(i).getNom());   
-            }
-            for(i =0;i<tabp.size();i++)
-            {
-             jComboBox3.addItem(tabp.get(i).getNom());   
-            }
-            for(i =0;i<tabd.size();i++)
-            {
-             jComboBox4.addItem(tabd.get(i).getNom());   
-            }
+
             aff.add(jComboBox2);
             aff.add(jComboBox3);
             aff.add(jComboBox4);
@@ -302,7 +316,8 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
             saisie[1].setBounds(10, 145, 450, 40);
             jComboBox7.setBounds(10, 75, 150, 30);
             aff.add(jComboBox6);
-            aff.add(jComboBox3);
+
+            if(droit == 0){aff.add(jComboBox3);}
             aff.add(jComboBox4);
             aff.add(a);
             aff.add(a2);
@@ -353,6 +368,7 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
             }
             for(int i = 0;i<tabc.size();i++)
             {
+
                 if (tabc.get(i).getNom().equals(classe)){
                     c1 = tabc.get(i);
                 }
@@ -361,8 +377,13 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         }
            if(choix == "Evaluation")
         {
+
+            if(droit!=0)
+            {
+                prof = pr.getNom();
+            }
+            ArrayList<Detail> tabd;
             p = d.searchp(eleve);
-            System.out.println(eleve);
             Inscription in = d.searchinscrit(p.getId());
             Trimestre t = d.searcht(3, 2018);
             b = d.searchbulletin(in.getId(), t.getId());
@@ -370,28 +391,30 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
                 d.addb(in, t,saisie[1].getText());
                 b = d.searchbulletin(in.getId(), t.getId());
             }
-            Detail de = d.searchd(b.getId());
-            if(de==null){
-                Enseignement e = d.searchenseignement(prof, discipline);
-                if(e!=null){
-                 d.addetail(b, e);
-                 de = d.searchde(b,e);
-                 d.addeval(note,saisie[1].getText(),de , p);
+
+            tabd = d.searchd(b.getId());
+            Enseignement e = d.searchenseignement(prof, discipline);
+                if(e!=null){  
+            Detail de = d.search1d(e);
+            if(de == null){
+             d.addetail(b, e);   
+            }
+                 de = d.search1d(e);
+                 d.addeval(note,saisie[1].getText(),de , e);
                 }
                 else
                 {
                     initjpanel();
                     JLabel trouve = new JLabel();
                     trouve.setText("Le professeur n'enseigne pas cette matière");
-                    trouve.setBounds(10, 10, 100, 30);
+
+                    trouve.setBounds(10, 10, 300, 30);
                     aff.add(trouve);
                 }
             }
-            else d.addeval(note,saisie[1].getText(),de , p);
-                
+    }   
             
-        }
-    }
+
      private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
          JComboBox cb = (JComboBox) evt.getSource();
         classe = (String) cb.getSelectedItem();
@@ -411,7 +434,7 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
       private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {
           JComboBox cb = (JComboBox) evt.getSource();
         eleve = (String) cb.getSelectedItem();
-        System.out.println(eleve);
+
      }
       private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {
           JComboBox cb = (JComboBox) evt.getSource();

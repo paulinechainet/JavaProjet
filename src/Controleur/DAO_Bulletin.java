@@ -43,7 +43,8 @@ public class DAO_Bulletin extends DAO<Bulletin> {
             statement.setObject(1,obj.getInscription().getId(),Types.INTEGER);
             statement.setObject(2,obj.getTrimestre().getId(),Types.INTEGER);
             statement.setObject(3,obj.getapre(),Types.VARCHAR); 
-            statement.setObject(4,obj.getmoy(),Types.INTEGER);
+
+            statement.setObject(4,obj.getmoy(),Types.FLOAT);
             statement.executeUpdate(); 
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Bulletin.class.getName()).log(Level.SEVERE, null, ex);
@@ -112,7 +113,8 @@ public class DAO_Bulletin extends DAO<Bulletin> {
                 e.setInscription(inscriDAO.find(rs.getInt("Inscription.id")));
                 e.setTrimestre(trimDAO.find(rs.getInt("Trimestre.id")));
                 e.setapre(rs.getString("Appreciation"));
-                e.setmoy(rs.getInt("Moyenneg"));
+                e.setmoy(rs.getFloat("Moyenneg"));
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAO_Bulletin.class.getName()).log(Level.SEVERE, null, ex);

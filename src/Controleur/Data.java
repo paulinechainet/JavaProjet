@@ -154,7 +154,7 @@ public class Data {
             }
         }
     }
-      private void LoadPersonne()
+      public void LoadPersonne()
     {
         DAO<Personne> DAO= DAOFactory.getDAO_Personne();
         for(int i =1;i<DAO.getMaxId()+1;i++)
@@ -166,6 +166,30 @@ public class Data {
             }
         }
     }
+      public Personne verifp(String s){
+          Personne p,p1 = null;
+         for(Map.Entry<Integer, Personne> entry2 : tablePersonnes.entrySet())
+         {
+          p = entry2.getValue();
+          if(p.getNom().equals(s) && p.getType() == 0)
+          {
+              p1 = p;
+          }
+         }
+         return p1;
+      }
+      public Personne verife(String s){
+          Personne p,p1 = null;
+         for(Map.Entry<Integer, Personne> entry2 : tablePersonnes.entrySet())
+         {
+          p = entry2.getValue();
+          if(p.getNom().equals(s) && p.getType() == 1)
+          {
+              p1 = p;
+          }
+         }
+         return p1;
+      }
     
     private void LoadEnseignement()
     {
@@ -248,8 +272,21 @@ public class Data {
     private void SaveDetail()
     {
         DAO<Detail> DAO= DAOFactory.getDAO_Detail();
+
+
         for(Map.Entry<Integer, Detail> entry : tableDetail.entrySet()) {  
             Detail a = entry.getValue();
+             float Moyenne =0;
+            int nbnotes =0;
+        for(Map.Entry<Integer, Evaluation> entry2 : tableEvaluations.entrySet()){
+            Evaluation e = entry2.getValue();
+            if(e.getBulletin().getId() == a.getId()){
+                Moyenne += e.getNote();
+                nbnotes++; 
+            }
+        }
+        if(nbnotes!=0)Moyenne = Moyenne/nbnotes;
+        a.setMoyenne(Moyenne);
             if(DAO.find(a.getId())!=null)
             {
                 DAO.update(a);
@@ -263,8 +300,24 @@ public class Data {
     private void SaveBulletin()
     {
         DAO<Bulletin> DAO= DAOFactory.getDAO_Bulletin();
+        Detail de;
+                    
         for(Map.Entry<Integer, Bulletin> entry : tableBulletins.entrySet()) {  
             Bulletin a = entry.getValue();
+            float Moyenne = 0;
+            int nbmoy =0;
+            for(Map.Entry<Integer,Detail> entry2 : tableDetail.entrySet())
+        {
+           de = entry2.getValue();
+           if(de.getBulletin().getId() == a.getId()){
+               Moyenne += de.getMoyenne();
+               nbmoy++;
+           }
+        }
+           if(nbmoy !=0){Moyenne = Moyenne/nbmoy;}
+           else Moyenne = 10;
+           a.setmoy(Moyenne);
+            
             if(DAO.find(a.getId())!=null)
             {
                 DAO.update(a);
@@ -401,10 +454,12 @@ public class Data {
     public Map<Integer, Classe> getClasses() {
         return tableClasses;
     }
+
     /**
      * 
      * @return table de classe
      */
+
     public ArrayList<Classe> getallC(){
         Classe c;
         ArrayList <Classe> tabc = new ArrayList();
@@ -433,6 +488,7 @@ public class Data {
      * 
      * @return arraylist de niveau 
      */
+
     public ArrayList<Niveau> getallNiv(){
         Niveau e;
         ArrayList <Niveau> tabe = new ArrayList();
@@ -443,11 +499,12 @@ public class Data {
       }
        return tabe;
     }
-    
+
   /**
    * 
    * @return  arrayList de bulletin
    */
+
     public ArrayList<Bulletin> getallB(){
         Bulletin b;
         ArrayList <Bulletin> tabb = new ArrayList();
@@ -509,23 +566,41 @@ public class Data {
       }  
       
     }
+
     /**
      * Recherche d'un enseognant selon son id 
      * @param id
-     * @return detail du buletin
+     * @return array liste de detail du buletin
      */
-    public Detail searchd(int id)
+    
+    public ArrayList<Detail> searchd(int id)
+
     {
-        Detail t,t1 = null;
+        Detail t= null;
+        ArrayList<Detail> d1 = new ArrayList();
         Bulletin b;
         Enseignement e;
         for(Map.Entry<Integer, Detail> entry : tableDetail.entrySet())
         {
           t = entry.getValue();
           b = t.getBulletin();
-          System.out.print(id);
-          System.out.print(b.getId());
+
           if(b.getId() == id)
+          {
+              d1.add(t);
+          }
+        }
+        return d1;
+    }
+    public Detail search1d(Enseignement e)
+    {
+        Detail t,t1= null;
+        Enseignement e1;
+        for(Map.Entry<Integer, Detail> entry : tableDetail.entrySet())
+        {
+          t = entry.getValue();
+          e1 = t.getEnseignement();
+          if(e1.getDiscipline().getId() == e.getDiscipline().getId())
           {
               t1 = t;
           }
@@ -631,10 +706,8 @@ public class Data {
     public void addenseignement( Classe classe, Personne personne, Discipline discipline)
     {
        DAO<Enseignement> DAO= DAOFactory.getDAO_Enseignement();
-       Enseignement e = new Enseignement(DAO.getMaxId()+1,classe,personne,discipline); 
-       System.out.println(personne.getNom());
-       System.out.println(classe.getNom());
-       System.out.println(discipline.getNom());
+
+       Enseignement e = new Enseignement(DAO.getMaxId()+1,classe,personne,discipline);
        tableEnseignements.put(DAO.getMaxId(), e);
        SaveEnseignement();
     }
@@ -723,7 +796,7 @@ public class Data {
         Inscription i;
         Trimestre t;
         String s;
-        int a =0;
+        float a =0;
          for(Map.Entry<Integer, Bulletin> entry : tableBulletins.entrySet()) 
       {
 
@@ -913,18 +986,24 @@ public class Data {
         
     }*/
 
-    public void addeval(int note, String a, Detail b, Personne el) {
+void addeval(int note, String a, Detail b, Enseignement el) {
         //int id, int note, String appreciation, Detail bulletin,Personne enseignant
                 DAO<Evaluation> DAO = DAOFactory.getDAO_Evaluation();
                 Evaluation e = new Evaluation(DAO.getMaxId()+1,note,a,b,el);
                 tableEvaluations.put(DAO.getMaxId()+1, e);
                 SaveEvaluation();
+
+                SaveBulletin();
+                SaveDetail();
+
                 LoadEvaluation();
     }
 
     public void addb(Inscription inscription, Trimestre trimestre, String appreciation) {
         DAO<Bulletin> DAO= DAOFactory.getDAO_Bulletin();
-        int moyenne = 10;
+
+        Detail de;
+        float moyenne =0;
         Bulletin b = new Bulletin(DAO.getMaxId()+1,inscription,trimestre,"", moyenne);
         tableBulletins.put(DAO.getMaxId()+1, b);
         SaveBulletin();
