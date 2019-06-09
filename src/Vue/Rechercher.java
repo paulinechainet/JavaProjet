@@ -479,7 +479,7 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
             {
               tableModel.addColumn(b.attributs[i]);  
             }
-            tableModel.addRow(new Object[]{p.getNom(),t.getDebut(),t.getFin(),b.getapre()});
+            tableModel.addRow(new Object[]{p.getNom(),t.getDebut(),t.getFin(),b.getapre(),b.getmoy()});
             jTable.setModel(tableModel);                   
              jScrollPane1.setViewportView(jTable);
              jScrollPane1.setBounds (20,120,900,40);

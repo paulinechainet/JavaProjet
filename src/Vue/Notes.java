@@ -133,8 +133,8 @@ public class Notes extends javax.swing.JFrame{
               if(tabb.get(i).getInscription().getPersonne().getId() == p.getId()){
                   tableModel.addRow(new Object[]{p.getNom(),tabb.get(i).getTrimestre().getDebut(),tabb.get(i).getTrimestre().getFin(),tabb.get(i).getapre(),tabb.get(i).getmoy()});
                   tabd = db.searchd(tabb.get(i).getId());
-                  for(int j =0; i<tabd.size();i++){
-                 tableModel2.addRow(new Object[]{tabd.get(j).getEnseignement().getDiscipline().getNom(),tabd.get(j).getEnseignement().getPersonne().getNom(),tabd.get(i).getMoyenne(),tabd.get(j).getapre()});
+                  for(int j =0; j<tabd.size();j++){
+                 tableModel2.addRow(new Object[]{tabd.get(j).getEnseignement().getDiscipline().getNom(),tabd.get(j).getEnseignement().getPersonne().getNom(),tabd.get(j).getMoyenne(),tabd.get(j).getapre()});
              }
               }
             }

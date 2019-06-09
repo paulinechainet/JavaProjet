@@ -383,7 +383,9 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
             Enseignement e = d.searchenseignement(prof, discipline);
                 if(e!=null){  
             Detail de = d.search1d(e);
-                 d.addetail(b, e);
+            if(de == null){
+             d.addetail(b, e);   
+            }
                  de = d.search1d(e);
                  d.addeval(note,saisie[1].getText(),de , e);
                 }
