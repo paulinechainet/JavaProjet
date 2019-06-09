@@ -19,11 +19,18 @@ import java.util.logging.Logger;
  * @author grego
  */
 public class DAO_Detail extends DAO<Detail> {
-  
+  /**
+   * 
+   * @param conn 
+   */
     public DAO_Detail(Connection conn) {
         super(conn);
     }
-    
+    /**
+     * 
+     *  
+     * @return 
+     */
     @Override
     public boolean create(Detail obj) {
         try {
@@ -33,6 +40,7 @@ public class DAO_Detail extends DAO<Detail> {
             statement.setObject(1,obj.getBulletin().getId(),Types.INTEGER);
             statement.setObject(2,obj.getEnseignement().getId(),Types.INTEGER);
             statement.setObject(3,obj.getapre(),Types.VARCHAR);
+
             statement.setObject(4,obj.getMoyenne(),Types.FLOAT);
             statement.executeUpdate(); 
         } catch (SQLException ex) {
@@ -41,7 +49,11 @@ public class DAO_Detail extends DAO<Detail> {
         
         return true;
     }
-      
+    /**
+     * 
+     * @param id
+     * @return 
+     */  
 
     @Override
     public Detail find(int id) {
@@ -59,6 +71,7 @@ public class DAO_Detail extends DAO<Detail> {
                 e.setEnseignement(ensDAO.find(rs.getInt("Enseignement.id")));
                 e.setBulletin(bullDAO.find(rs.getInt("Bulletin.id")));
                 e.setapre(rs.getString("Appreciation"));
+
                 e.setMoyenne(rs.getFloat("Moyenne"));
             }
         } catch (SQLException ex) {
@@ -67,7 +80,10 @@ public class DAO_Detail extends DAO<Detail> {
         
         return e;
     }
-    
+    /**
+     * 
+     * @return 
+     */
         @Override
     public int getMaxId(){
         int max_id = 0;
@@ -85,12 +101,21 @@ public class DAO_Detail extends DAO<Detail> {
         
         return max_id;
     }
-
+/**
+ * 
+ *  
+ * @return 
+ */
     @Override
     public boolean delete(Detail obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     *  
+     * @return 
+     */
     @Override
     public boolean update(Detail obj) {
         try {
@@ -100,6 +125,7 @@ public class DAO_Detail extends DAO<Detail> {
             statement.setObject(2,obj.getEnseignement().getId(),Types.INTEGER);
             statement.setObject(1,obj.getBulletin().getId(),Types.INTEGER); 
             statement.setObject(3,obj.getapre(),Types.VARCHAR); 
+
             statement.setObject(4,obj.getMoyenne(),Types.FLOAT);
             statement.setObject(5,obj.getId(),Types.INTEGER);
             

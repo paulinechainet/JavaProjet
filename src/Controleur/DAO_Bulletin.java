@@ -20,11 +20,19 @@ import java.util.logging.Logger;
  * @author grego
  */
 public class DAO_Bulletin extends DAO<Bulletin> {
-  
+  /**
+   * 
+   * 
+   * @param conn 
+   */
     public DAO_Bulletin(Connection conn) {
         super(conn);
     }
-    
+    /**
+     * 
+     *  
+     * @return boolean
+     */
     @Override
     public boolean create(Bulletin obj) {
         try {
@@ -35,6 +43,7 @@ public class DAO_Bulletin extends DAO<Bulletin> {
             statement.setObject(1,obj.getInscription().getId(),Types.INTEGER);
             statement.setObject(2,obj.getTrimestre().getId(),Types.INTEGER);
             statement.setObject(3,obj.getapre(),Types.VARCHAR); 
+
             statement.setObject(4,obj.getmoy(),Types.FLOAT);
             statement.executeUpdate(); 
         } catch (SQLException ex) {
@@ -43,7 +52,11 @@ public class DAO_Bulletin extends DAO<Bulletin> {
         
         return true;
     }
-
+/**
+ * 
+ * 
+ * @return  bool
+ */
     @Override
     public boolean delete(Bulletin obj) {
         try {
@@ -57,7 +70,11 @@ public class DAO_Bulletin extends DAO<Bulletin> {
         
         return true;
     }
-
+/**
+ * 
+ * 
+ * @return boolean
+ */
     @Override
     public boolean update(Bulletin obj) {
          try {
@@ -75,7 +92,11 @@ public class DAO_Bulletin extends DAO<Bulletin> {
         
         return true;
     }
-
+/**
+ * 
+ * 
+ * @return 
+ */
     @Override
     public Bulletin find(int id) {
         Bulletin e = null;
@@ -101,7 +122,11 @@ public class DAO_Bulletin extends DAO<Bulletin> {
         
         return e;
     }
-    
+    /**
+     * 
+     * @return max_id
+     */
+        
         @Override
     public int getMaxId(){
         int max_id = 0;

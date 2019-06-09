@@ -14,6 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import Controleur.*;
 import Modele.*;
+
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -21,39 +22,164 @@ import java.util.Map;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *
+ * @author paulinechainet
+ */
 public class Rechercher extends javax.swing.JFrame{
-private javax.swing.JScrollPane jScrollPane1;
+
+    /**
+     *
+     */
+    private javax.swing.JScrollPane jScrollPane1;
+
+    /**
+     *
+     */
     private javax.swing.JScrollPane jScrollPane12;
+
+    /**
+     *
+     */
     private javax.swing.JTable jTable;
+
+    /**
+     *
+     */
     private javax.swing.JTable jTable2;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<String> jComboBox1;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<String> jComboBox3;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<Integer> jComboBox2;
+
+    /**
+     *
+     */
     private javax.swing.JLabel jLabel1;
+
+    /**
+     *
+     */
     private javax.swing.JLabel jLabel2;
+
+    /**
+     *
+     */
     private javax.swing.JLabel trouve;
+
+    /**
+     *
+     */
     private javax.swing.JTextField texte;
+
+    /**
+     *
+     */
     private javax.swing.JTextField texte2;
+
+    /**
+     *
+     */
     private String choix;
+
+    /**
+     *
+     */
     private javax.swing.JPanel jP;
+
+    /**
+     *
+     */
     private int annee;
-    Classe c,c1;
+
+    /**
+     *
+     */
+    Classe c,
+
+    /**
+     *
+     */
+    c1;
+
+    /**
+     *
+     */
     Evaluation ev = new Evaluation();
+
+    /**
+     *
+     */
     ArrayList <Personne> tabp;
+
+    /**
+     *
+     */
     Personne p;
+
+    /**
+     *
+     */
     Inscription i;
+
+    /**
+     *
+     */
     Bulletin b;
+
+    /**
+     *
+     */
     Niveau n;
+
+    /**
+     *
+     */
     Trimestre t;
+
+    /**
+     *
+     */
     Detail de;
+
+    /**
+     *
+     */
     Discipline di;
+
+    /**
+     *
+     */
     private Data d;
+
+    /**
+     *
+     */
     private int sup;
+
+    /**
+     *
+     */
     private int trimestre;
 
-
-public Rechercher(Data datab)
+    /**
+     * Rechercher un objet
+     * @param datab
+     */
+    public Rechercher(Data datab)
 {
+
     Image img = Toolkit.getDefaultToolkit().createImage("Images/Ecole.jpg");
         this.setIconImage(img);
     d = datab;
@@ -81,6 +207,7 @@ public Rechercher(Data datab)
                 jComboBox2ActionPerformed(evt);
             }
         });
+
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rechercher dans","Eleve","Professeur", "Classe", "Evaluation","Bulletin", }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,10 +231,13 @@ public Rechercher(Data datab)
         Init();
         this.setTitle("Rechercher");
         this.setVisible(true);
-        
+
     }
         
-public void Init()
+    /**
+     * initialisation du JFrame
+     */
+    public void Init()
 {
    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,9 +264,15 @@ public void Init()
         );
         pack();
     }
-private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) { 
+ 
+    /**
+     *jComboBox1ActionPerformed
+     * @param evt
+     */
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) { 
         Init();
         JComboBox cb = (JComboBox)evt.getSource();
+
          choix = (String)cb.getSelectedItem();
             
             if(choix != "Choisissez la table à modifier")
@@ -270,7 +406,11 @@ private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
                 
             }
 }
-public void rafraichir()
+
+    /**
+     *rafraichir
+     */
+    public void rafraichir()
     {
         jP.setLayout(null);
         jP.removeAll();
@@ -301,11 +441,21 @@ public void rafraichir()
         jP.add(texte);
         this.repaint();
     }
-private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) 
+ 
+    /**
+     *jComboBox2ActionPerformed
+     * @param evt
+     */
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) 
     {
         JComboBox cb = (JComboBox)evt.getSource();
          annee = (Integer)cb.getSelectedItem();
     } 
+
+    /**
+     *jComboBox3ActionPerformed
+     * @param evt
+     */
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) 
     {
         JComboBox cb = (JComboBox)evt.getSource();
@@ -323,6 +473,11 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
              trimestre = 3;
          }
     }
+
+    /**
+     *texte2ActionPerformed
+     * @param evt
+     */
     private void texte2ActionPerformed(java.awt.event.ActionEvent evt)
     {
         String ins;
@@ -360,6 +515,11 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
               jP.add(trouve);
             }
     }
+
+    /**
+     *texteActionPerformed
+     * @param evt
+     */
     private void texteActionPerformed(java.awt.event.ActionEvent evt)
     {
         
@@ -463,6 +623,7 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
         {
             rafraichir();
             ArrayList<Detail> tabd;
+
             p = d.searchp(texte.getText());
             if(p.getId()!=-1 && p.getType()!=0){
             i = d.searchinscrit(p.getId());
@@ -479,6 +640,7 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
             {
               tableModel.addColumn(b.attributs[i]);  
             }
+
             tableModel.addRow(new Object[]{p.getNom(),t.getDebut(),t.getFin(),b.getapre(),b.getmoy()});
             jTable.setModel(tableModel);                   
              jScrollPane1.setViewportView(jTable);
@@ -490,6 +652,8 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
             {
               tableModel2.addColumn(de.attributs[i]);  
             }
+             
+            jScrollPane12.setBounds (20,200,900,40);
              for(int i =0; i<tabd.size();i++){
                  tableModel2.addRow(new Object[]{tabd.get(i).getEnseignement().getDiscipline().getNom(),tabd.get(i).getEnseignement().getPersonne().getNom(),tabd.get(i).getMoyenne(),tabd.get(i).getapre()});
              }
@@ -518,7 +682,9 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
         {
             rafraichir();
             String s,ins;
+
             ArrayList<Detail> tabd;
+
             rech = texte.getText();
             rafraichir();
             p = d.searchp(rech);
@@ -550,6 +716,7 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
             t = d.searcht(trimestre, annee);
             b = d.searchbulletin(i.getId(), t.getId());
             if(b!=null){
+
             tabd = d.searchd(b.getId());
             System.out.println(tabd.size());
             ArrayList <Evaluation> eval;
@@ -560,12 +727,13 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
             {
               tableModel2.addColumn(ev.attributs[i]);  
             }
-            for(int i=0;i<tabd.size();i++)
+         for(int i=0;i<tabd.size();i++)
             {
             eval = d.searchNote(tabd.get(i).getId());
             for(int j=0; j<eval.size();j++){
                 tableModel2.addRow(new Object[]{tabd.get(i).getEnseignement().getDiscipline().getNom(),eval.get(j).getNote(),eval.get(j).getAppreciation()}); 
             }
+
             }
             jTable2.setModel(tableModel2);                   
             jScrollPane12.setViewportView(jTable2);

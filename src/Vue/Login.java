@@ -17,18 +17,66 @@ import javax.swing.JLabel;
  * @author grego
  */
 public class Login extends javax.swing.JFrame{
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<String> jComboBox1;
+
+    /**
+     *
+     */
     private javax.swing.JPanel aff;
+
+    /**
+     *
+     */
     private javax.swing.JPasswordField jPasswordField1;
+
+    /**
+     *
+     */
     private javax.swing.JTextField jTextField1;
+
+    /**
+     *
+     */
     private javax.swing.JLabel j1;
+
+    /**
+     *
+     */
     private javax.swing.JLabel j2;
+
+    /**
+     *
+     */
     private javax.swing.JLabel j3;
+
+    /**
+     *
+     */
     private javax.swing.JButton bouton;
+
+    /**
+     *
+     */
     private String choix;
+
+    /**
+     *
+     */
     private Personne p;
+
+    /**
+     *
+     */
     Data datab = new Data();
-public Login(){
+
+    /**
+     * Initialisation et creation du jpannel de login
+     */
+    public Login(){
     Image img = Toolkit.getDefaultToolkit().createImage("Images/Ecole.jpg");
         this.setIconImage(img);
 jComboBox1 = new javax.swing.JComboBox<>();
@@ -89,12 +137,21 @@ jComboBox1 = new javax.swing.JComboBox<>();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+                                           
+    /**
+     *jComboBox1ActionPerformed
+     * @param evt
+     */
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         JComboBox cb = (JComboBox)evt.getSource();
          choix = (String)cb.getSelectedItem();
          rafraichir();
     }   
-private void rafraichir(){
+
+    /**
+     * Rafraichissement de la jframe
+     */
+    private void rafraichir(){
 aff.setLayout(null);
 aff.removeAll();
              aff.add(j1);
@@ -104,7 +161,12 @@ aff.removeAll();
              aff.add(bouton);
          this.repaint();
 }
-private void boutonActionPerformed(java.awt.event.ActionEvent evt)
+
+    /**
+     * boutonActionPerformed
+     * @param evt
+     */
+    private void boutonActionPerformed(java.awt.event.ActionEvent evt)
     {
         if(choix == "Eleve" && jTextField1 != null && jPasswordField1!=null)
         {

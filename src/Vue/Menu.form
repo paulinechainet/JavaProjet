@@ -110,7 +110,7 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel2MouseClicked"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Icon image = new ImageIcon( &quot;Graphique.png&quot; );&#xa;jLabel2.setIcon(image);"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Icon image = new ImageIcon( &quot;Images/Graphique.png&quot; );&#xa;jLabel2.setIcon(image);"/>
       </AuxValues>
     </Component>
   </SubComponents>

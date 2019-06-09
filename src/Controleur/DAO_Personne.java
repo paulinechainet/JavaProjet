@@ -21,10 +21,19 @@ import java.util.logging.Logger;
 
 public class DAO_Personne extends DAO<Personne>   
 {
-
+/**
+ * 
+ * @param conn 
+ */
     public DAO_Personne(Connection conn) {
         super(conn);
     }
+    
+    /**
+     * 
+     *  
+     * @return boolean
+     */
     
     @Override
     public boolean create(Personne obj) {
@@ -44,6 +53,11 @@ public class DAO_Personne extends DAO<Personne>
         
         return true;
     }
+    /**
+     * 
+     *  
+     * @return boolean
+     */
 
     @Override
     public boolean delete(Personne obj) {
@@ -58,7 +72,11 @@ public class DAO_Personne extends DAO<Personne>
         
         return true;
     }
-
+/**
+ * 
+ *  
+ * @return  boolean
+ */
     @Override
     public boolean update(Personne obj) {
        try {
@@ -75,7 +93,11 @@ public class DAO_Personne extends DAO<Personne>
         
         return true;
     }
-
+/**
+ * 
+ * @param id
+ * @return e
+ */
     @Override
     public Personne find(int id) {
         Personne e = null;
@@ -94,7 +116,10 @@ public class DAO_Personne extends DAO<Personne>
         
         return e;
     }
-    
+    /**
+     * 
+     * @return max_id
+     */
         @Override
     public int getMaxId(){
         int max_id = 0;

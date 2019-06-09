@@ -23,16 +23,42 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
- 
+/**
+ *
+ * @author paulinechainet
+ */
 public class Reporting extends javax.swing.JFrame{
-   private Data db = new Data();
-   private ArrayList<Bulletin> tabb;
-   private javax.swing.JButton jButton1;
+
+    /**
+     *
+     */
+    private Data db = new Data();
+
+    /**
+     *
+     */
+    private ArrayList<Bulletin> tabb;
+
+    /**
+     *
+     */
+    private javax.swing.JButton jButton1;
+
+    /**
+     *
+     */
     private javax.swing.JButton jButton2;
+
+    /**
+     *
+     */
     private javax.swing.JButton jButton3;
   
-
-   public Reporting(Data d) {
+    /**
+     * Creation du reporting
+     * @param d
+     */
+    public Reporting(Data d) {
        initComponents();
        db = d;
        Image img = Toolkit.getDefaultToolkit().createImage("Images/Ecole.jpg");
@@ -40,7 +66,11 @@ public class Reporting extends javax.swing.JFrame{
        this.setTitle("Reporting");
        this.setVisible(true);
    }
-   public void matiere(){
+
+    /**
+     * Creation des report selon matiere
+     */
+    public void matiere(){
        JDialog ratioHommeFemmeJdialog = new JDialog();
 			ratioHommeFemmeJdialog.setTitle("Repartition des moyennes inférieures à 10");
 			ArrayList<Discipline> tabd = db.getallDis();
@@ -74,7 +104,11 @@ public class Reporting extends javax.swing.JFrame{
 			ratioHommeFemmeJdialog.pack();
 			ratioHommeFemmeJdialog.setVisible(true);
    }
-   public void repartition()
+
+    /**
+     * creation du chart de repartition
+     */
+    public void repartition()
    {
       JDialog ratioHommeFemmeJdialog = new JDialog();
        ratioHommeFemmeJdialog.setTitle("Répartition générale");
@@ -117,7 +151,11 @@ public class Reporting extends javax.swing.JFrame{
                         ratioHommeFemmeJdialog.pack();
 			ratioHommeFemmeJdialog.setVisible(true);
    }
-   public void Moyennesge()
+
+    /**
+     * creation du chart selon la moyenne
+     */
+    public void Moyennesge()
    {
        JDialog ratioHommeFemmeJdialog = new JDialog();
 			ratioHommeFemmeJdialog.setTitle("Moyenne générale");
@@ -160,16 +198,35 @@ public class Reporting extends javax.swing.JFrame{
 			ratioHommeFemmeJdialog.pack();
 			ratioHommeFemmeJdialog.setVisible(true);
    }
-   private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+                                         
+    /**
+     *jButton1ActionPerformed
+     * @param evt
+     */
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         Moyennesge();
     } 
-   private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+                                         
+    /**
+     *jButton2ActionPerformed
+     * @param evt
+     */
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         repartition();
     } 
-   private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+                                         
+    /**
+     *jButton3ActionPerformed
+     * @param evt
+     */
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
        matiere();
     } 
- private void initComponents() {
+
+    /**
+     *initComponents
+     */
+    private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();

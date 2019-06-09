@@ -26,6 +26,7 @@ import java.util.Map;
  * @author paulinechainet
  */
 public class Data {
+    
     private Map<Integer,Annee> tableAnnees = new HashMap<Integer,Annee>();
     private Map<Integer,Bulletin> tableBulletins = new HashMap<Integer,Bulletin>();
     private Map<Integer,Classe> tableClasses = new HashMap<Integer,Classe>();
@@ -37,10 +38,15 @@ public class Data {
     private Map<Integer,Niveau> tableNiveaux = new HashMap<Integer,Niveau>();
     private Map<Integer,Trimestre> tableTrimestres = new HashMap<Integer,Trimestre>();
     private Map<Integer,Detail> tableDetail = new HashMap<Integer,Detail>();
-   
+   /**
+    * 
+    */
     public Data() {
       
     }
+    /**
+     * 
+     */
     public void LoadAllData()
     {
         
@@ -58,6 +64,9 @@ public class Data {
         //SetDataClasses();
         //SetDataBulletins();
     }
+    /**
+     * Permet de sauver tout la bdd
+     */
       public void Save_All_Data()
     {
         SaveAnnee();
@@ -71,7 +80,9 @@ public class Data {
         SaveNiveau();
         SaveTrimestre();
     }
-        
+        /*
+    Chargement de l'année
+      */
     private void LoadAnnee()
     {
         DAO<Annee> DAO= DAOFactory.getDAO_Annee();
@@ -85,7 +96,9 @@ public class Data {
         }
     }
     
-    
+    /**
+     * 
+     */
      private void LoadBulletin()
     {
         DAO<Bulletin> DAO= DAOFactory.getDAO_Bulletin();
@@ -98,6 +111,10 @@ public class Data {
             }
         }
     }
+     /**
+      * 
+    */
+     
      private void LoadDetail()
     {
         DAO<Detail> DAO= DAOFactory.getDAO_Detail();
@@ -255,6 +272,7 @@ public class Data {
     private void SaveDetail()
     {
         DAO<Detail> DAO= DAOFactory.getDAO_Detail();
+
 
         for(Map.Entry<Integer, Detail> entry : tableDetail.entrySet()) {  
             Detail a = entry.getValue();
@@ -415,17 +433,33 @@ public class Data {
         }
     }
     
-
+/**
+ * 
+ * @return tableAnnees 
+ */
     public Map<Integer, Annee> getAnnees() {
         return tableAnnees;
     }
+    /**
+     * 
+     * @return table de bulletins
+     */
      public Map<Integer, Bulletin> getBulletins() {
         return tableBulletins;
     }
-
+/**
+ * 
+ * @return table de classes
+ */
     public Map<Integer, Classe> getClasses() {
         return tableClasses;
     }
+
+    /**
+     * 
+     * @return table de classe
+     */
+
     public ArrayList<Classe> getallC(){
         Classe c;
         ArrayList <Classe> tabc = new ArrayList();
@@ -436,6 +470,10 @@ public class Data {
       }
        return tabc;
     }
+    /**
+     * 
+     * @return  tabe
+     */
     public ArrayList<Evaluation> getallEv(){
         Evaluation e;
         ArrayList <Evaluation> tabe = new ArrayList();
@@ -446,6 +484,11 @@ public class Data {
       }
        return tabe;
     }
+    /**
+     * 
+     * @return arraylist de niveau 
+     */
+
     public ArrayList<Niveau> getallNiv(){
         Niveau e;
         ArrayList <Niveau> tabe = new ArrayList();
@@ -456,6 +499,12 @@ public class Data {
       }
        return tabe;
     }
+
+  /**
+   * 
+   * @return  arrayList de bulletin
+   */
+
     public ArrayList<Bulletin> getallB(){
         Bulletin b;
         ArrayList <Bulletin> tabb = new ArrayList();
@@ -504,6 +553,10 @@ public class Data {
     public Map<Integer, Trimestre> getTrimestres() {
         return tableTrimestres;
     }
+    /**
+     * Methode qui affiche la tab d'evaluation avec don id et sa value
+     * 
+     */
     public void affichage()
     {
       for(Map.Entry<Integer, Evaluation> entry : tableEvaluations.entrySet()) 
@@ -513,7 +566,16 @@ public class Data {
       }  
       
     }
+
+    /**
+     * Recherche d'un enseognant selon son id 
+     * @param id
+     * 
+     * @return array liste de detail du buletin
+     */
+    
     public ArrayList<Detail> searchd(int id)
+
     {
         Detail t= null;
         ArrayList<Detail> d1 = new ArrayList();
@@ -523,6 +585,7 @@ public class Data {
         {
           t = entry.getValue();
           b = t.getBulletin();
+
           if(b.getId() == id)
           {
               d1.add(t);
@@ -644,6 +707,7 @@ public class Data {
     public void addenseignement( Classe classe, Personne personne, Discipline discipline)
     {
        DAO<Enseignement> DAO= DAOFactory.getDAO_Enseignement();
+
        Enseignement e = new Enseignement(DAO.getMaxId()+1,classe,personne,discipline);
        tableEnseignements.put(DAO.getMaxId(), e);
        SaveEnseignement();
@@ -923,19 +987,22 @@ public class Data {
         
     }*/
 
-    public void addeval(int note, String a, Detail b, Enseignement el) {
+void addeval(int note, String a, Detail b, Enseignement el) {
         //int id, int note, String appreciation, Detail bulletin,Personne enseignant
                 DAO<Evaluation> DAO = DAOFactory.getDAO_Evaluation();
                 Evaluation e = new Evaluation(DAO.getMaxId()+1,note,a,b,el);
                 tableEvaluations.put(DAO.getMaxId()+1, e);
                 SaveEvaluation();
+
                 SaveBulletin();
                 SaveDetail();
+
                 LoadEvaluation();
     }
 
     public void addb(Inscription inscription, Trimestre trimestre, String appreciation) {
         DAO<Bulletin> DAO= DAOFactory.getDAO_Bulletin();
+
         Detail de;
         float moyenne =0;
         Bulletin b = new Bulletin(DAO.getMaxId()+1,inscription,trimestre,"", moyenne);

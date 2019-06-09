@@ -13,12 +13,14 @@ import java.util.ArrayList;
  */
 
 public class Bulletin {
+
     private int id;
     private Personne P;
     private Inscription inscription;
-private Trimestre trimestre; 
+     private Trimestre trimestre; 
     private Personne personne;
     private ArrayList<Evaluation> tableEvaluations = new ArrayList();
+
     String Appreciation;
     private float moyenne;
 
@@ -31,6 +33,16 @@ private Trimestre trimestre;
         "Moyenne générale"
     };
 
+    /**
+     *Constructeur 
+     * i
+     * @param id
+     * @param inscription
+     * @param trimestre
+     * @param Appreciation
+     * @param moy
+     */
+
 
     public Bulletin(int id, Inscription inscription, Trimestre trimestre, String Appreciation, float moy) {
         this.id = id;
@@ -40,62 +52,114 @@ private Trimestre trimestre;
         this.moyenne = moy;
     }
 
+    /**
+     *
+     * @param id
+     */
     public Bulletin(int id) {
         this.id = id;
     }
+
 
     public Bulletin() {
         
     }
     
-    
-    
+    /**
+     *
+     * @return id du bulletin
+     */
     public int getId() {
         return id;
     }
 
-
+    /**
+     *
+     * @return l'inscription du bulletin
+     */
     public Inscription getInscription() {
         return inscription;
     }
 
+    /**
+     *
+     * @return le trimestre du bulletin
+     */
     public Trimestre getTrimestre() {
         return trimestre;
     }
     
+    /**
+     *
+     * @return la table d'eval du du bulletin
+     */
     public  ArrayList<Evaluation> getEvaluation()
     {
         return tableEvaluations;
     }
 
+    /**
+     *
+     * @return personne du bulletin
+     */
     public Personne getPersonne()
     {
         return personne;
     }
+
+    /**
+     *
+     * @param inscription du bulletin
+     */
     public void setInscription(Inscription inscription) {
         this.inscription = inscription;
     }
 
+    /**
+     *
+     * @param trimestre du bulletin
+     */
     public void setTrimestre(Trimestre trimestre) {
         this.trimestre = trimestre;
     }
 
-public void setEvaluations(ArrayList<Evaluation> evaluations) {
+    /**
+     *
+     * @param evaluations du bulletin
+     */
+    public void setEvaluations(ArrayList<Evaluation> evaluations) {
         this.tableEvaluations = evaluations;
     }
-public String getapre()
+
+    /**
+     *
+     * @return appreciations du bulletin
+     */
+    public String getapre()
 {
     return this.Appreciation;
 }
-public void setapre(String s)
+
+    /**
+     *
+     * @param s du bulletin
+     */
+    public void setapre(String s)
 {
     this.Appreciation = s;
 }
+
+    /**
+     *
+     * @param m du bulletin
+     */
+    
 public void setmoy(float m)
 {
     this.moyenne = m;
 }
 public float getmoy()
+
 {
     return this.moyenne;
 }

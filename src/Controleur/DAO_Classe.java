@@ -20,12 +20,20 @@ import java.util.logging.Logger;
  * @author grego
  */
 public class DAO_Classe extends DAO<Classe>{
-    private ArrayList <Classe> cla;
+   private ArrayList <Classe> cla;
     
+  /**
+   * 
+   * @param conn 
+   */
     public DAO_Classe(Connection conn) {
         super(conn);
     }
-     
+     /**
+      * 
+      *  
+      * @return 
+      */
     @Override
     public boolean create(Classe obj) {
         try {
@@ -43,7 +51,11 @@ public class DAO_Classe extends DAO<Classe>{
         
         return true;
     }
-
+/**
+ * 
+ *  
+ * @return 
+ */
     @Override
     public boolean delete(Classe obj) {
         try {
@@ -57,7 +69,12 @@ public class DAO_Classe extends DAO<Classe>{
         
         return true;
     }
-
+/**
+ * 
+ * 
+ *  
+ * @return 
+ */
     @Override
     public boolean update(Classe obj) {
          try {
@@ -75,7 +92,12 @@ public class DAO_Classe extends DAO<Classe>{
         
         return true;
     }
-
+/**
+ * 
+ * 
+ * @param id
+ * @return 
+ */
     @Override
     public Classe find(int id) {
         Classe e = null;
@@ -98,7 +120,11 @@ public class DAO_Classe extends DAO<Classe>{
         
         return e;
     }
-    
+    /**
+     * 
+     * 
+     * @return 
+     */
         @Override
     public int getMaxId(){
         int max_id = 0;

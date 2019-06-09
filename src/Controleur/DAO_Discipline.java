@@ -19,11 +19,18 @@ import java.util.logging.Logger;
  * @author grego
  */
 public class DAO_Discipline extends DAO<Discipline>{
-    
+    /**
+     * 
+     * @param conn 
+     */
     public DAO_Discipline(Connection conn) {
         super(conn);
     }
-    
+    /**
+     * 
+     *  
+     * @return 
+     */
     @Override
     public boolean create(Discipline obj) {
         try {
@@ -39,7 +46,11 @@ public class DAO_Discipline extends DAO<Discipline>{
         
         return true;
     }
-
+/**
+ * 
+ *  
+ * @return 
+ */
     @Override
     public boolean delete(Discipline obj) {
         try {
@@ -53,7 +64,11 @@ public class DAO_Discipline extends DAO<Discipline>{
         
         return true;
     }
-
+/**
+ * 
+ *  
+ * @return 
+ */
     @Override
     public boolean update(Discipline obj) {
         try {
@@ -69,7 +84,11 @@ public class DAO_Discipline extends DAO<Discipline>{
         
         return true;
     }
-
+/**
+ * 
+ * @param id
+ * @return 
+ */
     @Override
     public Discipline find(int id) {
         Discipline e = null;
@@ -88,7 +107,10 @@ public class DAO_Discipline extends DAO<Discipline>{
         
         return e;
     }
-    
+    /**
+     * 
+     * @return 
+     */
         @Override
     public int getMaxId(){
         int max_id = 0;

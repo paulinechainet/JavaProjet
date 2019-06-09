@@ -19,11 +19,18 @@ import java.util.logging.Logger;
  * @author grego
  */
 public class DAO_Niveau extends DAO<Niveau>{
-    
+    /**
+     * 
+     * @param conn 
+     */
     public DAO_Niveau(Connection conn) {
         super(conn);
     }
-    
+    /**
+     * 
+     *  
+     * @return 
+     */
     @Override
     public boolean create(Niveau obj) {
         try {
@@ -39,7 +46,11 @@ public class DAO_Niveau extends DAO<Niveau>{
         
         return true;
     }
-
+/**
+ * 
+ *  
+ * @return 
+ */
     @Override
     public boolean delete(Niveau obj) {
         try {
@@ -69,6 +80,11 @@ public class DAO_Niveau extends DAO<Niveau>{
         
         return true;
     }
+    /**
+     * 
+     * @param id
+     * @return 
+     */
 
     @Override
     public Niveau find(int id) {

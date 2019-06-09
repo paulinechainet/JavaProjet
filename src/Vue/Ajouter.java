@@ -24,30 +24,157 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Ajouter extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     private javax.swing.JComboBox<String> jComboBox1;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<String> jComboBox2;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<String> jComboBox3;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<String> jComboBox4;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<String> jComboBox5;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<String> jComboBox6;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<Integer> jComboBox7;
-    private String choix, classe, discipline,prof,niveau,eleve;
+
+    /**
+     *
+     */
+    private String choix,
+
+    /**
+     *
+     */
+    classe,
+
+    /**
+     *
+     */
+    discipline,
+
+    /**
+     *
+     */
+    prof,
+
+    /**
+     *
+     */
+    niveau,
+
+    /**
+     *
+     */
+    eleve;
+
+    /**
+     *
+     */
     private JTextField[] saisie = new JTextField[10];
+
+    /**
+     *
+     */
     private javax.swing.JButton bouton;
+
+    /**
+     *
+     */
     private javax.swing.JPanel aff;
+
+    /**
+     *
+     */
     private javax.swing.JRadioButton jRadioButton1;
+
+    /**
+     *
+     */
     private javax.swing.JRadioButton jRadioButton2;
+
+    /**
+     *
+     */
     private javax.swing.ButtonGroup groupe;
+
+    /**
+     *
+     */
     private Classe c;
+
+    /**
+     *
+     */
     private Bulletin b;
-    private Personne p,pr;
+
+    /**
+     *
+     */
+    private Personne p,
+
+    /**
+     *
+     */
+    pr;
+
+    /**
+     *
+     */
     private Discipline di;
+
+    /**
+     *
+     */
     private Enseignement e;
+
+    /**
+     *
+     */
     private int type = 3;
+
+    /**
+     *
+     */
     private Data d;
+
+    /**
+     *
+     */
     private Integer note;
+
+    /**
+     *
+     */
     private int droit;
 
+    /**
+     * CONSTRUCTEUR 
+     * @param db
+     * @param dr
+     * @param p1
+     */
     public Ajouter(Data db, int dr, Personne p1) {
         Image img = Toolkit.getDefaultToolkit().createImage("Images/Ecole.jpg");
         this.setIconImage(img);
@@ -132,46 +259,54 @@ public class Ajouter extends javax.swing.JFrame {
         bouton.setText("Ajouter");
         jComboBox1 = new javax.swing.JComboBox<>();
         
+
         if(droit == 0){
             jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Ajouter un(e)", "Personne", "Classe", "Enseignement","Discipline","Evaluation"}));
         }
         else jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Ajouter une","Evaluation"}));
+
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
+
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
             }
         });
+
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);
             }
         });
+
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
             }
         });
+
         jComboBox5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox5ActionPerformed(evt);
             }
         });
+
         jComboBox6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox6ActionPerformed(evt);
             }
         });
+
         jComboBox7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox7ActionPerformed(evt);
             }
         });
-        
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -193,19 +328,36 @@ public class Ajouter extends javax.swing.JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Initialisation du jpanel
+     */
     public void initjpanel() {
         
         aff.setLayout(null);
         aff.removeAll();
         this.repaint();
     }
-private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
+                                              
+    /**
+     *Radio buttom1 action performed
+     * @param evt
+     */
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                              
         type = 1;
     }                                             
 
+    /**
+     *jRadioButton2ActionPerformed
+     * @param evt
+     */
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                              
         type = 0;
     }  
+
+    /**
+     *jComboBox1ActionPerformed
+     * @param evt
+     */
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
         JComboBox cb = (JComboBox) evt.getSource();
         choix = (String) cb.getSelectedItem();
@@ -264,6 +416,7 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         }
         if (choix == "Enseignement") {
             initjpanel();
+
             aff.add(jComboBox2);
             aff.add(jComboBox3);
             aff.add(jComboBox4);
@@ -306,6 +459,7 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
             saisie[1].setBounds(10, 145, 450, 40);
             jComboBox7.setBounds(10, 75, 150, 30);
             aff.add(jComboBox6);
+
             if(droit == 0){aff.add(jComboBox3);}
             aff.add(jComboBox4);
             aff.add(a);
@@ -318,6 +472,11 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
            
         }
 }
+
+    /**
+     *boutonActionPerformed
+     * @param evt
+     */
     private void boutonActionPerformed(java.awt.event.ActionEvent evt)
     {
         initjpanel();
@@ -366,6 +525,7 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         }
            if(choix == "Evaluation")
         {
+
             if(droit!=0)
             {
                 prof = pr.getNom();
@@ -379,6 +539,7 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
                 d.addb(in, t,saisie[1].getText());
                 b = d.searchbulletin(in.getId(), t.getId());
             }
+
             tabd = d.searchd(b.getId());
             Enseignement e = d.searchenseignement(prof, discipline);
                 if(e!=null){  
@@ -392,34 +553,64 @@ private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
                     initjpanel();
                     JLabel trouve = new JLabel();
                     trouve.setText("Le professeur n'enseigne pas cette matière");
+
                     trouve.setBounds(10, 10, 300, 30);
                     aff.add(trouve);
                 }
             }
     }   
             
-        
-     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
+    /**
+     *jComboBox2ActionPerformed
+     * @param evt
+     */
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
          JComboBox cb = (JComboBox) evt.getSource();
         classe = (String) cb.getSelectedItem();
      }
-     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {
+
+    /**
+     * jComboBox3ActionPerformed
+     * @param evt
+     */
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {
          JComboBox cb = (JComboBox) evt.getSource();
         prof = (String) cb.getSelectedItem();
      }
-     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {
+
+    /**
+     *jComboBox4ActionPerformed
+     * @param evt
+     */
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {
          JComboBox cb = (JComboBox) evt.getSource();
         discipline = (String) cb.getSelectedItem();
      }
-      private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {
+
+    /**
+     *jComboBox5ActionPerformed
+     * @param evt
+     */
+    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {
          JComboBox cb = (JComboBox) evt.getSource();
         niveau = (String) cb.getSelectedItem();
      }
-      private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {
+
+    /**
+     * jComboBox6ActionPerformed
+     * @param evt
+     */
+    private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {
           JComboBox cb = (JComboBox) evt.getSource();
         eleve = (String) cb.getSelectedItem();
+
      }
-      private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {
+
+    /**
+     * jComboBox7ActionPerformed
+     * @param evt
+     */
+    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {
           JComboBox cb = (JComboBox) evt.getSource();
       note = (Integer) cb.getSelectedItem();
      }

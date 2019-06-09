@@ -12,16 +12,33 @@ package Modele;
 
 
 public class Annee {
+
+    /**
+     *
+     */
     private int id;
 
+    /**
+     *
+     * @param id
+     */
     public Annee(int id) {
         this.id = id;
     }
 
+    /**
+     *G
+     * @return id de l'année
+     */
     public int getId() {
         return id;
     }
-public void setId(int id)
+
+    /**
+     *SETTER
+     * @param id
+     */
+    public void setId(int id)
 {
     this.id=id;
 }
