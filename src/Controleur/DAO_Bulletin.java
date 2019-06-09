@@ -30,8 +30,8 @@ public class DAO_Bulletin extends DAO<Bulletin> {
     }
     /**
      * 
-     * @param obj
-     * @return 
+     *  
+     * @return boolean
      */
     @Override
     public boolean create(Bulletin obj) {
@@ -54,8 +54,8 @@ public class DAO_Bulletin extends DAO<Bulletin> {
     }
 /**
  * 
- * @param obj
- * @return 
+ * 
+ * @return  bool
  */
     @Override
     public boolean delete(Bulletin obj) {
@@ -72,8 +72,8 @@ public class DAO_Bulletin extends DAO<Bulletin> {
     }
 /**
  * 
- * @param obj
- * @return 
+ * 
+ * @return boolean
  */
     @Override
     public boolean update(Bulletin obj) {
@@ -94,7 +94,7 @@ public class DAO_Bulletin extends DAO<Bulletin> {
     }
 /**
  * 
- * @param id
+ * 
  * @return 
  */
     @Override
@@ -124,7 +124,7 @@ public class DAO_Bulletin extends DAO<Bulletin> {
     }
     /**
      * 
-     * @return 
+     * @return max_id
      */
         
         @Override

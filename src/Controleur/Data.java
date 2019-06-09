@@ -570,6 +570,7 @@ public class Data {
     /**
      * Recherche d'un enseognant selon son id 
      * @param id
+     * 
      * @return array liste de detail du buletin
      */
     

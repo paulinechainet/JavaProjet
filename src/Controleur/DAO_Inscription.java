@@ -32,7 +32,7 @@ public class DAO_Inscription extends DAO<Inscription>{
     
     /**
      * 
-     * @param obj
+     *  
      * @return 
      */
     @Override
@@ -54,7 +54,7 @@ public class DAO_Inscription extends DAO<Inscription>{
     }
 /**
  * 
- * @param obj
+ *  
  * @return 
  */
     @Override
@@ -72,7 +72,7 @@ public class DAO_Inscription extends DAO<Inscription>{
     }
 /**
  * 
- * @param obj
+ *  
  * @return 
  */
     @Override

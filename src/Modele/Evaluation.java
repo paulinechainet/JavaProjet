@@ -71,11 +71,7 @@ public class Evaluation {
     }
 
 
-    /**Constructeur
-     *
-     */
-    public Evaluation() {
-    }
+   
 
     /**
      *GETTER

@@ -19,37 +19,168 @@ import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *
+ * @author paulinechainet
+ */
 public class Modifier extends javax.swing.JFrame{
+
+    /**
+     *
+     */
     private javax.swing.JScrollPane jScrollPane1;
+
+    /**
+     *
+     */
     private javax.swing.JScrollPane jScrollPane12;
+
+    /**
+     *
+     */
     private javax.swing.JTable jTable;
+
+    /**
+     *
+     */
     private javax.swing.JTable jTable2;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<String> jComboBox1;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<String> jComboBox3;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<Integer> jComboBox2;
+
+    /**
+     *
+     */
     private javax.swing.JLabel jLabel1;
+
+    /**
+     *
+     */
     private javax.swing.JLabel jLabel2;
+
+    /**
+     *
+     */
     private javax.swing.JLabel trouve;
+
+    /**
+     *
+     */
     private javax.swing.JTextField texte;
+
+    /**
+     *
+     */
     private javax.swing.JTextField texte2;
+
+    /**
+     *
+     */
     private javax.swing.JButton bouton;
+
+    /**
+     *
+     */
     private javax.swing.JButton bouton2;
+
+    /**
+     *
+     */
     private javax.swing.JButton bouton3;
+
+    /**
+     *
+     */
     private String choix;
+
+    /**
+     *
+     */
     private javax.swing.JPanel jP;
+
+    /**
+     *
+     */
     private int annee;
-    Classe c,c1;
+
+    /**
+     *
+     */
+    Classe c,
+
+    /**
+     *
+     */
+    c1;
+
+    /**
+     *
+     */
     Personne p;
+
+    /**
+     *
+     */
     Inscription i;
+
+    /**
+     *
+     */
     Bulletin b;
+
+    /**
+     *
+     */
     Niveau n;
+
+    /**
+     *
+     */
     Trimestre t;
 
+    /**
+     *
+     */
     Detail de = new Detail(1);
-        Evaluation ev = new Evaluation();
+
+    /**
+     *
+     */
+    Evaluation ev = new Evaluation();
+
+    /**
+     *
+     */
     private Data d;
+
+    /**
+     *
+     */
     private int sup;
+
+    /**
+     *
+     */
     private int trimestre;
+
+    /**
+     * Modification
+     * @param a
+     * @param db
+     * @param droit
+     */
     public Modifier(int a, Data db, int droit)
     {
         Image img = Toolkit.getDefaultToolkit().createImage("Images/Ecole.jpg");
@@ -142,7 +273,10 @@ public class Modifier extends javax.swing.JFrame{
         this.setVisible(true);
     }
         
-public void Init()
+    /**
+     * Initialisation du jFrame
+     */
+    public void Init()
 {
    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -169,6 +303,11 @@ public void Init()
         );
         pack();
     }
+
+    /**
+     * texteActionPerformed
+     * @param evt
+     */
     private void texteActionPerformed(java.awt.event.ActionEvent evt)
     {
         
@@ -434,6 +573,11 @@ public void Init()
         }
         
     }
+
+    /**
+     *jComboBox1ActionPerformed
+     * @param evt
+     */
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) { 
         Init();
         JComboBox cb = (JComboBox)evt.getSource();
@@ -448,6 +592,11 @@ public void Init()
             
             
     }
+
+    /**
+     *bouton2ActionPerformed
+     * @param evt
+     */
     private void bouton2ActionPerformed(java.awt.event.ActionEvent evt)
     {
         jP.setLayout(null);
@@ -456,6 +605,11 @@ public void Init()
         jP.add(texte2);
         this.repaint();
     }
+
+    /**
+     *bouton3ActionPerformed
+     * @param evt
+     */
     private void bouton3ActionPerformed(java.awt.event.ActionEvent evt)
     {
         rafraichir();
@@ -463,6 +617,11 @@ public void Init()
        d.modifinscrit(jTable.getValueAt(0, 2).toString(), p.getId(), c1, p);
         
     }
+
+    /**
+     *boutonActionPerformed
+     * @param evt
+     */
     private void boutonActionPerformed(java.awt.event.ActionEvent evt)
     {
        rafraichir();
@@ -499,6 +658,10 @@ public void Init()
             
         }
     }
+
+    /**
+     *rafraichir
+     */
     public void rafraichir()
     {
         jP.setLayout(null);
@@ -530,11 +693,21 @@ public void Init()
         jP.add(texte);
         this.repaint();
     }
+
+    /**
+     *jComboBox2ActionPerformed
+     * @param evt
+     */
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) 
     {
         JComboBox cb = (JComboBox)evt.getSource();
          annee = (Integer)cb.getSelectedItem();
     } 
+
+    /**
+     *jComboBox3ActionPerformed
+     * @param evt
+     */
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) 
     {
         JComboBox cb = (JComboBox)evt.getSource();
@@ -552,6 +725,11 @@ public void Init()
              trimestre = 3;
          }
     }
+
+    /**
+     *texte2ActionPerformed
+     * @param evt
+     */
     private void texte2ActionPerformed(java.awt.event.ActionEvent evt)
     {
         String ins;

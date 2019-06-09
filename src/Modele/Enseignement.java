@@ -25,11 +25,7 @@ public class Enseignement {
         "Discipline"
     };
 
-    public String attributs[]={
-        "Classe",
-        "Professeur",
-        "Discipline"
-    };
+    
 
     /**
      *CONSTRUCTEUR
@@ -59,12 +55,7 @@ public class Enseignement {
     }
     
 
-    /**
-     *
-     */
-    public Enseignement() {
-        
-    }
+   
     
     /**
      *GETTER

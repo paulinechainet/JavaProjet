@@ -31,8 +31,8 @@ public class DAO_Personne extends DAO<Personne>
     
     /**
      * 
-     * @param obj
-     * @return 
+     *  
+     * @return boolean
      */
     
     @Override
@@ -55,8 +55,8 @@ public class DAO_Personne extends DAO<Personne>
     }
     /**
      * 
-     * @param obj
-     * @return 
+     *  
+     * @return boolean
      */
 
     @Override
@@ -74,8 +74,8 @@ public class DAO_Personne extends DAO<Personne>
     }
 /**
  * 
- * @param obj
- * @return 
+ *  
+ * @return  boolean
  */
     @Override
     public boolean update(Personne obj) {
@@ -96,7 +96,7 @@ public class DAO_Personne extends DAO<Personne>
 /**
  * 
  * @param id
- * @return 
+ * @return e
  */
     @Override
     public Personne find(int id) {

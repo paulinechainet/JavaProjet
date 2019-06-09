@@ -28,7 +28,7 @@ public class DAO_Detail extends DAO<Detail> {
     }
     /**
      * 
-     * @param obj
+     *  
      * @return 
      */
     @Override
@@ -103,7 +103,7 @@ public class DAO_Detail extends DAO<Detail> {
     }
 /**
  * 
- * @param obj
+ *  
  * @return 
  */
     @Override
@@ -113,7 +113,7 @@ public class DAO_Detail extends DAO<Detail> {
 
     /**
      * 
-     * @param obj
+     *  
      * @return 
      */
     @Override

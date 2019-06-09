@@ -29,7 +29,7 @@ public class DAO_Trimestre extends DAO<Trimestre>{
     }
     /**
      * 
-     * @param obj
+     *  
      * @return 
      */
     @Override
@@ -53,7 +53,7 @@ public class DAO_Trimestre extends DAO<Trimestre>{
     }
 /**
  * 
- * @param obj
+ *  
  * @return 
  */
     @Override
@@ -71,7 +71,7 @@ public class DAO_Trimestre extends DAO<Trimestre>{
     }
 /**
  * 
- * @param obj
+ *  
  * @return 
  */
     @Override

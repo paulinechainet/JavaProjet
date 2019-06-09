@@ -22,38 +22,162 @@ import java.util.Map;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *
+ * @author paulinechainet
+ */
 public class Rechercher extends javax.swing.JFrame{
-private javax.swing.JScrollPane jScrollPane1;
+
+    /**
+     *
+     */
+    private javax.swing.JScrollPane jScrollPane1;
+
+    /**
+     *
+     */
     private javax.swing.JScrollPane jScrollPane12;
+
+    /**
+     *
+     */
     private javax.swing.JTable jTable;
+
+    /**
+     *
+     */
     private javax.swing.JTable jTable2;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<String> jComboBox1;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<String> jComboBox3;
+
+    /**
+     *
+     */
     private javax.swing.JComboBox<Integer> jComboBox2;
+
+    /**
+     *
+     */
     private javax.swing.JLabel jLabel1;
+
+    /**
+     *
+     */
     private javax.swing.JLabel jLabel2;
+
+    /**
+     *
+     */
     private javax.swing.JLabel trouve;
+
+    /**
+     *
+     */
     private javax.swing.JTextField texte;
+
+    /**
+     *
+     */
     private javax.swing.JTextField texte2;
+
+    /**
+     *
+     */
     private String choix;
+
+    /**
+     *
+     */
     private javax.swing.JPanel jP;
+
+    /**
+     *
+     */
     private int annee;
-    Classe c,c1;
+
+    /**
+     *
+     */
+    Classe c,
+
+    /**
+     *
+     */
+    c1;
+
+    /**
+     *
+     */
     Evaluation ev = new Evaluation();
+
+    /**
+     *
+     */
     ArrayList <Personne> tabp;
+
+    /**
+     *
+     */
     Personne p;
+
+    /**
+     *
+     */
     Inscription i;
+
+    /**
+     *
+     */
     Bulletin b;
+
+    /**
+     *
+     */
     Niveau n;
+
+    /**
+     *
+     */
     Trimestre t;
+
+    /**
+     *
+     */
     Detail de;
+
+    /**
+     *
+     */
     Discipline di;
+
+    /**
+     *
+     */
     private Data d;
+
+    /**
+     *
+     */
     private int sup;
+
+    /**
+     *
+     */
     private int trimestre;
 
-
-public Rechercher(Data datab)
+    /**
+     * Rechercher un objet
+     * @param datab
+     */
+    public Rechercher(Data datab)
 {
 
     Image img = Toolkit.getDefaultToolkit().createImage("Images/Ecole.jpg");
@@ -110,7 +234,10 @@ public Rechercher(Data datab)
 
     }
         
-public void Init()
+    /**
+     * initialisation du JFrame
+     */
+    public void Init()
 {
    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,7 +264,12 @@ public void Init()
         );
         pack();
     }
-private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) { 
+ 
+    /**
+     *jComboBox1ActionPerformed
+     * @param evt
+     */
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) { 
         Init();
         JComboBox cb = (JComboBox)evt.getSource();
 
@@ -274,7 +406,11 @@ private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
                 
             }
 }
-public void rafraichir()
+
+    /**
+     *rafraichir
+     */
+    public void rafraichir()
     {
         jP.setLayout(null);
         jP.removeAll();
@@ -305,11 +441,21 @@ public void rafraichir()
         jP.add(texte);
         this.repaint();
     }
-private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) 
+ 
+    /**
+     *jComboBox2ActionPerformed
+     * @param evt
+     */
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) 
     {
         JComboBox cb = (JComboBox)evt.getSource();
          annee = (Integer)cb.getSelectedItem();
     } 
+
+    /**
+     *jComboBox3ActionPerformed
+     * @param evt
+     */
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) 
     {
         JComboBox cb = (JComboBox)evt.getSource();
@@ -327,6 +473,11 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
              trimestre = 3;
          }
     }
+
+    /**
+     *texte2ActionPerformed
+     * @param evt
+     */
     private void texte2ActionPerformed(java.awt.event.ActionEvent evt)
     {
         String ins;
@@ -364,6 +515,11 @@ private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt)
               jP.add(trouve);
             }
     }
+
+    /**
+     *texteActionPerformed
+     * @param evt
+     */
     private void texteActionPerformed(java.awt.event.ActionEvent evt)
     {
         

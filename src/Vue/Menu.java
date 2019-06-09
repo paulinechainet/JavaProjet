@@ -21,15 +21,41 @@ import javax.swing.JOptionPane;
  */
 public class Menu extends javax.swing.JFrame {
 
+    /**
+     *
+     */
     private Image img;
+
+    /**
+     *
+     */
     private javax.swing.JLabel eleves;
+
+    /**
+     *
+     */
     private Data datab = new Data();
+
+    /**
+     *
+     */
     private int nb;
+
+    /**
+     *
+     */
     private int droit;
+
+    /**
+     *
+     */
     private Personne p;
 
     /**
      * Creates new form Menu
+     * @param db
+     * @param c
+     * @param pe
      */
     public Menu(Data db, int c, Personne pe) {
         initComponents();
@@ -48,6 +74,9 @@ public class Menu extends javax.swing.JFrame {
         eleves.setText("Nombre d'élèves : "+nb);
     }
     
+    /**
+     * Initialisation des composants 
+     */
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
@@ -139,33 +168,76 @@ public class Menu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
+    /**
+     * jButton4ActionPerformed
+     * @param evt
+     */
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         new Modifier(0,datab,droit);
     }                                        
 
+    /**
+     * jButton1ActionPerformed
+     * @param evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         new Rechercher(datab);
     }                                        
 
+    /**
+     *jLabel2MouseClicked
+     * @param evt
+     */
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {                                     
       new Reporting(datab);
     }                                    
 
-
+    /**
+     *jButton2ActionPerformed
+     * @param evt
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         new Ajouter(datab,droit,p);
     }                                        
 
+    /**
+     * jButton3ActionPerformed
+     * @param evt
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         new Modifier(1,datab,droit);
     }                                        
 
     // Variables declaration - do not modify                     
+
+    /**
+     *
+     */
     private javax.swing.JButton jButton1;
+
+    /**
+     *
+     */
     private javax.swing.JButton jButton2;
+
+    /**
+     *
+     */
     private javax.swing.JButton jButton3;
+
+    /**
+     *
+     */
     private javax.swing.JButton jButton4;
+
+    /**
+     *
+     */
     private javax.swing.JLabel jLabel1;
+
+    /**
+     *
+     */
     private javax.swing.JLabel jLabel2;
     // End of variables declaration                   
 }
