@@ -18,9 +18,9 @@ import javax.swing.JOptionPane;
  * @author paulinechainet
  */
 public class ProjetJAVA {
-    private static Connexion bdd;
-    private static Graphique G;
-    private Login l;
+    //private static Connexion bdd;
+   // private static Graphique G;
+  //  private Login l;
     
     public static Connexion BaseDeDonnee() throws SQLException, ClassNotFoundException
     {
