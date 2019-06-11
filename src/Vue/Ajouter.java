@@ -544,9 +544,7 @@ public class Ajouter extends javax.swing.JFrame {
             Enseignement e = d.searchenseignement(prof, discipline);
                 if(e!=null){  
             Detail de = d.search1d(e);
-            if(de == null){
              d.addetail(b, e);   
-            }
                  de = d.search1d(e);
                  d.addeval(note,saisie[1].getText(),de , e);
                 }
